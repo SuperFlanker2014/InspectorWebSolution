@@ -9,5 +9,10 @@ namespace InspectorWeb.Reports
         {
             InitializeComponent();
         }
+
+        private void label2_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+
+        }
     }
 }

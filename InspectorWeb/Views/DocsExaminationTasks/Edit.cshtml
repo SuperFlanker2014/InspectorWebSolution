@@ -1,12 +1,5 @@
 ﻿@model InspectorWeb.ViewModels.DocsExaminationTaskViewModel
 
-@{
-    ViewData["Title"] = $"Задание на исследование #{Model}";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-
-    //ViewData["Title"] = $"Редактирование заключения № {viewModel.Number} от {viewModel.Date:dd.MM.yyy}";
-}
-
 @using Microsoft.AspNetCore.Mvc.ModelBinding
 
 @section styles
@@ -201,15 +194,22 @@
 
                 <input asp-for="Examinations" type="hidden" name="Examinations" />
 
-                <div class="form-group">
-                    <input type="submit" value="Сохранить" class="btn btn-default" />
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="submit" value="Сохранить" class="btn btn-default" />
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-right" >
+                        <div class="input-group-btn">
+                            <a asp-action="Viewer" asp-route-id="@Model.Guid" target="_blank">
+                                <input type="button" value="Печатать" class="btn btn-default" />
+                            </a>
+                        </div>
+                    </div>
                 </div>
 
             </form>
         </div>
-    </div>
-
-    <div>
-        <a asp-action="Index">Назад к списку</a>
     </div>
 </div>

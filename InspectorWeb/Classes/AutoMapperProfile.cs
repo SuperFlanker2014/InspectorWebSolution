@@ -46,6 +46,7 @@ namespace InspectorWeb.Classes
 			CreateMap<DocsExaminationTaskViewModel, DocsExaminationTasks>()
 				.ForMember(db => db.DateSampling, vm => vm.MapFrom(s => DateTime.ParseExact(s.DateSampling, DocsExaminationTaskViewModel.DateFormat, CultureInfo.InvariantCulture)))
 				.ForMember(db => db.DateReceipt, vm => vm.MapFrom(s => DateTime.ParseExact(s.DateReceipt, DocsExaminationTaskViewModel.DateFormat, CultureInfo.InvariantCulture)))
+				.ForMember(db => db.Date, vm => vm.MapFrom(s => DateTime.ParseExact(s.Date, DocsExaminationTaskViewModel.DateFormat, CultureInfo.InvariantCulture)))
 				//.ForMember(db => db.DocsExaminationTasksExaminations, vm => vm.MapFrom<IList<DocsExaminationTasksExaminationsViewModel>>(s => s.TaskExaminations))
 				//.ForMember(db => db.OriginCountryId, vm => vm.MapFrom(s => s.OriginCountry.Guid))
 				//.ForMember(db => db.SamplingProductionId, vm => vm.MapFrom(s => s.SamplingProduction.Guid))

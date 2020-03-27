@@ -63,7 +63,7 @@ namespace InspectorWeb.Controllers
 
                 context.Add(task);
                 await context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Edit),new { id = task.Guid });
             }
 
             PutSelectsData(viewModel);
@@ -91,11 +91,13 @@ namespace InspectorWeb.Controllers
                 return NotFound();
             }
 
-            var vm = new DocsExaminationTaskViewModel(docsExaminationTask);
+            var viewModel = new DocsExaminationTaskViewModel(docsExaminationTask);
 
-            PutSelectsData(vm);
+            PutSelectsData(viewModel);
 
-            return View(vm);
+            ViewData["Title"] = $"Задание на исследование #{viewModel.Number} от {viewModel.Date}";
+
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -166,7 +168,30 @@ namespace InspectorWeb.Controllers
 
             PutSelectsData(viewModel);
 
+            ViewData["Title"] = $"Задание на исследование #{viewModel.Number} от {viewModel.Date}";
+
             return View(viewModel);
+        }
+
+        public async Task<IActionResult> Viewer(Guid id)
+        {
+            var ds = await context.DocsExaminationTasks
+                .Include(d => d.Client)
+                .Include(d => d.DestinationCountry)
+                .Include(d => d.OriginCountry)
+                .Include(d => d.SamplingProduction)
+                .Include(d => d.DocsExaminationTasksExaminations)
+                .FirstOrDefaultAsync(t => t.Guid == id);
+
+            var report = new InspectorWeb.Reports.XtraReport
+            {
+                DataSource = new List<DocsExaminationTasks> { ds }
+            };
+            //report.Parameters.Add()
+
+            ViewData["Title"] = $"Задание на исследование #{ds.Number} от {ds.Date.Value.ToString("dd.MM.yyyy")} - печать";
+
+            return View(report);
         }
 
         public async Task<IActionResult> Delete(Guid? id)
