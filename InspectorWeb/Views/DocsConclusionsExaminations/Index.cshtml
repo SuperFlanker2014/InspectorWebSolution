@@ -1,0 +1,108 @@
+﻿@model IEnumerable<InspectorWeb.ModelsDB.DocsConclusionsExamination>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TransportNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InvoiceNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InvoiceDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SertNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SertFrom)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TargetOrSource)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FactAddress)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.KarantinSertNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.KarantinSertDate)
+                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InvoiceTypeGu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TargetOrSourceGu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransportTypeGu)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransportNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InvoiceNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InvoiceDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SertNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SertFrom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TargetOrSource)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FactAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KarantinSertNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KarantinSertDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gu.Guid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InvoiceTypeGu.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TargetOrSourceGu.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransportTypeGu.Title)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Guid">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Guid">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Guid">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

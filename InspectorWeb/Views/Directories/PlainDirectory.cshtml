@@ -1,0 +1,74 @@
+﻿@model InspectorWeb.ViewModels.PlainDirectoryModel
+    
+@{
+    ViewData["Title"] = ViewData["Title"] ?? "Справочники";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{ 
+    var GroupedDirectories = Model.Directories.GroupBy(i => i.Title.Split(" ").FirstOrDefault()).ToDictionary(i=>i.Key, i=>i.ToList());
+}
+
+<div class="row">
+    <div class="col-md-2 nopaddingright">
+        <nav class="navbar navbar-default dir-left-menu" role="navigation">
+            <ul class="nav navbar-nav dir-vert-menu">
+
+                @*<li class="dropdown">
+                    <a class="dropdown-toggle dir-vert-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        Dropdown <span class="caret"></span>
+                    </a>
+                    <ul class="navbar-nav navbar-default dropdown-menu">
+                        <li><a href="#" class="dir-vert-menu">Home1</a></li>
+                        <li><a href="#" class="dir-vert-menu">Home2</a></li>
+                        <li><a href="#" class="dir-vert-menu">Home3</a></li>
+                    </ul>
+                </li>*@
+
+                @foreach (var item in GroupedDirectories)
+                {
+                    @if (item.Value.Count == 1)
+                    {
+                        var directoryItem = item.Value[0];
+
+                        <li @((string)ViewContext.RouteData.Values["directoryName"] == directoryItem.Name ? "class=active" : "")>
+                            @Html.ActionLink(directoryItem.Title, "Index", "Directories", routeValues: new { directoryName = directoryItem.Name }, htmlAttributes: new { @class = "dir-vert-menu" })
+                        </li>}
+                    else
+                    {
+                        <li class="dropdown @(item.Value.Any(i => i.Name == (string)ViewContext.RouteData.Values["directoryName"]) ? "active" : "")">
+                            <a class="dropdown-toggle dir-vert-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                @item.Key <span class="caret"></span>
+                            </a>
+                            <ul class="navbar-nav navbar-default dropdown-menu">
+                                @foreach (var directoryItem in item.Value)
+                                {
+                                    <li @((string)ViewContext.RouteData.Values["directoryName"] == directoryItem.Name ? "class=active" : "")>
+                                        @Html.ActionLink(directoryItem.Title, "Index", "Directories", routeValues: new { directoryName = directoryItem.Name }, htmlAttributes: new { @class = "dir-vert-menu" })
+                                    </li>
+                                 }
+                            </ul>
+                        </li>
+                    }
+                }
+
+                @*@foreach (var directoryItem in Model.Directories)
+                {
+                <li @((string)ViewContext.RouteData.Values["directoryName"] == directoryItem.Name ? "class=active" : "")>
+                    @Html.ActionLink(directoryItem.Title, "Index", "Directories", routeValues: new { directoryName = directoryItem.Name }, htmlAttributes: new { @class = "dir-vert-menu" })
+                </li>
+                }*@
+            </ul>
+        </nav>
+    </div>
+    <div class="col-md-10 nopaddingleft">
+        <div id="jsGrid"></div>
+    </div>
+</div>
+
+@section scripts {
+    @if (Model.Properties?.Count > 0)
+    {
+        @await Component.InvokeAsync("PlainDirectoryGrid", Model)
+    }
+}

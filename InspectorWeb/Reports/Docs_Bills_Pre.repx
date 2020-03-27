@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="18.2.3.0" Ref="0" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v18.2, Version=18.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="Docs_Bills_Pre" Margins="59, 39, 39, 39" PaperKind="Custom" PageWidth="825" PageHeight="1168" Version="18.2">
+  <Parameters>
+    <Item1 Ref="2" Visible="false" Name="line_number" Type="#Ref-1" />
+    <Item2 Ref="3" Visible="false" Name="sum_without_nds" Type="#Ref-1" />
+    <Item3 Ref="5" Visible="false" Name="bill_number" />
+    <Item4 Ref="6" Visible="false" Name="doc_date" />
+    <Item5 Ref="7" Visible="false" Name="org_director" />
+    <Item6 Ref="8" Visible="false" Name="org_buch" />
+    <Item7 Ref="9" Visible="false" Name="org_title" />
+    <Item8 Ref="10" Visible="false" Name="org_adress" />
+    <Item9 Ref="11" Visible="false" Name="org_telephone" />
+    <Item10 Ref="12" Visible="false" Name="org_account" />
+    <Item11 Ref="13" Visible="false" Name="org_bank_bik" />
+    <Item12 Ref="14" Visible="false" Name="org_bank_account" />
+    <Item13 Ref="15" Visible="false" Name="org_payment_target" />
+    <Item14 Ref="16" Visible="false" Name="org_bank" />
+    <Item15 Ref="17" Visible="false" Name="org_inn" />
+    <Item16 Ref="18" Visible="false" Name="org_kpp" />
+    <Item17 Ref="19" Visible="false" Name="org_adressee" />
+    <Item18 Ref="20" Visible="false" Name="string_sum" />
+    <Item19 Ref="21" Visible="false" Name="bank" />
+    <Item20 Ref="22" Visible="false" Name="org_kbk" />
+    <Item21 Ref="23" Visible="false" Name="org_okato" />
+  </Parameters>
+  <CalculatedFields>
+    <Item1 Ref="24" Name="nds" FieldType="Int32" Expression="Iif(True, '', '{Docs_Bills.doc_sum}-{?sum_without_nds}')" />
+    <Item2 Ref="25" Name="full_rate" FieldType="Int32" Expression="Iif(True, '', '{Docs_Bills_Services.rate}*{Docs_Bills_Services.sum_factor}')" />
+    <Item3 Ref="26" Name="isVans" FieldType="String" Expression="Iif(True, '', 'IIF ({Docs_Bills.vans} = &quot;&quot; , &quot;&quot;, &quot;Номера вагонов: &quot; &amp; {Docs_Bills.vans} &amp; Chr(10)&amp;Chr(13))')" />
+  </CalculatedFields>
+  <Bands>
+    <Item1 Ref="27" ControlType="DetailBand" Name="Detail" HeightF="23" TextAlignment="TopLeft" Padding="0,0,0,0,100">
+      <Controls>
+        <Item1 Ref="28" ControlType="XRLine" Name="Line17" Font="Times New Roman, 9.75pt" SizeF="708.3333,2" LocationFloat="0, 0" ForeColor="Black" BackColor="White" Padding="0,0,0,0,100" BorderColor="Black" Borders="Top" BorderWidth="1" />
+        <Item2 Ref="29" ControlType="XRLabel" Name="unit1" TextAlignment="TopCenter" SizeF="100,15.3472223" LocationFloat="316.666656, 3.47222233" Font="Arial, 10pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" BorderWidth="1">
+          <ExpressionBindings>
+            <Item1 Ref="30" Expression="[unit]" PropertyName="Text" EventName="BeforePrint" />
+          </ExpressionBindings>
+        </Item2>
+        <Item3 Ref="31" ControlType="XRLabel" Name="count1" CanGrow="false" TextAlignment="TopCenter" SizeF="83.3333359,15.3472223" LocationFloat="416.666656, 3.47222233" Font="Arial, 10pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" BorderWidth="1">
+          <ExpressionBindings>
+            <Item1 Ref="32" Expression="[count]" PropertyName="Text" EventName="BeforePrint" />
+          </ExpressionBindings>
+        </Item3>
+        <Item4 Ref="33" ControlType="XRLabel" Name="RecordNumber1" CanGrow="false" Text="Untranslated" TextAlignment="TopCenter" SizeF="46.875,15.3472223" LocationFloat="8.333333, 3.47222233" Font="Arial, 10pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" BorderWidth="1" />
+        <Item5 Ref="34" ControlType="XRLabel" Name="sum1" CanGrow="false" TextAlignment="TopCenter" SizeF="100,15.3472223" LocationFloat="600, 3.47222233" Font="Arial, 10pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" BorderWidth="1">
+          <ExpressionBindings>
+            <Item1 Ref="35" Expression="[sum]" PropertyName="Text" EventName="BeforePrint" />
+          </ExpressionBindings>
+        </Item5>
+        <Item6 Ref="36" ControlType="XRLine" Name="Line1" Font="Times New Roman, 9.75pt" SizeF="705.2083,2" LocationFloat="2.08333325, 0" ForeColor="Black" BackColor="White" Padding="0,0,0,0,100" BorderColor="Black" Borders="Top" BorderWidth="1" />
+        <Item7 Ref="37" ControlType="XRLabel" Name="Text3" Text="{Docs_Bills_Services.service_title}. {Docs_Bills_Services.sum_factor_title}" TextAlignment="TopLeft" SizeF="233.333328,15.833333" LocationFloat="66.6666641, 3.47222233" Font="Arial, 10pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" BorderWidth="1" />
+        <Item8 Ref="38" ControlType="XRLabel" Name="fullrate1" CanGrow="false" TextAlignment="TopCenter" SizeF="91.6666641,15.3472223" LocationFloat="500, 3.47222233" Font="Arial, 10pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" BorderWidth="1">
+          <ExpressionBindings>
+            <Item1 Ref="39" Expression="[full_rate]" PropertyName="Text" EventName="BeforePrint" />
+          </ExpressionBindings>
+        </Item8>
+      </Controls>
+    </Item1>
+    <Item2 Ref="40" ControlType="ReportHeaderBand" Name="ReportHeader" HeightF="381" KeepTogether="true" TextAlignment="TopLeft" Padding="0,0,0,0,100">
+      <Controls>
+        <Item1 Ref="41" ControlType="XRLabel" Name="Text20" Text="СЧЁТ № {?bill_number} от {?doc_date}&#xA;&#xA;Заказчик: {R_clients.client_name}, {R_clients.client_adress}, тел. {R_clients.client_phone}&#xA;Плательщик: ИНН {R_clients.client_inn} КПП {R_clients.client_kpp} {?bank}" TextAlignment="TopCenter" SizeF="675,64.72222" LocationFloat="8.333333, 316.666656" Font="Arial, 10pt, style=Bold" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" BorderWidth="1" />
+        <Item2 Ref="42" ControlType="XRLabel" Name="Text22" Text="{?org_title}&#xA;Адрес: {?org_adress}, тел. {?org_telephone}&#xA;&#xA;Образец заполнения платёжного поручения" TextAlignment="TopLeft" SizeF="675,65" LocationFloat="8.333333, 8.333333" Font="Arial, 10pt, style=Bold, Underline" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" BorderWidth="1" />
+        <Item3 Ref="43" ControlType="XRLabel" Name="Text23" CanGrow="false" Text="Получатель: ИНН {?org_inn} КПП {?org_kpp} {?org_adressee}" TextAlignment="TopLeft" SizeF="363.194458,88.19444" LocationFloat="8.333333, 116.666664" Font="Arial, 10pt, style=Bold" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="All" BorderWidth="1" />
+        <Item4 Ref="44" ControlType="XRLabel" Name="Text24" CanGrow="false" Text="Банк: {?org_bank}" TextAlignment="TopLeft" SizeF="363.194458,38.1944427" LocationFloat="8.333333, 208.333328" Font="Arial, 10pt, style=Bold" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="All" BorderWidth="1" />
+        <Item5 Ref="45" ControlType="XRLabel" Name="Text25" CanGrow="false" Text="Назначение платежа: {?org_payment_target}" TextAlignment="TopLeft" SizeF="672.2222,33.3333321" LocationFloat="8.333333, 269.444458" Font="Arial, 10pt, style=Bold" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="All" BorderWidth="1" />
+        <Item6 Ref="46" ControlType="XRLabel" Name="Text26" CanGrow="false" Text="Сч №" TextAlignment="TopCenter" SizeF="66.6666641,88.19444" LocationFloat="375, 116.666664" Font="Arial, 10pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="All" BorderWidth="1" />
+        <Item7 Ref="47" ControlType="XRLabel" Name="Text27" CanGrow="false" Text="БИК" TextAlignment="TopCenter" SizeF="66.6666641,16.666666" LocationFloat="375, 208.333328" Font="Arial, 10pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="All" BorderWidth="1" />
+        <Item8 Ref="48" ControlType="XRLabel" Name="Text28" CanGrow="false" Text="Сч №" TextAlignment="TopCenter" SizeF="66.6666641,18.0555553" LocationFloat="375, 228.472229" Font="Arial, 10pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="All" BorderWidth="1" />
+        <Item9 Ref="49" ControlType="XRLabel" Name="Text29" CanGrow="false" Text="{?org_account}" TextAlignment="TopLeft" SizeF="236.111115,88.19444" LocationFloat="445.1389, 116.666664" Font="Arial, 10pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="All" BorderWidth="1" />
+        <Item10 Ref="50" ControlType="XRLabel" Name="Text30" CanGrow="false" Text="{?org_bank_bik}" TextAlignment="TopLeft" SizeF="236.111115,16.666666" LocationFloat="445.1389, 208.333328" Font="Arial, 10pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="All" BorderWidth="1" />
+        <Item11 Ref="51" ControlType="XRLabel" Name="Text31" CanGrow="false" Text="{?org_bank_account}" TextAlignment="TopLeft" SizeF="236.111115,18.0555553" LocationFloat="445.1389, 228.472229" Font="Arial, 10pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="All" BorderWidth="1" />
+        <Item12 Ref="52" ControlType="XRLabel" Name="Text1" CanGrow="false" Text="{?org_kbk}" TextAlignment="TopCenter" SizeF="258.333344,15.2777777" LocationFloat="8.333333, 250" Font="Arial, 10pt, style=Bold" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="All" BorderWidth="1" />
+        <Item13 Ref="53" ControlType="XRLabel" Name="Text2" CanGrow="false" Text="{?org_okato}" TextAlignment="TopCenter" SizeF="101.388885,15.2777777" LocationFloat="270.1389, 250" Font="Arial, 10pt, style=Bold" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="All" BorderWidth="1" />
+        <Item14 Ref="54" ControlType="XRLabel" Name="Text6" CanGrow="false" Text="0" TextAlignment="TopCenter" SizeF="66.6666641,15.2777777" LocationFloat="375, 250" Font="Arial, 10pt, style=Bold" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="All" BorderWidth="1" />
+        <Item15 Ref="55" ControlType="XRLabel" Name="Text7" CanGrow="false" Text="0" TextAlignment="TopCenter" SizeF="69.44444,15.2777777" LocationFloat="445.1389, 250" Font="Arial, 10pt, style=Bold" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="All" BorderWidth="1" />
+        <Item16 Ref="56" ControlType="XRLabel" Name="Text8" CanGrow="false" Text="0" TextAlignment="TopCenter" SizeF="113.194443,15.2777777" LocationFloat="518.055542, 250" Font="Arial, 10pt, style=Bold" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="All" BorderWidth="1" />
+        <Item17 Ref="57" ControlType="XRLabel" Name="Text11" CanGrow="false" Text="0" TextAlignment="TopCenter" SizeF="46.52778,15.2777777" LocationFloat="634.7222, 250" Font="Arial, 10pt, style=Bold" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="All" BorderWidth="1" />
+      </Controls>
+    </Item2>
+    <Item3 Ref="58" ControlType="PageHeaderBand" Name="PageHeader" HeightF="51" TextAlignment="TopLeft" Padding="0,0,0,0,100">
+      <Controls>
+        <Item1 Ref="59" ControlType="XRLabel" Name="Text9" CanGrow="false" Text="Единица измерения" TextAlignment="TopCenter" SizeF="100,36.11111" LocationFloat="316.666656, 13.8888893" Font="Arial, 10pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" BorderWidth="1" />
+        <Item2 Ref="60" ControlType="XRLabel" Name="Text10" CanGrow="false" Text="Количество" TextAlignment="TopCenter" SizeF="75,34.72222" LocationFloat="420.1389, 16.666666" Font="Arial, 10pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" BorderWidth="1" />
+        <Item3 Ref="61" ControlType="XRLabel" Name="Text19" CanGrow="false" Text="№ " TextAlignment="TopCenter" SizeF="46.875,15.3472223" LocationFloat="8.333333, 13.8888893" Font="Arial, 10pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" BorderWidth="1" />
+        <Item4 Ref="62" ControlType="XRLabel" Name="Text12" CanGrow="false" Text="Сумма, руб" TextAlignment="TopCenter" SizeF="103.125,15.3472223" LocationFloat="600, 16.666666" Font="Arial, 10pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" BorderWidth="1" />
+        <Item5 Ref="63" ControlType="XRLine" Name="Line2" Font="Times New Roman, 9.75pt" SizeF="708.3333,2" LocationFloat="0, 51.38889" ForeColor="Black" BackColor="White" Padding="0,0,0,0,100" BorderColor="Black" Borders="Top" BorderWidth="1" />
+        <Item6 Ref="64" ControlType="XRLabel" Name="Text4" CanGrow="false" Text="Наименование услуги" TextAlignment="TopCenter" SizeF="233.333328,15.3472223" LocationFloat="66.6666641, 13.8888893" Font="Arial, 10pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" BorderWidth="1" />
+        <Item7 Ref="65" ControlType="XRLabel" Name="Text5" CanGrow="false" Text="Цена" TextAlignment="TopCenter" SizeF="91.6666641,15.3472223" LocationFloat="500, 16.666666" Font="Arial, 10pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" BorderWidth="1" />
+      </Controls>
+    </Item3>
+    <Item4 Ref="66" ControlType="ReportFooterBand" Name="ReportFooter" HeightF="255" KeepTogether="true" TextAlignment="TopLeft" Padding="0,0,0,0,100">
+      <Controls>
+        <Item1 Ref="67" ControlType="XRLabel" Name="nds1" CanGrow="false" TextAlignment="TopCenter" SizeF="111.111115,20.833334" LocationFloat="594.444458, 27.7777786" Font="Arial, 10pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="All" BorderWidth="1">
+          <ExpressionBindings>
+            <Item1 Ref="68" Expression="[nds]" PropertyName="Text" EventName="BeforePrint" />
+          </ExpressionBindings>
+        </Item1>
+        <Item2 Ref="69" ControlType="XRLabel" Name="Text15" CanGrow="false" Text="Итого:" TextAlignment="TopRight" SizeF="115.902779,20.833334" LocationFloat="475, 0" Font="Arial, 10pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" BorderWidth="1" />
+        <Item3 Ref="70" ControlType="XRLabel" Name="Text16" CanGrow="false" Text="Итого НДС:" TextAlignment="TopRight" SizeF="115.902779,20.833334" LocationFloat="475, 25" Font="Arial, 10pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" BorderWidth="1" />
+        <Item4 Ref="71" ControlType="XRLabel" Name="Text17" CanGrow="false" Text="Всего к оплате:" TextAlignment="TopRight" SizeF="115.902779,20.833334" LocationFloat="475, 50" Font="Arial, 10pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" BorderWidth="1" />
+        <Item5 Ref="72" ControlType="XRLabel" Name="sumwithoutnds1" CanGrow="false" TextAlignment="TopCenter" SizeF="111.111115,20.833334" LocationFloat="594.444458, 2.77777767" Font="Arial, 10pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="All" BorderWidth="1">
+          <ExpressionBindings>
+            <Item1 Ref="73" Expression="[Parameters.sum_without_nds]" PropertyName="Text" EventName="BeforePrint" />
+          </ExpressionBindings>
+        </Item5>
+        <Item6 Ref="74" ControlType="XRLabel" Name="Text21" Text="{@isVans}Всего наименований RecordNumber на сумму &#xA;{?string_sum}&#xA;&#xA;ВАЖНО: Графу &quot; назначение платежа &quot; платёжного поручения заполнять в соответствии с образцом.&#xA;&#x9;&#x9;&#x9;В 104 поле платежного поручения также должен быть указан код дохода.&#xA;&#x9;&#x9;&#x9;В противном случае, платёж плательщику будет возвращён.&#xA;&#x9;&#x9;(Распоряжение  Руководителя  Центрального  отделения  Федерального  Казначейства  г. Екатеринбурга  Маланичева С.А.)&#xA;&#xA;Директор&#x9;&#x9;__________________________________________ &#x9;{?org_director}&#xA;&#xA;Главный Бухгалтер    __________________________________________&#x9;&#x9;{?org_buch}" TextAlignment="TopLeft" SizeF="708.3333,180.972229" LocationFloat="8.333333, 75" Font="Arial, 10pt, style=Bold" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" BorderWidth="1" />
+        <Item7 Ref="75" ControlType="XRLabel" Name="docsum1" CanGrow="false" TextAlignment="TopCenter" SizeF="111.111115,20.833334" LocationFloat="594.444458, 52.77778" Font="Arial, 10pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="All" BorderWidth="1">
+          <ExpressionBindings>
+            <Item1 Ref="76" Expression="[doc_sum]" PropertyName="Text" EventName="BeforePrint" />
+          </ExpressionBindings>
+        </Item7>
+      </Controls>
+    </Item4>
+    <Item5 Ref="77" ControlType="PageFooterBand" Name="PageFooter" HeightF="0" TextAlignment="TopLeft" Padding="0,0,0,0,100" />
+  </Bands>
+  <CrossBandControls>
+    <Item1 Ref="78" ControlType="XRCrossBandLine" Name="Line11" WidthF="1.38888884" StartBand="#Ref-58" EndBand="#Ref-66" StartPointFloat="416.666656, 8.333333" EndPointFloat="416.666656, 0" ForeColor="Black" />
+    <Item2 Ref="79" ControlType="XRCrossBandLine" Name="Line12" WidthF="1.38888884" StartBand="#Ref-58" EndBand="#Ref-66" StartPointFloat="591.6667, 8.333333" EndPointFloat="591.6667, 0" ForeColor="Black" />
+    <Item3 Ref="80" ControlType="XRCrossBandLine" Name="Line13" WidthF="1.38888884" StartBand="#Ref-58" EndBand="#Ref-66" StartPointFloat="308.333344, 8.333333" EndPointFloat="308.333344, 0" ForeColor="Black" />
+    <Item4 Ref="81" ControlType="XRCrossBandLine" Name="Line16" WidthF="1.38888884" StartBand="#Ref-58" EndBand="#Ref-66" StartPointFloat="59.09722, 8.333333" EndPointFloat="59.09722, 0" ForeColor="Black" />
+    <Item5 Ref="82" ControlType="XRCrossBandBox" Name="Box2" BorderWidth="1" WidthF="708.3333" StartBand="#Ref-58" EndBand="#Ref-66" StartPointFloat="0, 8.333333" EndPointFloat="0, 0" BorderColor="Black" />
+    <Item6 Ref="83" ControlType="XRCrossBandLine" Name="Line19" WidthF="1.38888884" StartBand="#Ref-58" EndBand="#Ref-66" StartPointFloat="500, 8.333333" EndPointFloat="500, 0" ForeColor="Black" />
+  </CrossBandControls>
+  <ObjectStorage>
+    <Item1 ObjectType="DevExpress.XtraReports.Serialization.ObjectStorageInfo, DevExpress.XtraReports.v18.2" Ref="1" Content="System.Double" Type="System.Type" />
+  </ObjectStorage>
+</XtraReportsLayoutSerializer>

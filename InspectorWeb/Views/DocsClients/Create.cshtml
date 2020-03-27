@@ -1,0 +1,192 @@
+﻿@model InspectorWeb.ModelsDB.DocsClients
+
+@{
+    ViewData["Title"] = "Создание клиента";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using Microsoft.AspNetCore.Mvc.ModelBinding
+
+@section styles
+{
+<link href="~/lib/bootstrap-combobox/css/bootstrap-combobox.css" rel="stylesheet">
+<link href="~/css/site-forms.css" rel="stylesheet">
+}
+
+@section scripts {
+<script src="~/lib/bootstrap-combobox/js/bootstrap-combobox.js"></script>
+<script src="~/lib/jquery.maskedinput/dist/jquery.maskedinput.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.select-autocomplete').combobox();
+        $(".phone").mask("+9 (999) 9999999");
+        $(".bank-account").mask("99999999999999999999");
+        $(".kpp").mask("999999999");
+        //$(".inn").mask("999999999999");
+    });
+</script>
+}
+
+@Html.AntiForgeryToken()
+
+<div class="container">
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">Юридические реквизиты</div>
+                    <div class="panel-body">
+
+                        <div class="input-group">
+                            <label asp-for="Name" class="input-group-addon"></label>
+                            <input asp-for="Name" class="form-control" />
+                        </div>
+                        <div class="alert alert-danger nomarginbottom" role="alert" style="display:
+                             @(ViewData.ModelState.GetFieldValidationState("Name") == ModelValidationState.Invalid ? "block" : "none" );">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <label asp-for="Inn" class="input-group-addon"></label>
+                                    <input asp-for="Inn" class="form-control inn" />
+                                </div>
+                                <div class="alert alert-danger nomarginbottom" role="alert" style="display:
+                                    @(ViewData.ModelState.GetFieldValidationState("Inn") == ModelValidationState.Invalid ? "block" : "none" );">
+                                    <span asp-validation-for="Inn" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <label asp-for="Kpp" class="input-group-addon"></label>
+                                    <input asp-for="Kpp" class="form-control kpp" />
+                                </div>
+                                <div class="alert alert-danger nomarginbottom" role="alert" style="display:
+                                    @(ViewData.ModelState.GetFieldValidationState("Kpp") == ModelValidationState.Invalid ? "block" : "none" );">
+                                    <span asp-validation-for="Kpp" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <label asp-for="BankGuid" class="input-group-addon"></label>
+                                    <select asp-for="BankGuid" class="form-control select-autocomplete" asp-items="ViewBag.BankGuid"></select>
+                                </div>
+                                <div class="alert alert-danger nomarginbottom" role="alert" style="display:
+                                    @(ViewData.ModelState.GetFieldValidationState("BankGuid") == ModelValidationState.Invalid ? "block" : "none" );">
+                                    <span asp-validation-for="BankGuid" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <label asp-for="BankAccount" class="input-group-addon"></label>
+                                    <input asp-for="BankAccount" class="form-control bank-account" />
+                                </div>
+                                <div class="alert alert-danger nomarginbottom" role="alert" style="display:
+                                    @(ViewData.ModelState.GetFieldValidationState("BankAccount") == ModelValidationState.Invalid ? "block" : "none" );">
+                                    <span asp-validation-for="BankAccount" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <label asp-for="TypeGuid" class="input-group-addon"></label>
+                                    <select asp-for="TypeGuid" class="form-control" asp-items="ViewBag.TypeGuid"></select>
+                                </div>
+                                <span asp-validation-for="TypeGuid" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">Адреса</div>
+                    <div class="panel-body">
+                        <div class="input-group">
+                            <label asp-for="Adress" class="input-group-addon"></label>
+                            <input asp-for="Adress" class="form-control" />
+                        </div>
+                        <span asp-validation-for="Adress" class="text-danger"></span>
+                        <br />
+                        <div class="input-group">
+                            <label asp-for="AdressFact" class="input-group-addon"></label>
+                            <input asp-for="AdressFact" class="form-control" />
+                        </div>
+                        <span asp-validation-for="AdressFact" class="text-danger"></span>
+                        <br />
+                        <div class="input-group">
+                            <label asp-for="AdressWarehouse" class="input-group-addon"></label>
+                            <input asp-for="AdressWarehouse" class="form-control" />
+                        </div>
+                        <span asp-validation-for="AdressWarehouse" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">Контактные данные</div>
+                    <div class="panel-body">
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <label asp-for="Phone" class="input-group-addon"></label>
+                                    <input asp-for="Phone" class="form-control phone" />
+                                </div>
+                                <span asp-validation-for="Phone" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="input-group">
+                                    <label asp-for="RegionGuid" class="input-group-addon"></label>
+                                    <select asp-for="RegionGuid" class="form-control select-autocomplete" asp-items="ViewBag.RegionGuid"></select>
+                                </div>
+                                <span asp-validation-for="RegionGuid" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <label asp-for="RegionRayonGuid" class="input-group-addon"></label>
+                                    <select asp-for="RegionRayonGuid" class="form-control select-autocomplete" asp-items="ViewBag.RegionRayonGuid"></select>
+                                </div>
+                                <span asp-validation-for="RegionRayonGuid" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <label asp-for="Representative" class="input-group-addon"></label>
+                                    <input asp-for="Representative" class="form-control" />
+                                </div>
+                                <span asp-validation-for="Representative" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <label asp-for="FaceAgreement" class="input-group-addon"></label>
+                                    <input asp-for="FaceAgreement" class="form-control" />
+                                </div>
+                                <span asp-validation-for="FaceAgreement" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Сохранить" class="btn btn-default" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <div>
+        <a asp-action="Index">Назад к списку</a>
+    </div>
+</div>
+

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="18.2.3.0" Ref="0" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v18.2, Version=18.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="Docs_Conclusion_Examination" Margins="59, 39, 39, 39" PaperKind="Custom" PageWidth="825" PageHeight="1168" Version="18.2">
+  <Parameters>
+    <Item1 Ref="2" Visible="false" Name="doc_id" Type="#Ref-1" />
+    <Item2 Ref="4" Visible="false" Name="doc_date" />
+    <Item3 Ref="5" Visible="false" Name="specialist1" />
+    <Item4 Ref="6" Visible="false" Name="exams" />
+    <Item5 Ref="7" Visible="false" Name="doc_num" />
+    <Item6 Ref="8" Visible="false" Name="director_div_karantin" />
+    <Item7 Ref="9" Visible="false" Name="org_title" />
+    <Item8 Ref="10" Visible="false" Name="org_adress" />
+  </Parameters>
+  <CalculatedFields>
+    <Item1 Ref="11" Name="is_fact_address" FieldType="String" Expression="Iif(True, '', 'iif(len({Docs_Conclusions_Examination.fact_address})&gt;0, &quot;Фактический адрес: &quot; &amp; {Docs_Conclusions_Examination.fact_address} &amp; &quot;.&quot;, &quot;&quot;)')" />
+    <Item2 Ref="12" Name="is_sert" FieldType="String" Expression="Iif(True, '', 'Switch (&#xD;&#xA;{Docs_Conclusions_Examination.sert_number}=&quot;&quot; , &#xD;&#xA;    &quot;&quot;,&#xD;&#xA;{Docs_Conclusions_Examination.sert_number}&lt;&gt;&quot;&quot; and {Docs_Conclusions_Examination.sert_from}=&quot;&quot;,&#xD;&#xA;    &quot;карантинный (фитосанитарный) сертификат № &quot; + {Docs_Conclusions_Examination.sert_number},&#xD;&#xA;{Docs_Conclusions_Examination.sert_number}&lt;&gt;&quot;&quot; and {Docs_Conclusions_Examination.sert_from}&lt;&gt;&quot;&quot;,&#xD;&#xA;    &quot;карантинный (фитосанитарный) сертификат № &quot; + {Docs_Conclusions_Examination.sert_number} + &quot; выдан &quot; + {Docs_Conclusions_Examination.sert_from}&#xD;&#xA;)&#xD;&#xA;')" />
+    <Item3 Ref="13" Name="is_transport" FieldType="String" Expression="Iif(True, '', 'Switch (&#xD;&#xA;{Docs_Conclusions_Examination.transport_type}&lt;&gt;&quot;&quot; and {Docs_Conclusions_Examination.transport_number}=&quot;&quot;,&#xD;&#xA;    {Docs_Conclusions_Examination.transport_type} &amp; &quot;;&quot;,&#xD;&#xA;{Docs_Conclusions_Examination.transport_type}&lt;&gt;&quot;&quot; and {Docs_Conclusions_Examination.transport_number}&lt;&gt;&quot;&quot;, &#xD;&#xA;    {Docs_Conclusions_Examination.transport_type} &amp; &quot; № &quot; &amp; {Docs_Conclusions_Examination.transport_number} &amp; &quot;;&quot;&#xD;&#xA;)')" />
+    <Item4 Ref="14" Name="is_bill" FieldType="String" Expression="Iif(True, '', 'Switch (&#xD;&#xA;{Docs_Conclusions_Examination.bill_type}&lt;&gt;&quot;&quot; and {Docs_Conclusions_Examination.bill_number}=&quot;&quot; and {Docs_Conclusions_Examination.bill_date}=&quot;&quot;, &#xD;&#xA;    {Docs_Conclusions_Examination.bill_type} &amp; &quot;;&quot;,&#xD;&#xA;{Docs_Conclusions_Examination.bill_type}&lt;&gt;&quot;&quot; and {Docs_Conclusions_Examination.bill_number}&lt;&gt;&quot;&quot; and {Docs_Conclusions_Examination.bill_date}=&quot;&quot;, &#xD;&#xA;    {Docs_Conclusions_Examination.bill_type} &amp; &quot; № &quot; &amp; {Docs_Conclusions_Examination.bill_number} &amp; &quot;;&quot;,&#xD;&#xA;{Docs_Conclusions_Examination.bill_type}&lt;&gt;&quot;&quot; and {Docs_Conclusions_Examination.bill_number}=&quot;&quot; and {Docs_Conclusions_Examination.bill_date}&lt;&gt;&quot;&quot;, &#xD;&#xA;    {Docs_Conclusions_Examination.bill_type} &amp; &quot; от &quot; &amp; {Docs_Conclusions_Examination.bill_date} &amp; &quot;;&quot;,&#xD;&#xA;{Docs_Conclusions_Examination.bill_type}&lt;&gt;&quot;&quot; and {Docs_Conclusions_Examination.bill_number}&lt;&gt;&quot;&quot; and {Docs_Conclusions_Examination.bill_date}&lt;&gt;&quot;&quot;,&#xD;&#xA;    {Docs_Conclusions_Examination.bill_type} &amp; &quot; № &quot; &amp; {Docs_Conclusions_Examination.bill_number} &amp; &quot; от &quot; &amp; {Docs_Conclusions_Examination.bill_date} &amp; &quot;;&quot;&#xD;&#xA;)')" />
+    <Item5 Ref="15" Name="is_parent_document" FieldType="String" Expression="Iif(True, '', 'IIF({Docs_Conclusions_Examination.karantin_sert_number} &lt;&gt; &quot;&quot;,&#xD;&#xA;&quot;На сопроводительный документ: заключение об установлении карантинного фитосанитарного состояния № &quot; &amp; &#xD;&#xA;{Docs_Conclusions_Examination.karantin_sert_number} &amp; &quot; от &quot; &amp; {Docs_Conclusions_Examination.karantin_sert_date} &amp; &quot;.&quot;,&#xD;&#xA;&quot;&quot;)')" />
+    <Item6 Ref="16" Name="is_samples" FieldType="String" Expression="Iif(True, '', 'IIF ({Docs_Acts_Goods.samples_count}&lt;&gt;0, &#xD;&#xA;Replace(Replace(CStr({Docs_Acts_Goods.samples_count}), &quot;,00&quot;, &quot;&quot;), &quot;.00&quot;, &quot;&quot;)  &amp; &quot; образец(ов)&quot;, &#xD;&#xA;&quot;&quot;)')" />
+    <Item7 Ref="17" Name="isMark" FieldType="String" Expression="Iif(True, '', 'IIF ({Docs_Conclusions_Examination.mark}=&quot;&quot;,&quot;&quot; ,{Docs_Conclusions_Examination.mark}&amp;&quot;;&quot; )')" />
+  </CalculatedFields>
+  <Bands>
+    <Item1 Ref="18" ControlType="DetailBand" Name="Detail" HeightF="19" KeepTogether="true" TextAlignment="TopLeft" Padding="0,0,0,0,100">
+      <Controls>
+        <Item1 Ref="19" ControlType="XRLabel" Name="Text17" Text="{Docs_Acts_Goods.good_title}, {Docs_Acts_Goods.weight} {Docs_Acts_Goods.weight_unit}, {Docs_Acts_Goods.places} {Docs_Acts_Goods.places_unit}, происхождение - {Docs_Acts_Goods.production_country}; {@is_samples}" TextAlignment="TopLeft" SizeF="715.625,19.7222214" LocationFloat="8.333333, 0" Font="Times New Roman, 12pt, style=Bold" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" BorderWidth="1" />
+      </Controls>
+    </Item1>
+    <Item2 Ref="20" ControlType="ReportHeaderBand" Name="ReportHeader" HeightF="338" KeepTogether="true" TextAlignment="TopLeft" Padding="0,0,0,0,100">
+      <Controls>
+        <Item1 Ref="21" ControlType="XRLabel" Name="Text4" CanGrow="false" Text="Федеральная служба по ветеринарному и фитосанитарному надзору&#xA;РОССЕЛЬХОЗНАДЗОР&#xA;&#xA;{?org_title}&#xA;Отдел карантина растений&#xA;{?org_adress}&#xA;&#xA;СВИДЕТЕЛЬСТВО КАРАНТИННОЙ ЭКСПЕРТИЗЫ&#xA;" TextAlignment="TopCenter" SizeF="708.3333,208.333328" LocationFloat="16.666666, 8.333333" Font="Times New Roman, 12pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" BorderWidth="1" />
+        <Item2 Ref="22" ControlType="XRLabel" Name="Text5" CanGrow="false" Text="от&#x9;{?doc_date}" TextAlignment="TopCenter" SizeF="208.333328,25" LocationFloat="41.6666679, 225" Font="Times New Roman, 12pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" BorderWidth="1" />
+        <Item3 Ref="23" ControlType="XRLabel" Name="Text6" CanGrow="false" Text="№&#x9;{?doc_num}" TextAlignment="TopCenter" SizeF="208.333328,25" LocationFloat="483.333344, 225" Font="Times New Roman, 12pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" BorderWidth="1" />
+        <Item4 Ref="24" ControlType="XRLabel" Name="Text7" Text="Выдано: {R_clients.client_name}, {R_clients.client_adress}&#xA;На сопроводительный документ: {Docs_Conclusions_Examination.to_document}.&#xA;От кого поступил материал: {R_clients.client_name}, {R_clients.client_adress}. {@is_fact_address} {Docs_Conclusions_Examination.material_from}&#xA;Наименование подкарантинного материала, происхождение и количество образцов:" TextAlignment="TopLeft" SizeF="716.6667,79.93056" LocationFloat="8.333333, 258.333344" Font="Times New Roman, 12pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" BorderWidth="1" />
+      </Controls>
+    </Item2>
+    <Item3 Ref="25" ControlType="PageHeaderBand" Name="PageHeader" HeightF="0" TextAlignment="TopLeft" Padding="0,0,0,0,100" />
+    <Item4 Ref="26" ControlType="ReportFooterBand" Name="ReportFooter" HeightF="331" TextAlignment="TopLeft" Padding="0,0,0,0,100">
+      <Controls>
+        <Item1 Ref="27" ControlType="XRLabel" Name="Text1" Text="{@isMark}{@is_transport} {@is_bill} {@is_sert}&#xA;Получатель (отправитель): {Docs_Conclusions_Examination.target_or_source}&#xA;&#xA;Результаты экспертизы:&#xA;{?exams}&#xA;&#xA;Начальник отдела карантина &#xA;растений референтного центра&#x9;_______________________________________&#x9;{?director_div_karantin}&#xA;&#xA;Исполнители&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;_______________________________________&#x9;{?specialist1}&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;_______________________________________&#xA;&#xA;&#xA;&#x9;&#x9;&#x9;М.П." TextAlignment="TopLeft" SizeF="708.3333,312.0139" LocationFloat="8.333333, 0" Font="Times New Roman, 12pt, style=Bold" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" BorderWidth="1" />
+      </Controls>
+    </Item4>
+    <Item5 Ref="28" ControlType="PageFooterBand" Name="PageFooter" HeightF="0" TextAlignment="TopLeft" Padding="0,0,0,0,100" />
+  </Bands>
+  <ObjectStorage>
+    <Item1 ObjectType="DevExpress.XtraReports.Serialization.ObjectStorageInfo, DevExpress.XtraReports.v18.2" Ref="1" Content="System.Double" Type="System.Type" />
+  </ObjectStorage>
+</XtraReportsLayoutSerializer>

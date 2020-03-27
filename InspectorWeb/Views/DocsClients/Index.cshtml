@@ -1,0 +1,19 @@
+﻿@model InspectorWeb.ViewModels.PlainDirectoryModel
+
+@{
+    ViewData["Title"] = "Клиенты";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div id="jsGrid"></div>
+    </div>
+</div>
+
+@section scripts {
+    @if (Model.Properties != null)
+    {
+        @await Component.InvokeAsync("PlainDirectoryGrid", Model)
+    }
+}

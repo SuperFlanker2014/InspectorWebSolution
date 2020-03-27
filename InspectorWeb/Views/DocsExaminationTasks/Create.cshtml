@@ -1,0 +1,210 @@
+﻿@model InspectorWeb.ViewModels.DocsExaminationTaskViewModel
+
+@{
+    ViewData["Title"] = "Новое задание на исследование";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using Microsoft.AspNetCore.Mvc.ModelBinding
+
+@section styles
+{
+    <link href="~/lib/eonasdan-bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap-combobox/css/bootstrap-combobox.min.css" rel="stylesheet">
+    <link href="~/css/site-forms.css" rel="stylesheet">
+    <link href="~/lib/select2/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="~/lib/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+}
+
+@section scripts {
+    <script src="~/lib/select2/dist/js/select2.min.js"></script>
+    <script src="~/lib/moment/moment-with-locales.min.js"></script>
+    <script src="~/lib/eonasdan-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/lib/bootstrap-combobox/js/bootstrap-combobox.min.js"></script>
+    <script src="~/lib/jquery.maskedinput/jquery.maskedinput.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.select2-autocomplete').select2();
+        });
+        $(function () {
+            $('.datetimepicker').datetimepicker({ locale: 'ru', format: 'DD.MM.YYYY' });
+            $('#formCreate').submit(function (event) {
+                $('input[name*=Examinations]').val(JSON.stringify(itemsData));
+            });
+        });
+    </script>
+
+    @await Component.InvokeAsync("TaskExaminationsGrid");
+}
+
+@Html.AntiForgeryToken()
+
+<div class="container">
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="Create" id="formCreate">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <label asp-for="Number" class="input-group-addon"></label>
+                                    <input asp-for="Number" class="form-control" />
+                                </div>
+                                <span asp-validation-for="Number" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group date">
+                                    <label asp-for="Date" class="input-group-addon"></label>
+                                    <input asp-for="Date" class="form-control datetimepicker" type="text" />
+                                </div>
+                                <span asp-validation-for="Date" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <label asp-for="ClientId" class="input-group-addon"></label>
+                                    <select asp-for="ClientId" class="form-control select2-autocomplete" asp-items="ViewBag.Client"></select>
+                                </div>
+                                <div class="alert alert-danger nomarginbottom" role="alert" style="display:
+                                    @(ViewData.ModelState.GetFieldValidationState("ClientId") == ModelValidationState.Invalid ? "block" : "none" );">
+                                    <span asp-validation-for="ClientId" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <label asp-for="OriginCountryId" class="input-group-addon"></label>
+                                    <select asp-for="OriginCountryId" class="form-control select2-autocomplete" asp-items="ViewBag.OriginCountry"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <label asp-for="DestinationCountryId" class="input-group-addon"></label>
+                                    <select asp-for="DestinationCountryId" class="form-control select2-autocomplete" asp-items="ViewBag.DestinationCountry"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <label asp-for="SamplingProductionId" class="input-group-addon"></label>
+                                    <select asp-for="SamplingProductionId" class="form-control select2-autocomplete" asp-items="ViewBag.SamplingProduction"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="input-group">
+                                    <label asp-for="Title" class="input-group-addon"></label>
+                                    <input asp-for="Title" class="form-control" />
+                                </div>
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="input-group">
+                                    <label asp-for="CountMassVolume" class="input-group-addon"></label>
+                                    <input asp-for="CountMassVolume" class="form-control" />
+                                </div>
+                                <span asp-validation-for="CountMassVolume" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="input-group">
+                                    <label asp-for="SafePackage" class="input-group-addon"></label>
+                                    <input asp-for="SafePackage" class="form-control" />
+                                </div>
+                                <span asp-validation-for="SafePackage" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="input-group date">
+                                    <label asp-for="DateSampling" class="input-group-addon"></label>
+                                    <input asp-for="DateSampling" class="form-control datetimepicker" type="text" />
+                                </div>
+                                <span asp-validation-for="DateSampling" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="input-group date">
+                                    <label asp-for="DateReceipt" class="input-group-addon"></label>
+                                    <input asp-for="DateReceipt" class="form-control datetimepicker" />
+                                </div>
+                                <span asp-validation-for="DateReceipt" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <label asp-for="SamplingStandard" class="input-group-addon"></label>
+                                    <input asp-for="SamplingStandard" class="form-control" />
+                                </div>
+                                <span asp-validation-for="SamplingStandard" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="input-group">
+                                    <label asp-for="HasAppendix" class="input-group-addon"></label>
+                                    <input asp-for="HasAppendix" class="form-control" />
+                                </div>
+                                <span asp-validation-for="HasAppendix" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="input-group">
+                                    <label asp-for="SamplingPlace" class="input-group-addon"></label>
+                                    <input asp-for="SamplingPlace" class="form-control" />
+                                </div>
+                                <span asp-validation-for="SamplingPlace" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="input-group">
+                                    <label asp-for="SamplingActor" class="input-group-addon"></label>
+                                    <input asp-for="SamplingActor" class="form-control" />
+                                </div>
+                                <span asp-validation-for="SamplingActor" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="input-group">
+                                    <label asp-for="ExamiationPlace" class="input-group-addon"></label>
+                                    <input asp-for="ExamiationPlace" class="form-control" />
+                                </div>
+                                <span asp-validation-for="ExamiationPlace" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="jsGrid"></div>
+                    </div>
+                </div>
+
+                <br />
+
+                <input asp-for="Examinations" type="hidden" name="Examinations" />
+
+                <div class="form-group">
+                    <input type="submit" value="Создать" class="btn btn-default" />
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Назад к списку</a>
+    </div>
+</div>

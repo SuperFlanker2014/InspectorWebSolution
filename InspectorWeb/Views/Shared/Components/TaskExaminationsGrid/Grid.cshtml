@@ -1,0 +1,76 @@
+﻿@*@model InspectorWeb.ViewModels.PlainDirectoryModel*@
+
+<script src="~/lib_manual/jsgrid/dist/jsgrid.js"></script>
+<script src="~/lib_manual/jsgrid/src/i18n/ru.js"></script>
+<script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
+<script src="~/lib/i18n/jquery.i18n.js"></script>
+<script src="~/lib/i18n/languages/ru.min.js"></script>
+<script src="~/js/jsgrid.datetime.field.js"></script>
+
+<script>
+    var itemsData = [];
+
+    function GetData() {
+        return itemsData;
+    }
+
+    $(function () {
+        var dirSamplesExaminations = [];
+        var dirExaminationMethods = [];
+        var dirUsers = [];
+
+        var dataString = "?pageIndex=1&pageSize=2000&sortField=title&sortOrder=asc";
+
+        $.get({ url: "/api/data/dirSamplesExaminations", dataType: "json", data: dataString, async: false }).done(function (data, textStatus, jqXHR) { dirSamplesExaminations = data.data; });
+        $.get({ url: "/api/data/dirExaminationMethods", dataType: "json", data: dataString, async: false }).done(function (data, textStatus, jqXHR) { dirExaminationMethods = data.data; });
+        $.get({ url: "/api/data/dirUsers", dataType: "json", data: dataString, async: false }).done(function (data, textStatus, jqXHR) { dirUsers = data.data; });
+
+        InitGridDatetimeField();
+
+        var fieldsList = [
+            { name: "guid", title: "guid", visible: false },
+            { name: "taskId", title: "taskId", visible: false },
+            { name: "examinationId", title: "Наименование показателя", type: "select", items: dirSamplesExaminations, valueField: "guid", textField: "title", align: "left" },
+            { name: "methodId", title: "Методика испытания", type: "select", items: dirExaminationMethods, valueField: "guid", textField: "title", align: "left" },
+            { name: "endDate", title: "Дата окончания", type: "dateField", align: "left", width: 35 },
+            { name: "userId", title: "Исполнитель", type: "select", items: dirUsers, valueField: "guid", textField: "title", align: "left", width: 70 },
+            { name: "examinationResult", title: "Результат", type: "text", align: "left", width: 35 },
+            { name: "comments", title: "Примечания", type: "text", align: "left", width: 60 },
+            { type: "control", editButton: true, deleteButton: true, width: "8%" }
+        ];
+
+        jsGrid.locale("ru");
+
+        $("#jsGrid").jsGrid({
+            height: "400",
+            width: "100%",
+
+            filtering: false,
+            inserting: true,
+            editing: true,
+            sorting: false,
+            paging: false,
+            pageLoading: false,
+            rowClick: function () { },
+
+            deleteConfirm: "Вы действительно хотите удалить запись?",
+
+            autoload: true,
+            controller: {
+                loadData: function (filter) { return GetData(); },
+                insertItem: function (item) { },
+                updateItem: function (item) { },
+                deleteItem: function (item) { }
+            },
+
+            fields: fieldsList,
+
+            invalidNotify: function (args) {
+                var messages = $.map(args.errors, function (error) {
+                    return error.field + ": " + error.message;
+                });
+                alert(messages);
+            }
+        });
+    });
+</script>

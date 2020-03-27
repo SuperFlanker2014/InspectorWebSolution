@@ -1,0 +1,11 @@
+﻿.jsgrid-cell {
+    padding: 0.25em 0.25em;
+}
+
+.jsgrid-header-cell {
+    padding: 0.25em 0.25em;
+}
+
+.jsgrid-filter-row .jsgrid-insert-row .jsgrid-header-row {
+    line-height: 10px;
+}

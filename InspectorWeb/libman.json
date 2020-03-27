@@ -1,0 +1,88 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "jquery@3.4.1",
+      "destination": "wwwroot/lib/jquery"
+    },
+    {
+      "library": "twitter-bootstrap@3.4.1",
+      "destination": "wwwroot/lib/bootstrap"
+    },
+    {
+      "library": "jQuery-Validation-Engine@2.6.4",
+      "destination": "wwwroot/lib/jquery-validation"
+    },
+    {
+      "library": "jquery-validation-unobtrusive@3.2.11",
+      "destination": "wwwroot/lib/jquery-validation-unobtrusive"
+    },
+    {
+      "library": "jqueryui@1.12.1",
+      "destination": "wwwroot/lib/jquery-ui"
+    },
+    //{
+    //  "library": "jquery.i18n@1.0.7",
+    //  "destination": "wwwroot/lib/i18n"
+    //},
+    {
+      "library": "bootstrap-combobox@1.2.0",
+      "destination": "wwwroot/lib/bootstrap-combobox"
+    },
+    {
+      "library": "jquery.maskedinput@1.4.1",
+      "destination": "wwwroot/lib/jquery.maskedinput"
+    },
+    {
+      "library": "eonasdan-bootstrap-datetimepicker@4.17.47",
+      "destination": "wwwroot/lib/eonasdan-bootstrap-datetimepicker"
+    },
+    {
+      "library": "globalize@1.4.2",
+      "destination": "wwwroot/lib/globalize"
+    },
+    {
+      "library": "cldrjs@0.5.1",
+      "destination": "wwwroot/lib/cldrjs"
+    },
+    {
+      "library": "knockout@3.4.2",
+      "destination": "wwwroot/lib/knockout"
+    },
+    {
+      "library": "moment.js@2.24.0",
+      "destination": "wwwroot/lib/moment"
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "select2@4.0.13",
+      "destination": "wwwroot/lib/select2"
+    }
+    //{
+    //  "provider": "jsdelivr",
+    //  "library": "jsgrid@1.5.3",
+    //  "destination": "wwwroot/lib/jsgrid"
+    //},
+    //{
+    //  "provider": "jsdelivr",
+    //  "library": "devextreme@19.2.6",
+    //  "destination": "wwwroot/lib/devextreme"
+    //},
+    //{
+    //  "provider": "jsdelivr",
+    //  "library": "devexpress-reporting@19.2.6",
+    //  "destination": "wwwroot/lib/devexpress-reporting"
+    //},
+    //{
+    //  "provider": "jsdelivr",
+    //  "library": "@devexpress/analytics-core@19.2.6",
+    //  "destination": "wwwroot/lib/devexpress-analytics"
+    //},
+    //{
+    //  "provider": "jsdelivr",
+    //  "library": "requirejs@2.3.6",
+    //  "destination": "wwwroot/lib/requirejs"
+    //},
+  ]
+}

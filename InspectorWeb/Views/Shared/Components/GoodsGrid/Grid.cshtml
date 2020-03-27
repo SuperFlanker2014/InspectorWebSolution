@@ -1,0 +1,107 @@
+﻿@*@model InspectorWeb.ViewModels.PlainDirectoryModel*@
+
+<script src="~/lib_manual/jsgrid/dist/jsgrid.js"></script>
+<script src="~/lib_manual/jsgrid/src/i18n/ru.js"></script>
+<script src="~/js/jsgrid.decimal.field.js"></script>
+
+<script>
+    var goodsData = [];
+
+    function GetGoodsData() {
+        return goodsData;
+    }
+
+    $(function () {
+        var goods = [];
+        var productionCountries = [];
+        var placesUnits = [];
+        var weighUnits = [];
+        var diseases = [];
+        var diseasesCounts = [];
+        var diseaseStates = [];  
+
+        var dataString = "?pageIndex=1&pageSize=2000&sortField=title&sortOrder=asc";
+
+        $.get({ url: "/api/data/DirGoods", dataType: "json", data: dataString, async: false }).done(function (data, textStatus, jqXHR) { goods = data.data; });
+        $.get({ url: "/api/data/DirCountries", dataType: "json", data: dataString, async: false }).done(function (data, textStatus, jqXHR) { productionCountries = data.data; });
+        $.get({ url: "/api/data/DirPlacesUnits", dataType: "json", data: dataString, async: false }).done(function (data, textStatus, jqXHR) { placesUnits = data.data; });
+        $.get({ url: "/api/data/DirWeightUnits", dataType: "json", data: dataString, async: false }).done(function (data, textStatus, jqXHR) { weighUnits = data.data; });
+        $.get({ url: "/api/data/DirDiseases", dataType: "json", data: dataString, async: false }).done(function (data, textStatus, jqXHR) { diseases = data.data; });
+        $.get({ url: "/api/data/DirDiseasesCounts", dataType: "json", data: dataString, async: false }).done(function (data, textStatus, jqXHR) { diseasesCounts = data.data; });
+        $.get({ url: "/api/data/DirDiaseasesStates", dataType: "json", data: dataString, async: false }).done(function (data, textStatus, jqXHR) { diseaseStates = data.data; });
+        
+        InitGridDecimalField();
+        
+        var fieldsList = [
+            { name: "goodGuid", title: "Продукция", type: "select", items: goods, valueField: "guid", textField: "title", align: "left" },
+            { name: "productionCountryGuid", title: "Происхождение", type: "select", items: productionCountries, valueField: "guid", textField: "title", align: "left" },
+            { name: "places", title: "Места", type: "number", align: "left", width: 35, validate: ["required", { validator: "range", param: [0, 100000] }] },
+            { name: "placesUnitGuid", title: "Ед.мест", type: "select", items: placesUnits, valueField: "guid", textField: "title", align: "left", width: 70 },
+            { name: "weight", title: "Вес", type: "decimal", align: "left", width: 35, validate: ["required", { validator: "range", param: [0, 100000] }] },
+            { name: "weightUnitGuid", title: "Ед.веса", type: "select", items: weighUnits, valueField: "guid", textField: "title", align: "left", width: 60 },
+            { name: "samplesCount", title: "Образцы", type: "number", align: "left", width: 35, validate: ["required", { validator: "range", param: [0, 100000] }] },
+            { type: "control", editButton: true, deleteButton: true, width: "8%" }
+        ];
+
+        var fieldsListDiseases = [
+            { name: "diaseaseGuid", title: "Заболевание", type: "select", items: diseases, valueField: "guid", textField: "title", align: "left" },
+            { name: "count", title: "Кол-во", type: "number", align: "left", width: 30, validate: ["required", { validator: "range", param: [0, 100000] }] },
+            { name: "countGuid", title: "Ед.кол-ва", type: "select", items: diseasesCounts, valueField: "guid", textField: "title", align: "left", width: 30 },
+            { name: "diaseaseStateGuid", title: "Состояние", type: "select", items: diseaseStates, valueField: "guid", textField: "title", align: "left", width: 50 },
+            { type: "control", editButton: true, deleteButton: true, width: "8%" }
+        ];
+
+        jsGrid.locale("ru");
+
+        $("#jsGrid").jsGrid({
+            height: "400",
+            width: "100%",
+
+            filtering: false,
+            inserting: true,
+            editing: true,
+            sorting: false,
+            paging: false,
+            pageLoading: false,
+            rowClick: function () { },
+
+            deleteConfirm: "Вы действительно хотите удалить запись?",
+
+            autoload: true,
+            controller: {
+                loadData: function (filter) { return GetGoodsData(); },
+                insertItem: function (item) { item.diseases = []; },
+                updateItem: function (item) { },
+                deleteItem: function (item) { }
+            },
+
+            rowRenderer: function (item, itemIndex) {
+                var row = $("<tr>");
+                var addressesGrid = $('<td colspan="8" class="padding10">').hide();
+                addressesGrid.jsGrid({
+                    inserting: true,
+                    editing: true,
+                    width: "100%",
+                    height: "auto",
+                    data: item.diseases,
+                    fields: fieldsListDiseases
+                });
+                this._renderCells(row, item);
+                row.click(function () {
+                    addressesGrid.toggle();
+                });
+                
+                return row.add($("<tr>").append(addressesGrid));
+            },
+
+            fields: fieldsList,
+
+            invalidNotify: function (args) {
+                var messages = $.map(args.errors, function (error) {
+                    return error.field + ": " + error.message;
+                });
+                alert(messages);
+            }
+        });
+    });
+</script>

@@ -1,0 +1,197 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <ApplicationIcon />
+    <OutputType>Exe</OutputType>
+    <StartupObject />
+    <AssemblyName>InspectorWebServer</AssemblyName>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Reports\Docs_Act.repx" />
+    <None Remove="Reports\Docs_Agreements.repx" />
+    <None Remove="Reports\Docs_Bills_Post.repx" />
+    <None Remove="Reports\Docs_Bills_Post_add.repx" />
+    <None Remove="Reports\Docs_Bills_Pre.repx" />
+    <None Remove="Reports\Docs_Bills_Pre_add.repx" />
+    <None Remove="Reports\Docs_Conclusion_Examination.repx" />
+    <None Remove="Reports\Docs_Conclusion_Export_New.repx" />
+    <None Remove="Reports\Docs_Conclusion_Import_New.repx" />
+    <None Remove="Reports\Docs_Conclusion_Objects.repx" />
+    <None Remove="Reports\XtraReport.repx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="BuildBundlerMinifier" Version="3.2.435" />
+    <PackageReference Include="DevExpress.AspNetCore.Reporting" Version="19.2.6" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\Docs_Act.repx" />
+    <EmbeddedResource Include="Reports\Docs_Agreements.repx" />
+    <EmbeddedResource Include="Reports\Docs_Bills_Post.repx" />
+    <EmbeddedResource Include="Reports\Docs_Bills_Post_add.repx" />
+    <EmbeddedResource Include="Reports\Docs_Bills_Pre.repx" />
+    <EmbeddedResource Include="Reports\Docs_Bills_Pre_add.repx" />
+    <EmbeddedResource Include="Reports\Docs_Conclusion_Examination.repx" />
+    <EmbeddedResource Include="Reports\Docs_Conclusion_Export_New.repx" />
+    <EmbeddedResource Include="Reports\Docs_Conclusion_Import_New.repx" />
+    <EmbeddedResource Include="Reports\Docs_Conclusion_Objects.repx" />
+    <EmbeddedResource Include="Reports\XtraReport.repx" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Update="Reports\Docs_Act.cs">
+      <DependentUpon>Docs_Act.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\Docs_Act.Designer.cs">
+      <DependentUpon>Docs_Act.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\Docs_Agreements.cs">
+      <DependentUpon>Docs_Agreements.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\Docs_Agreements.Designer.cs">
+      <DependentUpon>Docs_Agreements.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\Docs_Bills_Post.cs">
+      <DependentUpon>Docs_Bills_Post.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\Docs_Bills_Post.Designer.cs">
+      <DependentUpon>Docs_Bills_Post.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\Docs_Bills_Post_add.cs">
+      <DependentUpon>Docs_Bills_Post_add.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\Docs_Bills_Post_add.Designer.cs">
+      <DependentUpon>Docs_Bills_Post_add.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\Docs_Bills_Pre.cs">
+      <DependentUpon>Docs_Bills_Pre.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\Docs_Bills_Pre.Designer.cs">
+      <DependentUpon>Docs_Bills_Pre.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\Docs_Bills_Pre_add.cs">
+      <DependentUpon>Docs_Bills_Pre_add.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\Docs_Bills_Pre_add.Designer.cs">
+      <DependentUpon>Docs_Bills_Pre_add.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\Docs_Conclusion_Examination.cs">
+      <DependentUpon>Docs_Conclusion_Examination.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\Docs_Conclusion_Examination.Designer.cs">
+      <DependentUpon>Docs_Conclusion_Examination.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\Docs_Conclusion_Export_New.cs">
+      <DependentUpon>Docs_Conclusion_Export_New.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\Docs_Conclusion_Export_New.Designer.cs">
+      <DependentUpon>Docs_Conclusion_Export_New.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\Docs_Conclusion_Import_New.cs">
+      <DependentUpon>Docs_Conclusion_Import_New.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\Docs_Conclusion_Import_New.Designer.cs">
+      <DependentUpon>Docs_Conclusion_Import_New.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\Docs_Conclusion_Objects.cs">
+      <DependentUpon>Docs_Conclusion_Objects.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\Docs_Conclusion_Objects.Designer.cs">
+      <DependentUpon>Docs_Conclusion_Objects.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\XtraReport.cs">
+      <DependentUpon>XtraReport.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\XtraReport.Designer.cs">
+      <DependentUpon>XtraReport.repx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\DocsExaminationTasks\Create.cshtml" />
+    <None Include="Views\DocsExaminationTasks\Delete.cshtml" />
+    <None Include="Views\DocsExaminationTasks\Edit.cshtml" />
+    <None Include="Views\DocsExaminationTasks\Index.cshtml" />
+    <None Include="wwwroot\lib_manual\devextreme\css\fonts\Roboto-300.woff2" />
+    <None Include="wwwroot\lib_manual\devextreme\css\fonts\Roboto-400.woff2" />
+    <None Include="wwwroot\lib_manual\devextreme\css\fonts\Roboto-500.woff2" />
+    <None Include="wwwroot\lib_manual\devextreme\css\fonts\Roboto-700.woff2" />
+    <None Include="wwwroot\lib_manual\devextreme\css\icons\dxicons.woff2" />
+    <None Include="wwwroot\lib_manual\devextreme\css\icons\dxiconsios.woff2" />
+    <None Include="wwwroot\lib_manual\devextreme\css\icons\dxiconsmaterial.woff2" />
+    <None Include="wwwroot\lib_manual\devextreme\js\dx.all.debug.js" />
+    <None Include="wwwroot\lib_manual\devextreme\js\dx.all.js" />
+    <None Include="wwwroot\lib_manual\devextreme\js\dx.aspnet.mvc.js" />
+    <None Include="wwwroot\lib_manual\devextreme\js\localization\dx.messages.cs.js" />
+    <None Include="wwwroot\lib_manual\devextreme\js\localization\dx.messages.de.js" />
+    <None Include="wwwroot\lib_manual\devextreme\js\localization\dx.messages.en.js" />
+    <None Include="wwwroot\lib_manual\devextreme\js\localization\dx.messages.es.js" />
+    <None Include="wwwroot\lib_manual\devextreme\js\localization\dx.messages.fi.js" />
+    <None Include="wwwroot\lib_manual\devextreme\js\localization\dx.messages.fr.js" />
+    <None Include="wwwroot\lib_manual\devextreme\js\localization\dx.messages.it.js" />
+    <None Include="wwwroot\lib_manual\devextreme\js\localization\dx.messages.ja.js" />
+    <None Include="wwwroot\lib_manual\devextreme\js\localization\dx.messages.nl.js" />
+    <None Include="wwwroot\lib_manual\devextreme\js\localization\dx.messages.pt.js" />
+    <None Include="wwwroot\lib_manual\devextreme\js\localization\dx.messages.ru.js" />
+    <None Include="wwwroot\lib_manual\devextreme\js\localization\dx.messages.sv.js" />
+    <None Include="wwwroot\lib_manual\devextreme\js\localization\dx.messages.zh.js" />
+    <None Include="wwwroot\lib_manual\devextreme\js\vectormap-data\africa.js" />
+    <None Include="wwwroot\lib_manual\devextreme\js\vectormap-data\canada.js" />
+    <None Include="wwwroot\lib_manual\devextreme\js\vectormap-data\eurasia.js" />
+    <None Include="wwwroot\lib_manual\devextreme\js\vectormap-data\europe.js" />
+    <None Include="wwwroot\lib_manual\devextreme\js\vectormap-data\usa.js" />
+    <None Include="wwwroot\lib_manual\devextreme\js\vectormap-data\world.js" />
+    <None Include="wwwroot\lib_manual\devextreme\js\vectormap-utils\dx.vectormaputils.debug.js" />
+    <None Include="wwwroot\lib_manual\devextreme\js\vectormap-utils\dx.vectormaputils.js" />
+    <None Include="wwwroot\lib_manual\devextreme\js\vectormap-utils\dx.vectormaputils.node.js" />
+    <None Include="wwwroot\lib_manual\devextreme\layouts\Desktop\DesktopLayout.js" />
+    <None Include="wwwroot\lib_manual\devextreme\layouts\Empty\EmptyLayout.js" />
+    <None Include="wwwroot\lib_manual\devextreme\layouts\Navbar\NavbarLayout.js" />
+    <None Include="wwwroot\lib_manual\devextreme\layouts\Pivot\PivotLayout.js" />
+    <None Include="wwwroot\lib_manual\devextreme\layouts\Popup\PopupLayout.js" />
+    <None Include="wwwroot\lib_manual\devextreme\layouts\Simple\SimpleLayout.js" />
+    <None Include="wwwroot\lib_manual\devextreme\layouts\SlideOut\SlideOutLayout.js" />
+    <None Include="wwwroot\lib_manual\devextreme\layouts\Split\SplitLayout.js" />
+    <None Include="wwwroot\lib_manual\devextreme\README.md" />
+    <None Include="wwwroot\lib_manual\xtrareportsjs\js\dx-analytics-core.js" />
+    <None Include="wwwroot\lib_manual\xtrareportsjs\js\dx-analytics-core.min.js" />
+    <None Include="wwwroot\lib_manual\xtrareportsjs\js\dx-querybuilder.js" />
+    <None Include="wwwroot\lib_manual\xtrareportsjs\js\dx-querybuilder.min.js" />
+    <None Include="wwwroot\lib_manual\xtrareportsjs\js\dx-reportdesigner.js" />
+    <None Include="wwwroot\lib_manual\xtrareportsjs\js\dx-reportdesigner.min.js" />
+    <None Include="wwwroot\lib_manual\xtrareportsjs\js\dx-webdocumentviewer.js" />
+    <None Include="wwwroot\lib_manual\xtrareportsjs\js\dx-webdocumentviewer.min.js" />
+    <None Include="wwwroot\lib_manual\xtrareportsjs\js\localization\report-designer.de.js" />
+    <None Include="wwwroot\lib_manual\xtrareportsjs\js\localization\report-designer.en.js" />
+    <None Include="wwwroot\lib_manual\xtrareportsjs\js\localization\report-designer.ja.js" />
+    <None Include="wwwroot\lib_manual\xtrareportsjs\js\localization\report-designer.ru.js" />
+    <None Include="wwwroot\lib_manual\xtrareportsjs\js\localization\web-document-viewer.de.js" />
+    <None Include="wwwroot\lib_manual\xtrareportsjs\js\localization\web-document-viewer.en.js" />
+    <None Include="wwwroot\lib_manual\xtrareportsjs\js\localization\web-document-viewer.ja.js" />
+    <None Include="wwwroot\lib_manual\xtrareportsjs\js\localization\web-document-viewer.ru.js" />
+    <None Include="wwwroot\lib_manual\xtrareportsjs\README.md" />
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
+
+</Project>

@@ -1,0 +1,85 @@
+﻿@model IEnumerable<InspectorWeb.ModelsDB.DocsExaminationTasks>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateReceipt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateSampling)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SamplingStandard)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SamplingActor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DestinationCountry)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OriginCountry)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SamplingProduction)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateReceipt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateSampling)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SamplingStandard)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SamplingActor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client.Inn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DestinationCountry.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OriginCountry.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SamplingProduction)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Guid">Edit</a> |
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.Guid">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

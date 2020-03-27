@@ -1,0 +1,181 @@
+﻿@model InspectorWeb.ViewModels.DocsConclusionsExaminationViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Microsoft.AspNetCore.Mvc.ModelBinding
+
+@section styles
+    {
+    <link href="~/lib/eonasdan-bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap-combobox/css/bootstrap-combobox.min.css" rel="stylesheet">
+    <link href="~/css/site-forms.css" rel="stylesheet">
+}
+
+@section scripts {
+
+    <script src="~/lib/moment/moment-with-locales.min.js"></script>
+    <script src="~/lib/eonasdan-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+
+    <script src="~/lib/bootstrap-combobox/js/bootstrap-combobox.min.js"></script>
+    <script src="~/lib/jquery.maskedinput/jquery.maskedinput.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            goodsData = JSON.parse($('input[name*=Goods]').val());
+        });
+        $(function () {
+            $('.datetimepicker').datetimepicker({ locale: 'ru', format: 'DD.MM.YYYY' });
+            $('#formEdit').submit(function (event) {
+                $('input[name*=Goods]').val(JSON.stringify(goodsData));
+            });
+        });
+    </script>
+
+    @await Component.InvokeAsync("GoodsGrid");
+
+}
+
+@Html.AntiForgeryToken()
+
+<div class="container">
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="Edit" id="formEdit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <input asp-for="Guid" type="hidden" name="Guid" />
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <label asp-for="Number" class="input-group-addon"></label>
+                                    <input asp-for="Number" class="form-control" />
+                                </div>
+                                <div class="alert alert-danger nomarginbottom" role="alert" style="display:
+                                @(ViewData.ModelState.GetFieldValidationState("Number") == ModelValidationState.Invalid ? "block" : "none" );">
+                                    <span asp-validation-for="Number" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group date">
+                                    <label asp-for="Date" class="input-group-addon"></label>
+                                    <input asp-for="Date" class="form-control datetimepicker" />
+                                    @*<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>*@
+                                </div>
+                                <span asp-validation-for="Date" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <label asp-for="SertNumber" class="input-group-addon"></label>
+                                    <input asp-for="SertNumber" class="form-control" />
+                                </div>
+                                <span asp-validation-for="SertNumber" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <label asp-for="SertFrom" class="input-group-addon"></label>
+                                    <input asp-for="SertFrom" class="form-control" />
+                                </div>
+                                <span asp-validation-for="SertFrom" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <label asp-for="TransportTypeGuid" class="input-group-addon"></label>
+                                    <select asp-for="TransportTypeGuid" class="form-control" asp-items="ViewBag.TransportTypeGuid"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <label asp-for="TransportNumber" class="input-group-addon"></label>
+                                    <input asp-for="TransportNumber" class="form-control" />
+                                </div>
+                                <span asp-validation-for="TransportNumber" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <label asp-for="InvoiceTypeGuid" class="input-group-addon"></label>
+                                    <select asp-for="InvoiceTypeGuid" class="form-control" asp-items="ViewBag.InvoiceTypeGuid"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <label asp-for="InvoiceNumber" class="input-group-addon"></label>
+                                    <input asp-for="InvoiceNumber" class="form-control" />
+                                </div>
+                                <span asp-validation-for="InvoiceNumber" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <label asp-for="InvoiceDate" class="input-group-addon"></label>
+                                    <input asp-for="InvoiceDate" class="form-control datetimepicker" />
+                                </div>
+                                <span asp-validation-for="InvoiceDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <label asp-for="TargetOrSourceGuid" class="input-group-addon"></label>
+                                    <select asp-for="TargetOrSourceGuid" class="form-control" asp-items="ViewBag.TargetOrSourceGuid"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <input asp-for="TargetOrSource" class="form-control" />
+                                <span asp-validation-for="TargetOrSource" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <label asp-for="FactAddress" class="input-group-addon"></label>
+                                    <input asp-for="FactAddress" class="form-control" />
+                                </div>
+                                <span asp-validation-for="FactAddress" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <label asp-for="KarantinSertNumber" class="input-group-addon"></label>
+                                    <input asp-for="KarantinSertNumber" class="form-control" />
+                                </div>
+                                <span asp-validation-for="KarantinSertNumber" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <label asp-for="KarantinSertDate" class="input-group-addon"></label>
+                                    <input asp-for="KarantinSertDate" class="form-control datetimepicker" />
+                                </div>
+                                <span asp-validation-for="KarantinSertDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="jsGrid"></div>
+                    </div>
+                </div>
+
+                <br />
+
+                <input asp-for="Goods" type="hidden" name="Goods" />
+
+                <div class="form-group">
+                    <input type="submit" value="Сохранить" class="btn btn-default" />
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Назад к списку</a>
+    </div>
+</div>

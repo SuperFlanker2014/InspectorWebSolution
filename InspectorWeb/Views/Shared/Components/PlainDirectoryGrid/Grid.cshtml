@@ -1,0 +1,147 @@
+﻿@model InspectorWeb.ViewModels.PlainDirectoryModel
+
+<script src="~/lib_manual/jsgrid/dist/jsgrid.js"></script>
+<script src="~/lib_manual/jsgrid/src/i18n/ru.js"></script>
+
+<script>
+$(function () {
+    @foreach (var tuple in Model.DirectoryDropdowns)
+    {
+    <text>
+    var @tuple.Key = [];
+    $.get({ url: "/api/data/@tuple.Value", dataType: "json", data: "?pageIndex=1&pageSize=2000&sortField=title&sortOrder=asc", async: false })
+        .done(function (data, textStatus, jqXHR) { @tuple.Key = data.data; });
+    @(tuple.Key).unshift({ guid: "", title: ""});
+    </text>
+    }
+
+    jsGrid.locale("ru");
+
+    var fieldsList = [
+        @foreach (var directoryProperty in Model.Properties)
+        {
+            @switch (directoryProperty.Type)
+            {
+                case "select":
+                <text>
+                {
+                    name: "@directoryProperty.Name", title: "@directoryProperty.Title", type: "@directoryProperty.Type", items: @directoryProperty.Name, valueField: "guid", textField: "title", align: "left",
+                },
+                </text>
+                    break;
+                default:
+                <text>
+                {
+                    name: "@directoryProperty.Name", title: "@directoryProperty.Title", type: "@directoryProperty.Type",
+                },
+                </text>
+                    break;
+            }
+        }
+        { type: "control",
+            editButton: @(Model.Access.HasFlag(InspectorWeb.ViewModels.DirectoryAccessRights.Edit) ? "true" : "false"),
+            deleteButton: @(Model.Access.HasFlag(InspectorWeb.ViewModels.DirectoryAccessRights.Delete) ? "true" : "false"),
+            width: "5%",
+            itemTemplate: function (value, item) {
+                var result = jsGrid.fields.control.prototype.itemTemplate.apply(this, arguments);
+                var customButtons = $("");
+                @foreach (var customControlButton in Model.ItemButtons)
+                {
+                <text>
+                customButtons = customButtons.add($("<a href='@customControlButton.Link" + item.guid + "'><input class='@customControlButton.Classes' title='@customControlButton.Title' type='button'></a>"));
+                </text>
+                }
+                return customButtons.add(result);
+            },
+            headerTemplate: function (value, item) {
+                var result = jsGrid.fields.control.prototype.headerTemplate.apply(this, arguments);
+                var customButtons = $("");
+                @foreach (var customControlButton in Model.HeaderButtons)
+                {
+                <text>
+                customButtons = customButtons.add($("<a href='@customControlButton.Link'><input class='@customControlButton.Classes' title='@customControlButton.Title' type='button'></a>"));
+                </text>
+                }
+                return customButtons.add(result);;
+            },
+        }
+    ];
+
+    $("#jsGrid").jsGrid({
+        height: "800",
+        width: "100%",
+
+        filtering: true,
+        inserting: @(Model.Access.HasFlag(InspectorWeb.ViewModels.DirectoryAccessRights.Insert) ? "true" : "false"),
+        editing: @(Model.Access.HasFlag(InspectorWeb.ViewModels.DirectoryAccessRights.Edit) ? "true" : "false"),
+        sorting: true,
+        paging: true,
+        autoload: true,
+        pageLoading: true,
+        pageIndex: 1,
+        pageSize: 20,
+        pageButtonCount: 15,
+
+        deleteConfirm: "Вы действительно хотите удалить запись?",
+
+        controller: {
+            loadData: function (filter) {
+                return $.ajax({
+                    type: "GET",
+                    url: "/api/data/@Model.DirectoryName",
+                    data: filter,
+                    dataType: "json"
+                });
+            },
+
+            insertItem: function (item) {
+                return $.ajax({
+                    type: "POST",
+                    url: "/api/data/@Model.DirectoryName",
+                    data: item,
+                    dataType: "json",
+                    error: function (data) {
+                        alert('error new')
+                    }
+                });
+            },
+
+            updateItem: function (item) {
+                return $.ajax({
+                    type: "PUT",
+                    url: "/api/data/@Model.DirectoryName/" + item.guid,
+                    data: item,
+                    dataType: "json",
+                    error: function (data) {
+                        alert('error save')
+                    }
+                });
+            },
+
+            deleteItem: function (item) {
+                return $.ajax({
+                    type: "DELETE",
+                    url: "/api/data/@Model.DirectoryName/" + item.guid,
+                    dataType: "json",
+                    error: function (data) {
+                        alert('error delete')
+                    }
+                });
+            }
+        },
+
+        fields : fieldsList,
+
+        invalidNotify: function (args) {
+            var messages = $.map(args.errors, function (error) {
+                return error.field + ": " + error.message;
+            });
+
+            alert(messages);
+        }
+    });
+
+    $("#jsGrid").jsGrid("sort", "title");
+
+});
+</script>

@@ -1,0 +1,47 @@
+<link href="~/lib/jquery-ui/themes/base/jquery-ui.css" rel="stylesheet" />
+<link href="~/lib/jquery-ui/themes/base/resizable.css" rel="stylesheet" />
+<link href="~/lib/jquery-ui/themes/base/draggable.css" rel="stylesheet" />
+
+<script src="~/lib/jquery/jquery.min.js"></script>
+<script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
+<script src="~/lib/knockout/knockout-min.js"></script>
+
+<script src="~/lib/cldrjs/cldr.js"></script>
+<script src="~/lib/cldrjs/cldr/event.js"></script>
+<script src="~/lib/cldrjs/cldr/supplemental.js"></script>
+<script src="~/lib/cldrjs/cldr/unresolved.js"></script>
+<script src="~/lib/globalize/globalize.js"></script>
+<script src="~/lib/globalize/globalize/currency.js"></script>
+<script src="~/lib/globalize/globalize/message.js"></script>
+<script src="~/lib/globalize/globalize/number.js"></script>
+<script src="~/lib/globalize/globalize/date.js"></script>
+
+<script src="~/lib_manual/devextreme/js/dx.all.js"></script>
+<link href="~/lib_manual/devextreme/css/dx.common.css" rel="stylesheet" />
+<link href="~/lib_manual/devextreme/css/dx.light.css" rel="stylesheet" />
+
+<script src="~/lib_manual/xtrareportsjs/js/dx-analytics-core.min.js"></script>
+<script src="~/lib_manual/xtrareportsjs/js/dx-webdocumentviewer.min.js"></script>
+<link href="~/lib_manual/xtrareportsjs/css/dx-analytics.common.min.css" rel="stylesheet" />
+<link href="~/lib_manual/xtrareportsjs/css/dx-analytics.light.min.css" rel="stylesheet" />
+<link href="~/lib_manual/xtrareportsjs/css/dx-webdocumentviewer.css" rel="stylesheet" />
+
+@model InspectorWeb.Reports.Docs_Bills_Post_add
+
+<div class="wrapper">
+    @(Html.DevExpress()
+        .WebDocumentViewer("DocumentViewer")
+        .ClientSideModelSettings(x =>
+        {
+            x.IncludeCldrData = false;
+            x.IncludeCldrSupplemental = false;
+            x.IncludeLocalization = true;
+        })
+        .ClientSideEvents(events =>
+        {
+            //events.BeforeRender("BeforeRender");
+        })
+        .Height("1000px")
+        .Bind(Model)
+    )
+</div>
