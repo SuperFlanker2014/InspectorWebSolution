@@ -8,6 +8,7 @@ namespace InspectorWeb.ModelsDB
         public DirWeightUnits()
         {
             DirGoodsGroups = new HashSet<DirGoodsGroups>();
+            DocsExaminationTasksCiphers = new HashSet<DocsExaminationTasksCiphers>();
             DocsGoods = new HashSet<DocsGoods>();
         }
 
@@ -16,6 +17,7 @@ namespace InspectorWeb.ModelsDB
         public string Mnemonic { get; set; }
 
         public virtual ICollection<DirGoodsGroups> DirGoodsGroups { get; set; }
+        public virtual ICollection<DocsExaminationTasksCiphers> DocsExaminationTasksCiphers { get; set; }
         public virtual ICollection<DocsGoods> DocsGoods { get; set; }
     }
 }

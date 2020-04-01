@@ -7,6 +7,7 @@ namespace InspectorWeb.ModelsDB
     {
         public DocsExaminationTasks()
         {
+            DocsExaminationTasksCiphers = new HashSet<DocsExaminationTasksCiphers>();
             DocsExaminationTasksExaminations = new HashSet<DocsExaminationTasksExaminations>();
         }
 
@@ -33,6 +34,7 @@ namespace InspectorWeb.ModelsDB
         public virtual DirCountries DestinationCountry { get; set; }
         public virtual DirCountries OriginCountry { get; set; }
         public virtual DirGoods SamplingProduction { get; set; }
+        public virtual ICollection<DocsExaminationTasksCiphers> DocsExaminationTasksCiphers { get; set; }
         public virtual ICollection<DocsExaminationTasksExaminations> DocsExaminationTasksExaminations { get; set; }
     }
 }

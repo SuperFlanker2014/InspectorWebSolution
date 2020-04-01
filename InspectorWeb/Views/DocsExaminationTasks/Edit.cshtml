@@ -20,12 +20,12 @@
     <script>
         $(document).ready(function () {
             $('.select2-autocomplete').select2();
-            itemsData = JSON.parse($('input[name*=Examinations]').val());
+            examsData = JSON.parse($('input[name*=Examinations]').val());
         });
         $(function () {
             $('.datetimepicker').datetimepicker({ locale: 'ru', format: 'DD.MM.YYYY' });
             $('#formCreate').submit(function (event) {
-                $('input[name*=Examinations]').val(JSON.stringify(itemsData));
+                $('input[name*=Examinations]').val(JSON.stringify(examsData));
             });
         });
     </script>

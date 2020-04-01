@@ -13,7 +13,7 @@ namespace InspectorWeb.Components
 
 		public IViewComponentResult Invoke()
 		{
-			return View("Grid");
+			return View("TaskExaminationsGrid");
 		}
 	}
 }

@@ -51,6 +51,20 @@ namespace InspectorWeb.ViewModels
 					ExaminationResult = m.ExaminationResult,
 					EndDate = m.EndDate,
 					UserId = m.UserId,
+					Comments = m.Comments,
+					MethodItem = m.MethodItem,
+					SampleCiphers = m.SampleCiphers
+				}
+			).ToArray();
+
+			TaskCiphers = docsExaminationTask.DocsExaminationTasksCiphers.Select(m =>
+				new DocsExaminationTasksCiphersViewModel()
+				{
+					Guid = m.Guid,
+					TaskId = m.TaskId,
+					Cipher = m.Cipher,
+					WeightUnitId = m.WeightUnitId,
+					Count = m.Count,
 					Comments = m.Comments
 				}
 			).ToArray();
@@ -99,11 +113,17 @@ namespace InspectorWeb.ViewModels
 		public bool ShouldReturn { get; set; }
 
 		public string Examinations { get; set; }
-
 		public DocsExaminationTasksExaminationsViewModel[] TaskExaminations
 		{
 			get { return Examinations == null ? null : JsonConvert.DeserializeObject<DocsExaminationTasksExaminationsViewModel[]>(Examinations); }
 			set { Examinations = JsonConvert.SerializeObject(value); }
+		}
+
+		public string Ciphers { get; set; }
+		public DocsExaminationTasksCiphersViewModel[] TaskCiphers
+		{
+			get { return Ciphers == null ? null : JsonConvert.DeserializeObject<DocsExaminationTasksCiphersViewModel[]>(Ciphers); }
+			set { Ciphers = JsonConvert.SerializeObject(value); }
 		}
 	}
 }

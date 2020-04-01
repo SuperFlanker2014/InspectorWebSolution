@@ -8,10 +8,10 @@
 <script src="~/js/jsgrid.datetime.field.js"></script>
 
 <script>
-    var itemsData = [];
+    var examsData = [];
 
     function GetData() {
-        return itemsData;
+        return examsData;
     }
 
     $(function () {
@@ -32,6 +32,9 @@
             { name: "taskId", title: "taskId", visible: false },
             { name: "examinationId", title: "Наименование показателя", type: "select", items: dirSamplesExaminations, valueField: "guid", textField: "title", align: "left" },
             { name: "methodId", title: "Методика испытания", type: "select", items: dirExaminationMethods, valueField: "guid", textField: "title", align: "left" },
+
+            { name: "comments", title: "Примечания", type: "text", align: "left", width: 60 },
+
             { name: "endDate", title: "Дата окончания", type: "dateField", align: "left", width: 35 },
             { name: "userId", title: "Исполнитель", type: "select", items: dirUsers, valueField: "guid", textField: "title", align: "left", width: 70 },
             { name: "examinationResult", title: "Результат", type: "text", align: "left", width: 35 },

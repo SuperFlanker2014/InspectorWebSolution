@@ -13,6 +13,8 @@ namespace InspectorWeb.ModelsDB
         public DateTime? EndDate { get; set; }
         public Guid UserId { get; set; }
         public string Comments { get; set; }
+        public string MethodItem { get; set; }
+        public string SampleCiphers { get; set; }
 
         public virtual DirSamplesExaminations Examination { get; set; }
         public virtual DirExaminationMethods Method { get; set; }

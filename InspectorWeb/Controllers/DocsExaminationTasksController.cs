@@ -180,7 +180,9 @@ namespace InspectorWeb.Controllers
                 .Include(d => d.DestinationCountry)
                 .Include(d => d.OriginCountry)
                 .Include(d => d.SamplingProduction)
-                .Include(d => d.DocsExaminationTasksExaminations)
+                .Include(d => d.DocsExaminationTasksExaminations).ThenInclude(d => d.Examination)
+                .Include(d => d.DocsExaminationTasksExaminations).ThenInclude(d => d.Method)
+                .Include(d => d.DocsExaminationTasksExaminations).ThenInclude(d => d.User)
                 .FirstOrDefaultAsync(t => t.Guid == id);
 
             var report = new InspectorWeb.Reports.XtraReport

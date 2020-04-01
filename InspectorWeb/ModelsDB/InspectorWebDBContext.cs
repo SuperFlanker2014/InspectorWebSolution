@@ -61,6 +61,7 @@ namespace InspectorWeb.ModelsDB
         public virtual DbSet<DocsConclusionsImport> DocsConclusionsImport { get; set; }
         public virtual DbSet<DocsConclusionsObjects> DocsConclusionsObjects { get; set; }
         public virtual DbSet<DocsExaminationTasks> DocsExaminationTasks { get; set; }
+        public virtual DbSet<DocsExaminationTasksCiphers> DocsExaminationTasksCiphers { get; set; }
         public virtual DbSet<DocsExaminationTasksExaminations> DocsExaminationTasksExaminations { get; set; }
         public virtual DbSet<DocsGoods> DocsGoods { get; set; }
         public virtual DbSet<DocsGoodsDiseases> DocsGoodsDiseases { get; set; }
@@ -1703,6 +1704,44 @@ namespace InspectorWeb.ModelsDB
                     .HasConstraintName("FK_docsExaminationTasks_dirGoods");
             });
 
+            modelBuilder.Entity<DocsExaminationTasksCiphers>(entity =>
+            {
+                entity.HasKey(e => e.Guid);
+
+                entity.ToTable("docsExaminationTasksCiphers");
+
+                entity.Property(e => e.Guid)
+                    .HasColumnName("guid")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Cipher)
+                    .HasColumnName("cipher")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.Comments)
+                    .HasColumnName("comments")
+                    .HasMaxLength(500);
+
+                entity.Property(e => e.Count)
+                    .HasColumnName("count")
+                    .HasColumnType("numeric(18, 4)");
+
+                entity.Property(e => e.TaskId).HasColumnName("taskId");
+
+                entity.Property(e => e.WeightUnitId).HasColumnName("weightUnitId");
+
+                entity.HasOne(d => d.Task)
+                    .WithMany(p => p.DocsExaminationTasksCiphers)
+                    .HasForeignKey(d => d.TaskId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_docsExaminationTasksCiphers_docsExaminationTasks");
+
+                entity.HasOne(d => d.WeightUnit)
+                    .WithMany(p => p.DocsExaminationTasksCiphers)
+                    .HasForeignKey(d => d.WeightUnitId)
+                    .HasConstraintName("FK_docsExaminationTasksCiphers_dirWeightUnits");
+            });
+
             modelBuilder.Entity<DocsExaminationTasksExaminations>(entity =>
             {
                 entity.HasKey(e => e.Guid);
@@ -1726,6 +1765,14 @@ namespace InspectorWeb.ModelsDB
                     .HasMaxLength(500);
 
                 entity.Property(e => e.MethodId).HasColumnName("methodId");
+
+                entity.Property(e => e.MethodItem)
+                    .HasColumnName("methodItem")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.SampleCiphers)
+                    .HasColumnName("sampleCiphers")
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.TaskId).HasColumnName("taskId");
 
