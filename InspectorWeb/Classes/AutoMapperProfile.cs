@@ -1,30 +1,30 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using AutoMapper;
 using AutoMapper.Configuration;
 using InspectorWeb.ModelsDB;
 using InspectorWeb.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
 
 namespace InspectorWeb.Classes
 {
 	public class AutoMapperProfile : Profile
 	{
-		public AutoMapperProfile()	: this("InspectorWebProfile")
+		public AutoMapperProfile() : this("InspectorWebProfile")
 		{
 		}
-		
+
 		protected AutoMapperProfile(string profileName) : base(profileName)
 		{
 			foreach (var type in DirectoriesList.DirectoriesTypes)
 			{
 				CreateMap(type, type);
-			}		
+			}
 
 			CreateMap<DocsGoodsDiseasesViewModel, DocsGoodsDiseases>();
 			CreateMap<DocsGoodsViewModel, DocsGoods>()
 				.ForMember(dce => dce.DocsGoodsDiseases, opt => opt.MapFrom(s => s.Diseases));
-			CreateMap<DocsConclusionsExaminationViewModel, DocsAll>()				
+			CreateMap<DocsConclusionsExaminationViewModel, DocsAll>()
 				.ForMember(dce => dce.DocClientGu, opt => opt.Ignore())
 				.ForMember(dce => dce.DocsAgreements, opt => opt.Ignore())
 				.ForMember(dce => dce.DocsBills, opt => opt.Ignore())
@@ -53,8 +53,10 @@ namespace InspectorWeb.Classes
 				;
 
 			CreateMap<DocsExaminationTasksExaminationsViewModel, DocsExaminationTasksExaminations>();
-
 			CreateMap<DocsExaminationTasksExaminations, DocsExaminationTasksExaminationsViewModel>();
+
+			CreateMap<DocsExaminationTasksCiphersViewModel, DocsExaminationTasksCiphers>();
+			CreateMap<DocsExaminationTasksCiphers, DocsExaminationTasksCiphersViewModel>();
 		}
 	}
 }

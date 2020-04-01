@@ -1,0 +1,71 @@
+﻿@*@model InspectorWeb.ViewModels.PlainDirectoryModel*@
+
+<script src="~/lib_manual/jsgrid/dist/jsgrid.js"></script>
+<script src="~/lib_manual/jsgrid/src/i18n/ru.js"></script>
+<script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
+<script src="~/lib/i18n/jquery.i18n.js"></script>
+<script src="~/lib/i18n/languages/ru.min.js"></script>
+<script src="~/js/jsgrid.datetime.field.js"></script>
+<script src="~/js/jsgrid.decimal.field.js"></script>
+
+<script>
+    var ciphersData = [];
+
+    function GetCiphersData() {
+        return ciphersData;
+    }
+
+    $(function () {
+        var dirWeightUnits = [];
+
+        var dataString = "?pageIndex=1&pageSize=2000&sortField=title&sortOrder=asc";
+
+        $.get({ url: "/api/data/dirWeightUnits", dataType: "json", data: dataString, async: false }).done(function (data, textStatus, jqXHR) { dirWeightUnits = data.data; });
+
+        InitGridDecimalField();
+
+        var fieldsList = [
+            { name: "guid", title: "guid", visible: false },
+            { name: "taskId", title: "taskId", visible: false },
+            { name: "cipher", title: "Шифр образца", type: "text", align: "left", width: 60 },
+            { name: "weightUnitId", title: "ед. изм.", type: "select", items: dirWeightUnits, valueField: "guid", textField: "title", align: "left", width: 60 },
+            { name: "count", title: "кол-во", type: "decimal", align: "left", width: 35, validate: ["required", { validator: "range", param: [0, 100000] }] },
+            { name: "comments", title: "Примечания", type: "text", align: "left", width: 60 },
+            { type: "control", editButton: true, deleteButton: true, width: 20 }
+        ];
+
+        jsGrid.locale("ru");
+
+        $("#jsGridCiphers").jsGrid({
+            height: "200",
+            width: "100%",
+
+            filtering: false,
+            inserting: true,
+            editing: true,
+            sorting: false,
+            paging: false,
+            pageLoading: false,
+            rowClick: function () { },
+
+            deleteConfirm: "Вы действительно хотите удалить запись?",
+
+            autoload: true,
+            controller: {
+                loadData: function (filter) { return GetCiphersData(); },
+                insertItem: function (item) { },
+                updateItem: function (item) { },
+                deleteItem: function (item) { }
+            },
+
+            fields: fieldsList,
+
+            invalidNotify: function (args) {
+                var messages = $.map(args.errors, function (error) {
+                    return error.field + ": " + error.message;
+                });
+                alert(messages);
+            }
+        });
+    });
+</script>

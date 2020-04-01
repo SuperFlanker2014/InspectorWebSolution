@@ -10,7 +10,7 @@
 <script>
     var examsData = [];
 
-    function GetData() {
+    function GetExamsData() {
         return examsData;
     }
 
@@ -30,23 +30,22 @@
         var fieldsList = [
             { name: "guid", title: "guid", visible: false },
             { name: "taskId", title: "taskId", visible: false },
-            { name: "examinationId", title: "Наименование показателя", type: "select", items: dirSamplesExaminations, valueField: "guid", textField: "title", align: "left" },
-            { name: "methodId", title: "Методика испытания", type: "select", items: dirExaminationMethods, valueField: "guid", textField: "title", align: "left" },
-
+            { name: "examinationId", title: "Наименование показателя", type: "select", items: dirSamplesExaminations, valueField: "guid", textField: "title", align: "left", width: 60 },
+            { name: "methodId", title: "Методика испытания", type: "select", items: dirExaminationMethods, valueField: "guid", textField: "title", align: "left", width: 60 },
+            { name: "methodItem", title: "пункт", type: "text", align: "left", width: 20 },
+            { name: "endDate", title: "Дата окончания", type: "dateField", align: "left", width: 30 },
+            { name: "userId", title: "Исполнитель", type: "select", items: dirUsers, valueField: "guid", textField: "title", align: "left", width: 60 },
+            { name: "sampleCiphers", title: "Шифры образцов", type: "text", align: "left", width: 100 },
+            { name: "examinationResult", title: "Результат", type: "text", align: "left", width: 100 },
             { name: "comments", title: "Примечания", type: "text", align: "left", width: 60 },
-
-            { name: "endDate", title: "Дата окончания", type: "dateField", align: "left", width: 35 },
-            { name: "userId", title: "Исполнитель", type: "select", items: dirUsers, valueField: "guid", textField: "title", align: "left", width: 70 },
-            { name: "examinationResult", title: "Результат", type: "text", align: "left", width: 35 },
-            { name: "comments", title: "Примечания", type: "text", align: "left", width: 60 },
-            { type: "control", editButton: true, deleteButton: true, width: "8%" }
+            { type: "control", editButton: true, deleteButton: true, width: 20 }
         ];
 
         jsGrid.locale("ru");
 
-        $("#jsGrid").jsGrid({
+        $("#jsGridExaminations").jsGrid({
             height: "200",
-            width: "100%",
+            width: "150%",
 
             filtering: false,
             inserting: true,
@@ -60,7 +59,7 @@
 
             autoload: true,
             controller: {
-                loadData: function (filter) { return GetData(); },
+                loadData: function (filter) { return GetExamsData(); },
                 insertItem: function (item) { },
                 updateItem: function (item) { },
                 deleteItem: function (item) { }

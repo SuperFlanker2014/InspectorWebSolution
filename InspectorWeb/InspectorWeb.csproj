@@ -131,7 +131,6 @@
     <None Include="Views\DocsExaminationTasks\Create.cshtml" />
     <None Include="Views\DocsExaminationTasks\Delete.cshtml" />
     <None Include="Views\DocsExaminationTasks\Edit.cshtml" />
-    <None Include="Views\DocsExaminationTasks\Index.cshtml" />
     <None Include="wwwroot\lib_manual\devextreme\css\fonts\Roboto-300.woff2" />
     <None Include="wwwroot\lib_manual\devextreme\css\fonts\Roboto-400.woff2" />
     <None Include="wwwroot\lib_manual\devextreme\css\fonts\Roboto-500.woff2" />

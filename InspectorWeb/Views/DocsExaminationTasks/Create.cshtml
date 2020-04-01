@@ -25,16 +25,20 @@
     <script>
         $(document).ready(function () {
             $('.select2-autocomplete').select2();
+            examsData = JSON.parse($('input[name*=Examinations]').val());
+            ciphersData = JSON.parse($('input[name*=Ciphers]').val());
         });
         $(function () {
             $('.datetimepicker').datetimepicker({ locale: 'ru', format: 'DD.MM.YYYY' });
             $('#formCreate').submit(function (event) {
                 $('input[name*=Examinations]').val(JSON.stringify(examsData));
+                $('input[name*=Ciphers]').val(JSON.stringify(ciphersData));
             });
         });
     </script>
 
     @await Component.InvokeAsync("TaskExaminationsGrid");
+    @await Component.InvokeAsync("TasksCiphersGrid");
 }
 
 @Html.AntiForgeryToken()
@@ -186,15 +190,24 @@
                     </div>
                 </div>
 
+                <div class="row pre-scrollable">
+                    <div class="col-md-12">
+                        <div id="jsGridExaminations"></div>
+                    </div>
+                </div>
+
+                <br />
+
                 <div class="row">
                     <div class="col-md-12">
-                        <div id="jsGrid"></div>
+                        <div id="jsGridCiphers"></div>
                     </div>
                 </div>
 
                 <br />
 
                 <input asp-for="Examinations" type="hidden" name="Examinations" />
+                <input asp-for="Ciphers" type="hidden" name="Ciphers" />
 
                 <div class="form-group">
                     <input type="submit" value="Создать" class="btn btn-default" />
