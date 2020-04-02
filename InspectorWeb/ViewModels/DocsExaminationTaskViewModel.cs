@@ -63,6 +63,7 @@ namespace InspectorWeb.ViewModels
 					Guid = m.Guid,
 					TaskId = m.TaskId,
 					Cipher = m.Cipher,
+					SampleTitle = m.SampleTitle,
 					WeightUnitId = m.WeightUnitId,
 					Count = m.Count,
 					Comments = m.Comments

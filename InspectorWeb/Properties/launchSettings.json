@@ -2,8 +2,12 @@
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://localhost/InspectorWeb",
+      "sslPort": 0
+    },
     "iisExpress": {
-      "applicationUrl": "http://localhost:2000/",
+      "applicationUrl": "http://localhost:5080/",
       "sslPort": 0
     }
   },
@@ -22,6 +26,16 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "http://localhost:56441/"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "publishAllPorts": true
+    },
+    "IIS": {
+      "commandName": "IIS",
+      "workingDirectory": "http://localhost/InspectorWeb"
     }
   }
 }

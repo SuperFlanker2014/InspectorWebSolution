@@ -39,12 +39,6 @@ namespace InspectorWeb
 				options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor((v) => $"Требуется указать значение");
 			});
 
-			//services.AddMvcCore(options =>
-			//{
-			//	options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor((v) => $"Требуется указать значение");
-			//})
-			//.AddJsonFormatters();
-
 			var config = new AutoMapper.MapperConfiguration(cfg =>
 			{
 				cfg.AddProfile(new AutoMapperProfile());
@@ -75,6 +69,11 @@ namespace InspectorWeb
 					name: "Default",
 					template: "{controller}/{action}/{id?}",
 					defaults: new { controller = "DocsExaminationTasks", action = "Index" });
+
+
+				routes.MapRoute(
+					name: "data",
+					template: "api/data/{controller}");
 			});
 		}
 	}

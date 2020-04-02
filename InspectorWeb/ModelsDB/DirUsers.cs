@@ -8,6 +8,7 @@ namespace InspectorWeb.ModelsDB
         public DirUsers()
         {
             DocsAll = new HashSet<DocsAll>();
+            DocsExaminationTasks = new HashSet<DocsExaminationTasks>();
             DocsExaminationTasksExaminations = new HashSet<DocsExaminationTasksExaminations>();
             SecSubjects = new HashSet<SecSubjects>();
         }
@@ -19,6 +20,7 @@ namespace InspectorWeb.ModelsDB
 
         public virtual DirOrganizations OrgGu { get; set; }
         public virtual ICollection<DocsAll> DocsAll { get; set; }
+        public virtual ICollection<DocsExaminationTasks> DocsExaminationTasks { get; set; }
         public virtual ICollection<DocsExaminationTasksExaminations> DocsExaminationTasksExaminations { get; set; }
         public virtual ICollection<SecSubjects> SecSubjects { get; set; }
     }

@@ -1635,6 +1635,8 @@ namespace InspectorWeb.ModelsDB
                     .HasColumnName("guid")
                     .ValueGeneratedNever();
 
+                entity.Property(e => e.AuthorId).HasColumnName("authorId");
+
                 entity.Property(e => e.ClientId).HasColumnName("clientId");
 
                 entity.Property(e => e.CountMassVolume)
@@ -1683,6 +1685,11 @@ namespace InspectorWeb.ModelsDB
                     .HasColumnName("title")
                     .HasMaxLength(100);
 
+                entity.HasOne(d => d.Author)
+                    .WithMany(p => p.DocsExaminationTasks)
+                    .HasForeignKey(d => d.AuthorId)
+                    .HasConstraintName("FK_docsExaminationTasks_dirUsers");
+
                 entity.HasOne(d => d.Client)
                     .WithMany(p => p.DocsExaminationTasks)
                     .HasForeignKey(d => d.ClientId)
@@ -1725,6 +1732,10 @@ namespace InspectorWeb.ModelsDB
                 entity.Property(e => e.Count)
                     .HasColumnName("count")
                     .HasColumnType("numeric(18, 4)");
+
+                entity.Property(e => e.SampleTitle)
+                    .HasColumnName("sampleTitle")
+                    .HasMaxLength(500);
 
                 entity.Property(e => e.TaskId).HasColumnName("taskId");
 

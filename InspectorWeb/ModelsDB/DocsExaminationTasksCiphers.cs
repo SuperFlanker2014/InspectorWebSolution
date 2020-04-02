@@ -11,6 +11,7 @@ namespace InspectorWeb.ModelsDB
         public Guid? WeightUnitId { get; set; }
         public decimal? Count { get; set; }
         public string Comments { get; set; }
+        public string SampleTitle { get; set; }
 
         public virtual DocsExaminationTasks Task { get; set; }
         public virtual DirWeightUnits WeightUnit { get; set; }

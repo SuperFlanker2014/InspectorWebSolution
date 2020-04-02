@@ -28,6 +28,7 @@
             { name: "guid", title: "guid", visible: false },
             { name: "taskId", title: "taskId", visible: false },
             { name: "cipher", title: "Шифр образца", type: "text", align: "left", width: 60 },
+            { name: "sampleTitle", title: "Наименование образца", type: "text", align: "left", width: 60 },
             { name: "weightUnitId", title: "ед. изм.", type: "select", items: dirWeightUnits, valueField: "guid", textField: "title", align: "left", width: 60 },
             { name: "count", title: "кол-во", type: "decimal", align: "left", width: 35, validate: ["required", { validator: "range", param: [0, 100000] }] },
             { name: "comments", title: "Примечания", type: "text", align: "left", width: 60 },

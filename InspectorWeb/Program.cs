@@ -20,21 +20,9 @@ namespace InspectorWeb
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
             .UseUrls("http://*:5000;http://localhost:5001;https://hostname:5002")
-                //.UseKestrel()
-                //.UseIISIntegration()
+            .UseKestrel()
+            .UseContentRoot(Directory.GetCurrentDirectory())
+            .UseIISIntegration()
             .UseStartup<Startup>();
-        //.UseContentRoot(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))
-        //.UseStartup<Startup>()
-        //.UseDefaultServiceProvider(i => i.ValidateScopes = false)
-        //.ConfigureAppConfiguration((context, config) =>
-        //{
-        //    config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-        //})
-        //.ConfigureLogging(l =>
-        //{
-        //    l.ClearProviders();
-        //    l.SetMinimumLevel(LogLevel.Trace);
-        //})
-        //.UseNLog();
     }
 }

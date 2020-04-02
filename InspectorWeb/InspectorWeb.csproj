@@ -7,9 +7,11 @@
     <StartupObject />
     <AssemblyName>InspectorWebServer</AssemblyName>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Reports\DocsExaminationTaskReport.repx" />
     <None Remove="Reports\Docs_Act.repx" />
     <None Remove="Reports\Docs_Agreements.repx" />
     <None Remove="Reports\Docs_Bills_Post.repx" />
@@ -20,7 +22,6 @@
     <None Remove="Reports\Docs_Conclusion_Export_New.repx" />
     <None Remove="Reports\Docs_Conclusion_Import_New.repx" />
     <None Remove="Reports\Docs_Conclusion_Objects.repx" />
-    <None Remove="Reports\XtraReport.repx" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +34,7 @@
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.8" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
   </ItemGroup>
 
@@ -51,7 +53,7 @@
     <EmbeddedResource Include="Reports\Docs_Conclusion_Export_New.repx" />
     <EmbeddedResource Include="Reports\Docs_Conclusion_Import_New.repx" />
     <EmbeddedResource Include="Reports\Docs_Conclusion_Objects.repx" />
-    <EmbeddedResource Include="Reports\XtraReport.repx" />
+    <EmbeddedResource Include="Reports\DocsExaminationTaskReport.repx" />
   </ItemGroup>
   
   <ItemGroup>
@@ -115,11 +117,11 @@
     <Compile Update="Reports\Docs_Conclusion_Objects.Designer.cs">
       <DependentUpon>Docs_Conclusion_Objects.repx</DependentUpon>
     </Compile>
-    <Compile Update="Reports\XtraReport.cs">
-      <DependentUpon>XtraReport.repx</DependentUpon>
+    <Compile Update="Reports\DocsExaminationTaskReport.cs">
+      <DependentUpon>DocsExaminationTaskReport.repx</DependentUpon>
     </Compile>
-    <Compile Update="Reports\XtraReport.Designer.cs">
-      <DependentUpon>XtraReport.repx</DependentUpon>
+    <Compile Update="Reports\DocsExaminationTaskReport.Designer.cs">
+      <DependentUpon>DocsExaminationTaskReport.repx</DependentUpon>
     </Compile>
   </ItemGroup>
 

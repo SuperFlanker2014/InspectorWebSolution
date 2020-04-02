@@ -234,7 +234,8 @@ namespace InspectorWeb.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+
+                //return RedirectToAction(nameof(Index));
             }
 
             PutSelectsData(viewModel);
@@ -244,24 +245,24 @@ namespace InspectorWeb.Controllers
             return View(viewModel);
         }
 
-        public async Task<IActionResult> Viewer(Guid id)
+        public async Task<IActionResult> ViewerTask(Guid id)
         {
             var ds = await context.DocsExaminationTasks
                 .Include(d => d.Client)
                 .Include(d => d.DestinationCountry)
                 .Include(d => d.OriginCountry)
                 .Include(d => d.SamplingProduction)
+                .Include(d => d.Author)
                 .Include(d => d.DocsExaminationTasksExaminations).ThenInclude(d => d.Examination)
                 .Include(d => d.DocsExaminationTasksExaminations).ThenInclude(d => d.Method)
                 .Include(d => d.DocsExaminationTasksExaminations).ThenInclude(d => d.User)
                 .Include(d => d.DocsExaminationTasksCiphers).ThenInclude(d => d.WeightUnit)
                 .FirstOrDefaultAsync(t => t.Guid == id);
 
-            var report = new InspectorWeb.Reports.XtraReport
+            var report = new InspectorWeb.Reports.DocsExaminationTaskReport
             {
                 DataSource = new List<DocsExaminationTasks> { ds }
             };
-            //report.Parameters.Add()
 
             ViewData["Title"] = $"Задание на исследование #{ds.Number} от {ds.Date.Value.ToString("dd.MM.yyyy")} - печать";
 

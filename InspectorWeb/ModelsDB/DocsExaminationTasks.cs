@@ -29,7 +29,9 @@ namespace InspectorWeb.ModelsDB
         public string ExamiationPlace { get; set; }
         public int? Number { get; set; }
         public DateTime? Date { get; set; }
+        public Guid? AuthorId { get; set; }
 
+        public virtual DirUsers Author { get; set; }
         public virtual DocsClients Client { get; set; }
         public virtual DirCountries DestinationCountry { get; set; }
         public virtual DirCountries OriginCountry { get; set; }
