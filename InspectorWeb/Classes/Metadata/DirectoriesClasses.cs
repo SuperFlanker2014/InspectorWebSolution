@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Mvc;
 
@@ -479,10 +480,21 @@ namespace InspectorWeb.ModelsDB
 	[ModelMetadataType(typeof(MetaData))]
 	public partial class DirUsers : IModelBase
 	{
+		[DisplayName("Пользователи")]
+		public class MetaData
+		{
+			[DisplayName("Имя")] public string Name { get; set; }
+			[DisplayName("Администратор")] public bool IsAdmin { get; set; }
+			[DisplayName("Лаборатория")] public DirLaboratories Laboratory { get; set; }
+			[DisplayName("Организация")] public DirOrganizations OrgGu { get; set; }
+			[DisplayName("Логин")] public string Login { get; set; }
+			[DisplayName("Пароль")] public string PasswordHash { get; set; }
+		}
+
 		[NotMapped]
-		public string Title 
-		{ 
-			get 
+		public string Title
+		{
+			get
 			{
 				return Name;
 			}
@@ -491,11 +503,15 @@ namespace InspectorWeb.ModelsDB
 				Name = value;
 			}
 		}
+	}
 
-		[DisplayName("Пользователи")]
+	[ModelMetadataType(typeof(MetaData))]
+	public partial class DirLaboratories : IModelBase
+	{
+		[DisplayName("Испытания (лаборатории)")]
 		public class MetaData
 		{
-			[DisplayName("Имя")] public string Title { get; set; }
+			[DisplayName("Название")] public string Title { get; set; }
 		}
 	}
 }

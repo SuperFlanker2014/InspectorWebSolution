@@ -12,6 +12,9 @@ using InspectorWeb.Classes;
 using InspectorWeb.Classes.Metadata;
 using InspectorWeb.ViewModels;
 using InspectorWeb.ModelsDB;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace InspectorWeb
 {
@@ -47,7 +50,23 @@ namespace InspectorWeb
 			var mapper = config.CreateMapper();
 			services.AddSingleton(mapper);
 
-			//services.AddCors();			
+			services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+			{
+				options.Cookie.Name = "UserLoginCookie";
+				options.LoginPath = "/Account/Login";
+
+				//options.ExpireTimeSpan = TimeSpan.FromDays(1);
+				//options.SlidingExpiration = true;
+			});
+
+			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+			services.Configure<CookiePolicyOptions>(options =>
+			{
+				// This lambda determines whether user consent for non-essential cookies is needed for a given request.  
+				options.CheckConsentNeeded = context => true;
+				options.MinimumSameSitePolicy = SameSiteMode.None;
+			});
 		}
 
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -61,7 +80,11 @@ namespace InspectorWeb
 				app.UseExceptionHandler("/error");
 			}
 
+			//app.UseHttpsRedirection();
 			app.UseStaticFiles();
+			app.UseCookiePolicy();
+			app.UseAuthentication();
+			//app.UseSession();
 
 			app.UseMvc(routes =>
 			{

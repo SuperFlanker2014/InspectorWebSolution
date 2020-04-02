@@ -25,6 +25,7 @@ namespace InspectorWeb.ModelsDB
         public virtual DbSet<DirGoodsGroups> DirGoodsGroups { get; set; }
         public virtual DbSet<DirGoodsGroupsCategories> DirGoodsGroupsCategories { get; set; }
         public virtual DbSet<DirInvoiceTypes> DirInvoiceTypes { get; set; }
+        public virtual DbSet<DirLaboratories> DirLaboratories { get; set; }
         public virtual DbSet<DirMarkTypes> DirMarkTypes { get; set; }
         public virtual DbSet<DirObjectsCategories> DirObjectsCategories { get; set; }
         public virtual DbSet<DirOrganizations> DirOrganizations { get; set; }
@@ -398,6 +399,21 @@ namespace InspectorWeb.ModelsDB
                     .IsRequired()
                     .HasColumnName("title")
                     .HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<DirLaboratories>(entity =>
+            {
+                entity.HasKey(e => e.Guid);
+
+                entity.ToTable("dirLaboratories");
+
+                entity.Property(e => e.Guid)
+                    .HasColumnName("guid")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Title)
+                    .HasColumnName("title")
+                    .HasMaxLength(500);
             });
 
             modelBuilder.Entity<DirMarkTypes>(entity =>
@@ -954,6 +970,16 @@ namespace InspectorWeb.ModelsDB
                     .HasColumnName("guid")
                     .HasDefaultValueSql("(newid())");
 
+                entity.Property(e => e.FilialNumber).HasColumnName("filialNumber");
+
+                entity.Property(e => e.IsAdmin).HasColumnName("isAdmin");
+
+                entity.Property(e => e.LaboratoryId).HasColumnName("laboratoryId");
+
+                entity.Property(e => e.Login)
+                    .HasColumnName("login")
+                    .HasMaxLength(100);
+
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasColumnName("name")
@@ -962,8 +988,16 @@ namespace InspectorWeb.ModelsDB
                 entity.Property(e => e.OrgGuid).HasColumnName("org_guid");
 
                 entity.Property(e => e.PasswordHash)
+                    .IsRequired()
                     .HasColumnName("password_hash")
+                    .HasMaxLength(100)
                     .HasDefaultValueSql("((757602046))");
+
+                entity.HasOne(d => d.Laboratory)
+                    .WithMany(p => p.DirUsers)
+                    .HasForeignKey(d => d.LaboratoryId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_dirUsers_dirLaboratories");
 
                 entity.HasOne(d => d.OrgGu)
                     .WithMany(p => p.DirUsers)

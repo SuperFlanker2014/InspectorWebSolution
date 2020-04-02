@@ -12,7 +12,7 @@ using InspectorWeb.Classes;
 
 namespace InspectorWeb.Controllers
 {
-    public class DocsExaminationTasksController : Controller
+    public class DocsExaminationTasksController : BaseController
     {
         private readonly InspectorWebDBContext context;
         private readonly IMapper mapper;

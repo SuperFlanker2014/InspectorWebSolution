@@ -8,7 +8,7 @@ using InspectorWeb.Classes.Metadata;
 
 namespace InspectorWeb.Controllers
 {
-	public class BaseDataController<T> : Controller where T : class, IModelBase
+	public class BaseDataController<T> : BaseController where T : class, IModelBase
 	{
 		private InspectorWebDBContext DataContext { get; }
 		private IMapper Mapper;
@@ -30,8 +30,6 @@ namespace InspectorWeb.Controllers
 
 			int.TryParse(Request.Query["pageIndex"], out int pageIndex);
 			int.TryParse(Request.Query["pageSize"], out int pageSize);
-			//var pageIndex = int.Parse(Request.Query["pageIndex"]);
-			//var pageSize = int.Parse(Request.Query["pageSize"]);
 			var sortField = Request.Query["sortField"].ToString().ToLower();
 			var sortOrder = Request.Query["sortOrder"].ToString().ToLower();
 
@@ -70,8 +68,16 @@ namespace InspectorWeb.Controllers
 		public object Post(T item)
 		{
 			item.Guid = Guid.NewGuid();
-			DataContext.Set<T>().Add(item);
+			DataContext.Set<T>().Add(item);			
+
+			//try
+			//{
 			DataContext.SaveChanges();
+			//}
+			//catch (Exception ex)
+			//{
+			//	throw;
+			//}			
 
 			return item;
 		}

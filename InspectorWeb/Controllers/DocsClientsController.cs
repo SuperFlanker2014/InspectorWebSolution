@@ -12,7 +12,7 @@ using InspectorWeb.Classes.Metadata;
 
 namespace InspectorWeb.Controllers
 {
-    public class DocsClientsController : Controller
+    public class DocsClientsController : BaseController
     {
         private readonly InspectorWebDBContext _context;
 
@@ -128,8 +128,6 @@ namespace InspectorWeb.Controllers
             {
                 return NotFound();
             }
-
-			//docsClient.Validate();
 
             if (ModelState.IsValid)
             {

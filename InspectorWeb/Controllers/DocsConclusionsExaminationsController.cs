@@ -12,7 +12,7 @@ using AutoMapper;
 
 namespace InspectorWeb.Controllers
 {
-	public class DocsConclusionsExaminationsController : Controller
+	public class DocsConclusionsExaminationsController : BaseController
 	{
 		private InspectorWebDBContext DataContext { get; }
 		private IMapper Mapper;

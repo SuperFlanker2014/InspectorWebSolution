@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Вход в систему";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@ViewData["Title"] - InspectorWeb</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <h2><strong>Войдите в систему</strong></h2><br />
+                <form asp-action="login" method="post">
+                    <div class="form-group">
+                        <label>Логин</label>
+                        <input type="text" class="form-control" id="login" name="login" placeholder="логин">
+                    </div>
+                    <div class="form-group">
+                        <label>Пароль</label>
+                        <input type="password" class="form-control" name="password" id="password" placeholder="пароль">
+                    </div>
+                    <div class="form-check">
+                        <button type="submit" class="btn btn-primary">Войти</button>
+                        <button class="btn btn-info" type="reset">Сбросить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

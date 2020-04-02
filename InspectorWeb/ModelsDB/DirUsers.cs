@@ -16,8 +16,13 @@ namespace InspectorWeb.ModelsDB
         public Guid OrgGuid { get; set; }
         public Guid Guid { get; set; }
         public string Name { get; set; }
-        public int PasswordHash { get; set; }
+        public string Login { get; set; }
+        public string PasswordHash { get; set; }
+        public Guid LaboratoryId { get; set; }
+        public bool IsAdmin { get; set; }
+        public int? FilialNumber { get; set; }
 
+        public virtual DirLaboratories Laboratory { get; set; }
         public virtual DirOrganizations OrgGu { get; set; }
         public virtual ICollection<DocsAll> DocsAll { get; set; }
         public virtual ICollection<DocsExaminationTasks> DocsExaminationTasks { get; set; }

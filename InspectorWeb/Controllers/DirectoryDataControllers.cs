@@ -316,4 +316,12 @@ namespace InspectorWeb.Controllers
 		{
 		}
 	}
+
+	[Route("api/data/DirLaboratories")]
+	public class DirLaboratoriesDataController : BaseDataController<DirLaboratories>
+	{
+		public DirLaboratoriesDataController(InspectorWebDBContext dataContext, IMapper mapper) : base(dataContext, mapper)
+		{
+		}
+	}
 }

@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Microsoft.AspNetCore.Mvc;
 using InspectorWeb.ModelsDB;
-using System.Linq;
 using InspectorWeb.ViewModels;
 
 namespace InspectorWeb.Classes
@@ -50,7 +50,8 @@ namespace InspectorWeb.Classes
 			typeof(DirWeightUnits),
 			typeof(DirSamplesExaminations),
 			typeof(DirExaminationMethods),
-			typeof(DirUsers)
+			typeof(DirUsers),
+			typeof(DirLaboratories)
 		};
 
 		private static List<DirectoryItem> directories;

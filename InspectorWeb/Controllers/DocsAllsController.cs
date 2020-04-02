@@ -9,7 +9,7 @@ using InspectorWeb.ModelsDB;
 
 namespace InspectorWeb.Controllers
 {
-    public class DocsAllsController : Controller
+    public class DocsAllsController : BaseController
     {
         private readonly InspectorWebDBContext _context;
 

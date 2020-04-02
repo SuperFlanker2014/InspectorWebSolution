@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Reflection;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using InspectorWeb.ViewModels;
@@ -12,8 +14,8 @@ using InspectorWeb.Classes.Metadata;
 namespace InspectorWeb.Controllers
 {
 	[Route("Directories/{directoryName?}")]
-	public class DirectoriesController : Controller
-    {
+	public class DirectoriesController : BaseController
+	{
 		private InspectorWebDBContext DataContext { get; }
 		private IMapper Mapper;
 
@@ -46,8 +48,13 @@ namespace InspectorWeb.Controllers
 
 			var dataContextType = typeof(InspectorWebDBContext);
 
+			//var metaDataType = Assembly.GetExecutingAssembly().GetType(directoryClass.FullName + "+MetaData");
+
 			var properties1 = directoryClass.GetProperties()
-				.Where(p => TypeSelector(p.PropertyType) != null)
+				.Where(p => 
+					TypeSelector(p.PropertyType) != null 
+					&& p.CustomAttributes.All(ca => ca.AttributeType != typeof(NotMappedAttribute))
+					)
 				.Select(p => new Tuple<string, string, Type, string>(Char.ToLower(p.Name[0]) + p.Name.Substring(1), TypeSelector(p.PropertyType), p.PropertyType, p.Name))
 				.ToList();
 
@@ -56,7 +63,7 @@ namespace InspectorWeb.Controllers
 
 			foreach (var item in properties1)
 			{
-				var name = item.Item1 + (item.Item2 == "select" ? "id" : string.Empty);
+				var name = item.Item1 + (item.Item2 == "select" ? (item.Item1.EndsWith("Gu") ? "id" : "Id" ) : string.Empty);
 
 				if (item.Item2 == "select")
 				{			
@@ -83,6 +90,10 @@ namespace InspectorWeb.Controllers
 				return "text";
 			}
 			else if (typeof(bool).Equals(type))
+			{
+				return "checkbox";
+			}
+			else if (typeof(bool?).Equals(type))
 			{
 				return "checkbox";
 			}
