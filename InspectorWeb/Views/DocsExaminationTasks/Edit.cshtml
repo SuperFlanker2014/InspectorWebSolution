@@ -46,6 +46,7 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <input asp-for="Guid" type="hidden" name="Guid" />
+                <input asp-for="AuthorId" type="hidden" name="AuthorId" />
 
                 <div class="panel panel-default">
                     <div class="panel-body">
@@ -149,14 +150,20 @@
                         </div>
                         <br />
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-4">
                                 <div class="input-group">
                                     <label asp-for="HasAppendix" class="input-group-addon"></label>
                                     <input asp-for="HasAppendix" class="form-control" />
                                 </div>
                                 <span asp-validation-for="HasAppendix" class="text-danger"></span>
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <label asp-for="ShouldReturn" class="input-group-addon"></label>
+                                    <select asp-for="ShouldReturn" class="form-control" asp-items="ViewBag.ShouldReturn"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="input-group">
                                     <label asp-for="SamplingPlace" class="input-group-addon"></label>
                                     <input asp-for="SamplingPlace" class="form-control" />
@@ -207,15 +214,22 @@
                 <input asp-for="Ciphers" type="hidden" name="Ciphers" />
 
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <div class="form-group">
                             <input type="submit" value="Сохранить" class="btn btn-default" />
                         </div>
                     </div>
-                    <div class="col-md-6 text-right">
+                    <div class="col-md-2 text-right">
                         <div class="input-group-btn">
                             <a asp-action="ViewerTask" asp-route-id="@Model.Guid" target="_blank">
                                 <input type="button" value="Печатать задание" class="btn btn-default" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-2 text-right">
+                        <div class="input-group-btn">
+                            <a asp-action="ViewerResult" asp-route-id="@Model.Guid" target="_blank">
+                                <input type="button" value="Печатать протокол" class="btn btn-default" />
                             </a>
                         </div>
                     </div>

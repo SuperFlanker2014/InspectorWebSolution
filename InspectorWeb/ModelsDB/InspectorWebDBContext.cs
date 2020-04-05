@@ -1724,6 +1724,7 @@ namespace InspectorWeb.ModelsDB
                 entity.HasOne(d => d.Author)
                     .WithMany(p => p.DocsExaminationTasks)
                     .HasForeignKey(d => d.AuthorId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_docsExaminationTasks_dirUsers");
 
                 entity.HasOne(d => d.Client)

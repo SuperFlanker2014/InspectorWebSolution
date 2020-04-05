@@ -18,7 +18,7 @@ $(function () {
     {
     <text>
     var @tuple.Key = [];
-    $.get({ url: "/api/data/@tuple.Value", dataType: "json", data: "?pageIndex=1&pageSize=2000&sortField=title&sortOrder=asc", async: false })
+    $.get({ url: "/api/data/@tuple.Value", dataType: "json", data: "pageIndex=1&pageSize=2000&sortField=title&sortOrder=asc", async: false })
         .done(function (data, textStatus, jqXHR) { @tuple.Key = data.data; });
     @(tuple.Key).unshift({ guid: "", title: ""});
     </text>

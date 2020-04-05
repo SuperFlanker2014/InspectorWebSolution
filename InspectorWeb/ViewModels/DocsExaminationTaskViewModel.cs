@@ -27,8 +27,10 @@ namespace InspectorWeb.ViewModels
 			SamplingProductionId = docsExaminationTask.SamplingProductionId;
 
 			Guid = docsExaminationTask.Guid;
+			AuthorId = docsExaminationTask.AuthorId;
 			Number = docsExaminationTask.Number;
-			Date = docsExaminationTask.Date.HasValue ? docsExaminationTask.Date.Value.ToString(DateFormat) : null;
+			Date = docsExaminationTask.Date.ToString(DateFormat);
+
 			Title = docsExaminationTask.Title;
 			CountMassVolume = docsExaminationTask.CountMassVolume;
 			SafePackage = docsExaminationTask.SafePackage;
@@ -72,26 +74,26 @@ namespace InspectorWeb.ViewModels
 		}
 
 		public Guid Guid { get; set; }
-
+		public Guid AuthorId { get; set; }
 		[DisplayName("Номер")]
 		public virtual int? Number { get; set; }
 		[DisplayName("Дата")]
 		public string Date { get; set; }
 
-		[DisplayName("Заказчик")] 
+		[DisplayName("Заказчик")]
 		public Guid? ClientId { get; set; }
-		[DisplayName("Место назначения")] 
+		[DisplayName("Место назначения")]
 		public Guid? DestinationCountryId { get; set; }
-		[DisplayName("Происхождение")] 
+		[DisplayName("Происхождение")]
 		public Guid? OriginCountryId { get; set; }
-		[DisplayName("Продукция")] 
+		[DisplayName("Продукция")]
 		public Guid? SamplingProductionId { get; set; }
 
-		[DisplayName("Наименование образца")] 
+		[DisplayName("Наименование образца")]
 		public string Title { get; set; }
-		[DisplayName("Количество/вес/объём образца")] 
+		[DisplayName("Количество/вес/объём образца")]
 		public string CountMassVolume { get; set; }
-		[DisplayName("Номер сейф-пакента/пломбы/иной идентификатор")] 
+		[DisplayName("Номер сейф-пакента/пломбы/иной идентификатор")]
 		public string SafePackage { get; set; }
 
 		[DisplayName("Дата отбора")]
@@ -99,18 +101,18 @@ namespace InspectorWeb.ViewModels
 		[DisplayName("Дата поступления на исследование")]
 		public string DateReceipt { get; set; }
 
-		[DisplayName("Образец отобран согласно")] 
+		[DisplayName("Образец отобран согласно")]
 		public string SamplingStandard { get; set; }
-		[DisplayName("Имеется приложение с информацией об образцах")] 
-		public int? HasAppendix { get; set; }		
-		[DisplayName("Место отбора проб")] 
+		[DisplayName("Приложение с информ. об образцах")]
+		public int? HasAppendix { get; set; }
+		[DisplayName("Место отбора проб")]
 		public string SamplingPlace { get; set; }
-		[DisplayName("Отбор проб произвёл")] 
+		[DisplayName("Отбор проб произвёл")]
 		public string SamplingActor { get; set; }
-		[DisplayName("Место проведения исследований")] 
+		[DisplayName("Место проведения исследований")]
 		public string ExamiationPlace { get; set; }
 
-		[DisplayName("Подлежит возврату")] 
+		[DisplayName("Возврат")]
 		public bool ShouldReturn { get; set; }
 
 		public string Examinations { get; set; }

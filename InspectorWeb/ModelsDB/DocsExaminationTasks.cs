@@ -27,9 +27,9 @@ namespace InspectorWeb.ModelsDB
         public string SamplingActor { get; set; }
         public Guid? SamplingProductionId { get; set; }
         public string ExamiationPlace { get; set; }
-        public int? Number { get; set; }
-        public DateTime? Date { get; set; }
-        public Guid? AuthorId { get; set; }
+        public int Number { get; set; }
+        public DateTime Date { get; set; }
+        public Guid AuthorId { get; set; }
 
         public virtual DirUsers Author { get; set; }
         public virtual DocsClients Client { get; set; }

@@ -58,18 +58,16 @@ namespace InspectorWeb.Controllers
 
         public IActionResult Create()
         {
-            ViewData["Client"] = new SelectList(context.DocsClients, "Guid", "Name");
-            ViewData["DestinationCountry"] = new SelectList(context.DirCountries, "Guid", "Title");
-            ViewData["OriginCountry"] = new SelectList(context.DirCountries, "Guid", "Title");
-            ViewData["SamplingProduction"] = new SelectList(context.DirGoods, "Guid", "Title");
-            
+            PutSelectsData(null);
+
             var user = context.DirUsers.Where(u => u.Guid == UserGuid).Include(u => u.OrgGu).First();
+
+            var numberQuery = context.DocsExaminationTasks
+                    .Where(d => d.Author.FilialNumber == user.FilialNumber && d.Author.OrgGu.RegionNumber == user.OrgGu.RegionNumber);
 
             var view = new DocsExaminationTaskViewModel
             {
-                Number = context.DocsExaminationTasks
-                    .Where(d => d.Author.FilialNumber == user.FilialNumber && d.Author.OrgGu.RegionNumber == user.OrgGu.RegionNumber)
-                    .Max(d => d.Number) ?? 0 + 1,
+                Number = numberQuery.Any() ? numberQuery.Max(d => d.Number) + 1 : 1,
                 Date = DateTime.Today.ToString(DocsExaminationTaskViewModel.DateFormat)
             };
 
@@ -149,7 +147,7 @@ namespace InspectorWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id,
-            [Bind("Guid,ClientId,Number,Date,Title,CountMassVolume,SafePackage,DateReceipt,DateSampling,HasAppendix,ShouldReturn,OriginCountryId,DestinationCountryId,SamplingStandard,SamplingPlace,SamplingActor,SamplingProduction,ExamiationPlace,Examinations,Ciphers")]
+            [Bind("Guid,ClientId,Number,Date,Title,CountMassVolume,SafePackage,DateReceipt,DateSampling,HasAppendix,ShouldReturn,OriginCountryId,DestinationCountryId,SamplingStandard,SamplingPlace,SamplingActor,SamplingProduction,ExamiationPlace,Examinations,Ciphers,AuthorId")]
             DocsExaminationTaskViewModel viewModel)
         {
             if (id == null | id != viewModel.Guid)
@@ -277,9 +275,34 @@ namespace InspectorWeb.Controllers
                 DataSource = new List<DocsExaminationTasks> { ds }
             };
 
-            ViewData["Title"] = $"Задание на исследование #{ds.Number} от {ds.Date.Value.ToString("dd.MM.yyyy")} - печать";
+            ViewData["Title"] = $"Задание на исследования (испытания) № {ds.NumberText} от {ds.Date:dd.MM.yyyy} - печать";
 
-            return View(report);
+            return View("Viewer", report);
+        }
+
+        public async Task<IActionResult> ViewerResult(Guid id)
+        {
+            var ds = await context.DocsExaminationTasks
+                .Include(d => d.Client)
+                .Include(d => d.DestinationCountry)
+                .Include(d => d.OriginCountry)
+                .Include(d => d.SamplingProduction)
+                .Include(d => d.Author).ThenInclude(d => d.Laboratory)
+                .Include(d => d.Author).ThenInclude(d => d.OrgGu)
+                .Include(d => d.DocsExaminationTasksExaminations).ThenInclude(d => d.Examination)
+                .Include(d => d.DocsExaminationTasksExaminations).ThenInclude(d => d.Method)
+                .Include(d => d.DocsExaminationTasksExaminations).ThenInclude(d => d.User)
+                .Include(d => d.DocsExaminationTasksCiphers).ThenInclude(d => d.WeightUnit)
+                .FirstOrDefaultAsync(t => t.Guid == id);
+
+            var report = new InspectorWeb.Reports.DocsExaminationResultReport
+            {
+                DataSource = new List<DocsExaminationTasks> { ds }
+            };
+
+            ViewData["Title"] = $"Протокол исследований (испытаний) № {ds.NumberText} от {ds.Date:dd.MM.yyyy} - печать";
+
+            return View("Viewer", report);
         }
 
         private bool DocsExaminationTasksExists(Guid id)
@@ -289,10 +312,27 @@ namespace InspectorWeb.Controllers
 
         private void PutSelectsData(DocsExaminationTaskViewModel viewModel)
         {
-            ViewData["Client"] = new SelectList(context.DocsClients, "Guid", "Name", viewModel.ClientId);
-            ViewData["DestinationCountry"] = new SelectList(context.DirCountries, "Guid", "Title", viewModel.DestinationCountryId);
-            ViewData["OriginCountry"] = new SelectList(context.DirCountries, "Guid", "Title", viewModel.OriginCountryId);
-            ViewData["SamplingProduction"] = new SelectList(context.DirGoods, "Guid", "Title", viewModel.SamplingProductionId);
+            var returnItems = new[]
+            {
+                new { value = true, text = "Да" },
+                new { value = false, text = "Нет" }
+            }.ToList();
+
+            ViewData["Client"] = viewModel == null ?
+                new SelectList(context.DocsClients, "Guid", "Name") :
+                new SelectList(context.DocsClients, "Guid", "Name", viewModel.ClientId);
+            ViewData["DestinationCountry"] = viewModel == null ?
+                new SelectList(context.DirCountries, "Guid", "Title") :
+                new SelectList(context.DirCountries, "Guid", "Title", viewModel.DestinationCountryId);
+            ViewData["OriginCountry"] = viewModel == null ?
+                new SelectList(context.DirCountries, "Guid", "Title") :
+                new SelectList(context.DirCountries, "Guid", "Title", viewModel.OriginCountryId);
+            ViewData["SamplingProduction"] = viewModel == null ?
+                new SelectList(context.DirGoods, "Guid", "Title") :
+                new SelectList(context.DirGoods, "Guid", "Title", viewModel.SamplingProductionId);
+            ViewData["ShouldReturn"] = viewModel == null ?
+                new SelectList(returnItems, "value", "text") :
+                new SelectList(returnItems, "value", "text", viewModel.ShouldReturn);
         }
     }
 }

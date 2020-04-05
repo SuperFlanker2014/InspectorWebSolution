@@ -32,38 +32,27 @@
         sorter: function (date1, date2) {
             return new Date(date1) - new Date(date2);
         },
+
         itemTemplate: function (value) {
-            //return new Date(value).toLocaleDateString('ru-RU');
-            return formatDate(new Date(value));
+            return new Date(value).toLocaleDateString('ru-RU');
         },
+
         insertTemplate: function (value) {
-            return this._insertPicker = $("<input>").datepicker({ dateFormat: "dd.mm.yy", defaultDate: new Date() });
+            return this._insertPicker = $("<input>").datepicker({ defaultDate: new Date() });
         },
+
         editTemplate: function (value) {
-            return this._editPicker = $("<input>").datepicker({ dateFormat: "dd.mm.yy" }).datepicker("setDate", new Date(value));
+            return this._editPicker = $("<input>").datepicker().datepicker("setDate", new Date(value));
         },
-        //insertValue: function () {
-        //    return this._insertPicker.datepicker("getDate").toDateString();
-        //},
 
-        //editValue: function () {
-        //    return this._editPicker.datepicker("getDate").toDateString();
-        //},
         insertValue: function () {
-            var insertValue = this._insertPicker.datepicker("getDate");
-            if (insertValue !== null && insertValue !== 'undefined') {
-                return formatDate(this._insertPicker.datepicker("getDate"));
-            }
-            return null;
+            return this._insertPicker.datepicker("getDate").toDateString();
+        },
 
-        },
         editValue: function () {
-            var editValue = this._editPicker.datepicker("getDate");
-            if (editValue !== null && editValue !== 'undefined') {
-                return formatDate(this._editPicker.datepicker("getDate"));
-            }
-            return null;
+            return this._editPicker.datepicker("getDate").toDateString();
         },
+
         filterTemplate: function () {
             var grid = this._grid;
             var now = new Date();
@@ -113,5 +102,6 @@ function formatDate(date) {
     if (month.length < 2) month = '0' + month;
     if (day.length < 2) day = '0' + day;
 
-    return [day, month, year].join('.');
+    var f = [day, month, year].join('.');
+    return f;
 };

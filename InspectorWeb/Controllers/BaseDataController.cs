@@ -110,7 +110,7 @@ namespace InspectorWeb.Controllers
 			}
 
 			result = result
-				.Skip((pageIndex - 1) * pageSize)
+				.Skip((pageIndex == 0 ? 0 : pageIndex - 1) * pageSize)
 				.Take(pageSize);
 
 			//var f = MyNamespace.QueryableExtensions.ToSql(result);

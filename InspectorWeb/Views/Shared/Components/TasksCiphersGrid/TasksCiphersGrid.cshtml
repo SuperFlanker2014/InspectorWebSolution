@@ -3,8 +3,6 @@
 <script src="~/lib_manual/jsgrid/dist/jsgrid.js"></script>
 <script src="~/lib_manual/jsgrid/src/i18n/ru.js"></script>
 <script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
-<script src="~/lib/i18n/jquery.i18n.js"></script>
-<script src="~/lib/i18n/languages/ru.min.js"></script>
 <script src="~/js/jsgrid.datetime.field.js"></script>
 <script src="~/js/jsgrid.decimal.field.js"></script>
 
@@ -18,7 +16,7 @@
     $(function () {
         var dirWeightUnits = [];
 
-        var dataString = "?pageIndex=1&pageSize=2000&sortField=title&sortOrder=asc";
+        var dataString = "pageIndex=1&pageSize=2000&sortField=title&sortOrder=asc";
 
         $.get({ url: "/api/data/dirWeightUnits", dataType: "json", data: dataString, async: false }).done(function (data, textStatus, jqXHR) { dirWeightUnits = data.data; });
 

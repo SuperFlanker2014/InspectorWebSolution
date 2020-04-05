@@ -3,8 +3,6 @@
 <script src="~/lib_manual/jsgrid/dist/jsgrid.js"></script>
 <script src="~/lib_manual/jsgrid/src/i18n/ru.js"></script>
 <script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
-@*<script src="~/lib/i18n/jquery.i18n.js"></script>
-<script src="~/lib/i18n/languages/ru.min.js"></script>*@
 <script src="~/js/jsgrid.datetime.field.js"></script>
 
 <script>
@@ -19,7 +17,7 @@
         var dirExaminationMethods = [];
         var dirUsers = [];
 
-        var dataString = "?pageIndex=1&pageSize=2000&sortField=title&sortOrder=asc";
+        var dataString = "pageIndex=1&pageSize=2000&sortField=title&sortOrder=asc";
 
         $.get({ url: "/api/data/dirSamplesExaminations", dataType: "json", data: dataString, async: false }).done(function (data, textStatus, jqXHR) { dirSamplesExaminations = data.data; });
         $.get({ url: "/api/data/dirExaminationMethods", dataType: "json", data: dataString, async: false }).done(function (data, textStatus, jqXHR) { dirExaminationMethods = data.data; });
@@ -32,7 +30,7 @@
             { name: "taskId", title: "taskId", visible: false },
             { name: "examinationId", title: "Наименование показателя", type: "select", items: dirSamplesExaminations, valueField: "guid", textField: "title", align: "left", width: 60 },
             { name: "methodId", title: "Методика испытания", type: "select", items: dirExaminationMethods, valueField: "guid", textField: "title", align: "left", width: 60 },
-            { name: "methodItem", title: "пункт", type: "text", align: "left", width: 20 },
+            { name: "methodItem", title: "пункт", type: "text", align: "left", width: 100 },
             { name: "endDate", title: "Дата окончания", type: "dateField", align: "left", width: 30 },
             { name: "userId", title: "Исполнитель", type: "select", items: dirUsers, valueField: "guid", textField: "title", align: "left", width: 60 },
             { name: "sampleCiphers", title: "Шифры образцов", type: "text", align: "left", width: 100 },

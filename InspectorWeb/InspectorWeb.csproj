@@ -11,6 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Reports\DocsExaminationResultReport.repx" />
     <None Remove="Reports\DocsExaminationTaskReport.repx" />
     <None Remove="Reports\Docs_Act.repx" />
     <None Remove="Reports\Docs_Agreements.repx" />
@@ -44,6 +45,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Reports\DocsExaminationResultReport.repx" />
     <EmbeddedResource Include="Reports\Docs_Act.repx" />
     <EmbeddedResource Include="Reports\Docs_Agreements.repx" />
     <EmbeddedResource Include="Reports\Docs_Bills_Post.repx" />
@@ -58,6 +60,19 @@
   </ItemGroup>
   
   <ItemGroup>
+    <Compile Update="Reports\DocsExaminationResultReport.cs">
+      <DependentUpon>DocsExaminationResultReport.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\DocsExaminationResultReport.Designer.cs">
+      <DependentUpon>DocsExaminationResultReport.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\DocsExaminationTaskReport - Copy.cs">
+      <SubType>Component</SubType>
+      <DependentUpon>DocsExaminationTaskReport.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\DocsExaminationTaskReport - Copy.Designer.cs">
+      <DependentUpon>DocsExaminationTaskReport.repx</DependentUpon>
+    </Compile>
     <Compile Update="Reports\Docs_Act.cs">
       <DependentUpon>Docs_Act.repx</DependentUpon>
     </Compile>

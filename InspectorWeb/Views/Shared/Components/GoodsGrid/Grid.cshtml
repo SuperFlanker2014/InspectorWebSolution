@@ -20,7 +20,7 @@
         var diseasesCounts = [];
         var diseaseStates = [];  
 
-        var dataString = "?pageIndex=1&pageSize=2000&sortField=title&sortOrder=asc";
+        var dataString = "pageIndex=1&pageSize=2000&sortField=title&sortOrder=asc";
 
         $.get({ url: "/api/data/DirGoods", dataType: "json", data: dataString, async: false }).done(function (data, textStatus, jqXHR) { goods = data.data; });
         $.get({ url: "/api/data/DirCountries", dataType: "json", data: dataString, async: false }).done(function (data, textStatus, jqXHR) { productionCountries = data.data; });
