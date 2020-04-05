@@ -140,7 +140,7 @@
         </Item17>
       </Controls>
     </Item5>
-    <Item6 Ref="79" ControlType="DetailReportBand" Name="DetailReport1" Level="1" DataMember="DocsExaminationTasksCiphers" DataSource="#Ref-0" Expanded="false" PageBreak="BeforeBand">
+    <Item6 Ref="79" ControlType="DetailReportBand" Name="DetailReport1" Level="1" DataMember="DocsExaminationTasksCiphers" DataSource="#Ref-0" PageBreak="BeforeBand">
       <Bands>
         <Item1 Ref="80" ControlType="DetailBand" Name="Detail1" HeightF="23.3332958">
           <Controls>
@@ -224,7 +224,7 @@
             </Item1>
             <Item2 Ref="120" ControlType="XRLabel" Name="label3" TextFormatString="№ {0}" CanGrow="false" TextAlignment="TopCenter" SizeF="208.33,20" LocationFloat="131.25, 22.9999866" Font="Times New Roman, 10pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" BorderWidth="1">
               <ExpressionBindings>
-                <Item1 Ref="121" EventName="BeforePrint" PropertyName="Text" Expression="[Number]" />
+                <Item1 Ref="121" EventName="BeforePrint" PropertyName="Text" Expression="[NumberText]" />
               </ExpressionBindings>
               <StylePriority Ref="122" UseFont="false" />
             </Item2>
