@@ -117,9 +117,6 @@ $(function () {
             },*@
 
             loadData: function (filter) {
-
-                //alert(JSON.stringify(filter));
-
                 return $.ajax({
                     type: "GET",
                     url: "/api/data/@Model.DirectoryName",
