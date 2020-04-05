@@ -40,8 +40,8 @@ namespace InspectorWeb.ViewModels
 			ShouldReturn = docsExaminationTask.ShouldReturn ?? false;
 			SamplingStandard = docsExaminationTask.SamplingStandard;
 			SamplingPlace = docsExaminationTask.SamplingPlace;
-			SamplingActor = docsExaminationTask.SamplingActor;
-			ExamiationPlace = docsExaminationTask.ExamiationPlace;
+			SamplingActorId = docsExaminationTask.SamplingActorId;
+			ExamiationLaboratoryId = docsExaminationTask.ExamiationLaboratoryId;
 
 			TaskExaminations = docsExaminationTask.DocsExaminationTasksExaminations.Select(m =>
 				new DocsExaminationTasksExaminationsViewModel()
@@ -108,9 +108,9 @@ namespace InspectorWeb.ViewModels
 		[DisplayName("Место отбора проб")]
 		public string SamplingPlace { get; set; }
 		[DisplayName("Отбор проб произвёл")]
-		public string SamplingActor { get; set; }
+		public Guid? SamplingActorId { get; set; }
 		[DisplayName("Место проведения исследований")]
-		public string ExamiationPlace { get; set; }
+		public Guid? ExamiationLaboratoryId { get; set; }
 
 		[DisplayName("Возврат")]
 		public bool ShouldReturn { get; set; }

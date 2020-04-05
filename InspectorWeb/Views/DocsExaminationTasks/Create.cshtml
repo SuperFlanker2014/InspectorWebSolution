@@ -175,22 +175,17 @@
                         </div>
                         <br />
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="input-group">
-                                    <label asp-for="SamplingActor" class="input-group-addon"></label>
-                                    <input asp-for="SamplingActor" class="form-control" />
+                                    <label asp-for="SamplingActorId" class="input-group-addon"></label>
+                                    <select asp-for="SamplingActorId" class="form-control" asp-items="ViewBag.SamplingActor"></select>
                                 </div>
-                                <span asp-validation-for="SamplingActor" class="text-danger"></span>
                             </div>
-                        </div>
-                        <br />
-                        <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="input-group">
-                                    <label asp-for="ExamiationPlace" class="input-group-addon"></label>
-                                    <input asp-for="ExamiationPlace" class="form-control" />
+                                    <label asp-for="ExamiationLaboratoryId" class="input-group-addon"></label>
+                                    <select asp-for="ExamiationLaboratoryId" class="form-control" asp-items="ViewBag.ExamiationLaboratory"></select>
                                 </div>
-                                <span asp-validation-for="ExamiationPlace" class="text-danger"></span>
                             </div>
                         </div>
                     </div>

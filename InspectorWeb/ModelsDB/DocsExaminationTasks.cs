@@ -24,9 +24,9 @@ namespace InspectorWeb.ModelsDB
         public Guid? DestinationCountryId { get; set; }
         public string SamplingStandard { get; set; }
         public string SamplingPlace { get; set; }
-        public string SamplingActor { get; set; }
+        public Guid? SamplingActorId { get; set; }
         public Guid? SamplingProductionId { get; set; }
-        public string ExamiationPlace { get; set; }
+        public Guid? ExamiationLaboratoryId { get; set; }
         public int Number { get; set; }
         public DateTime Date { get; set; }
         public Guid AuthorId { get; set; }
@@ -34,7 +34,9 @@ namespace InspectorWeb.ModelsDB
         public virtual DirUsers Author { get; set; }
         public virtual DocsClients Client { get; set; }
         public virtual DirCountries DestinationCountry { get; set; }
+        public virtual DirLaboratories ExamiationLaboratory { get; set; }
         public virtual DirCountries OriginCountry { get; set; }
+        public virtual DirUsers SamplingActor { get; set; }
         public virtual DirGoods SamplingProduction { get; set; }
         public virtual ICollection<DocsExaminationTasksCiphers> DocsExaminationTasksCiphers { get; set; }
         public virtual ICollection<DocsExaminationTasksExaminations> DocsExaminationTasksExaminations { get; set; }

@@ -60,10 +60,11 @@ namespace InspectorWeb.Controllers
         {
             PutSelectsData(null);
 
-            var user = context.DirUsers.Where(u => u.Guid == UserGuid).Include(u => u.OrgGu).First();
+            var user = context.DirUsers
+                .Where(u => u.Guid == UserGuid).Include(u => u.OrgGu).First();
 
             var numberQuery = context.DocsExaminationTasks
-                    .Where(d => d.Author.FilialNumber == user.FilialNumber && d.Author.OrgGu.RegionNumber == user.OrgGu.RegionNumber);
+                .Where(d => d.Author.FilialNumber == user.FilialNumber && d.Author.OrgGu.RegionNumber == user.OrgGu.RegionNumber);
 
             var view = new DocsExaminationTaskViewModel
             {
@@ -77,7 +78,7 @@ namespace InspectorWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-            [Bind("ClientId,Number,Date,Title,CountMassVolume,SafePackage,DateReceipt,DateSampling,HasAppendix,ShouldReturn,OriginCountryId,DestinationCountryId,SamplingStandard,SamplingPlace,SamplingActor,SamplingProduction,ExamiationPlace,Examinations,Ciphers")]
+            [Bind("ClientId,Number,Date,Title,CountMassVolume,SafePackage,DateReceipt,DateSampling,HasAppendix,ShouldReturn,OriginCountryId,DestinationCountryId,SamplingStandard,SamplingPlace,SamplingActorId,SamplingProduction,ExamiationLaboratoryId,Examinations,Ciphers")]
             DocsExaminationTaskViewModel viewModel)
         {
             if (ModelState.IsValid)
@@ -147,7 +148,7 @@ namespace InspectorWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id,
-            [Bind("Guid,ClientId,Number,Date,Title,CountMassVolume,SafePackage,DateReceipt,DateSampling,HasAppendix,ShouldReturn,OriginCountryId,DestinationCountryId,SamplingStandard,SamplingPlace,SamplingActor,SamplingProduction,ExamiationPlace,Examinations,Ciphers,AuthorId")]
+            [Bind("Guid,ClientId,Number,Date,Title,CountMassVolume,SafePackage,DateReceipt,DateSampling,HasAppendix,ShouldReturn,OriginCountryId,DestinationCountryId,SamplingStandard,SamplingPlace,SamplingActorId,SamplingProduction,ExamiationLaboratoryId,Examinations,Ciphers,AuthorId")]
             DocsExaminationTaskViewModel viewModel)
         {
             if (id == null | id != viewModel.Guid)
@@ -257,18 +258,7 @@ namespace InspectorWeb.Controllers
 
         public async Task<IActionResult> ViewerTask(Guid id)
         {
-            var ds = await context.DocsExaminationTasks
-                .Include(d => d.Client)
-                .Include(d => d.DestinationCountry)
-                .Include(d => d.OriginCountry)
-                .Include(d => d.SamplingProduction)
-                .Include(d => d.Author).ThenInclude(d => d.Laboratory)
-                .Include(d => d.Author).ThenInclude(d => d.OrgGu)
-                .Include(d => d.DocsExaminationTasksExaminations).ThenInclude(d => d.Examination)
-                .Include(d => d.DocsExaminationTasksExaminations).ThenInclude(d => d.Method)
-                .Include(d => d.DocsExaminationTasksExaminations).ThenInclude(d => d.User)
-                .Include(d => d.DocsExaminationTasksCiphers).ThenInclude(d => d.WeightUnit)
-                .FirstOrDefaultAsync(t => t.Guid == id);
+            var ds = await GetItemForReport(id);
 
             var report = new InspectorWeb.Reports.DocsExaminationTaskReport
             {
@@ -282,18 +272,7 @@ namespace InspectorWeb.Controllers
 
         public async Task<IActionResult> ViewerResult(Guid id)
         {
-            var ds = await context.DocsExaminationTasks
-                .Include(d => d.Client)
-                .Include(d => d.DestinationCountry)
-                .Include(d => d.OriginCountry)
-                .Include(d => d.SamplingProduction)
-                .Include(d => d.Author).ThenInclude(d => d.Laboratory)
-                .Include(d => d.Author).ThenInclude(d => d.OrgGu)
-                .Include(d => d.DocsExaminationTasksExaminations).ThenInclude(d => d.Examination)
-                .Include(d => d.DocsExaminationTasksExaminations).ThenInclude(d => d.Method)
-                .Include(d => d.DocsExaminationTasksExaminations).ThenInclude(d => d.User)
-                .Include(d => d.DocsExaminationTasksCiphers).ThenInclude(d => d.WeightUnit)
-                .FirstOrDefaultAsync(t => t.Guid == id);
+            var ds = await GetItemForReport(id);
 
             var report = new InspectorWeb.Reports.DocsExaminationResultReport
             {
@@ -303,6 +282,25 @@ namespace InspectorWeb.Controllers
             ViewData["Title"] = $"Протокол исследований (испытаний) № {ds.NumberText} от {ds.Date:dd.MM.yyyy} - печать";
 
             return View("Viewer", report);
+        }
+
+        private async Task<DocsExaminationTasks> GetItemForReport(Guid id)
+        {
+            var ds = await context.DocsExaminationTasks
+                .Include(d => d.Client)
+                .Include(d => d.DestinationCountry)
+                .Include(d => d.OriginCountry)
+                .Include(d => d.SamplingProduction)
+                .Include(d => d.SamplingActor)
+                .Include(d => d.Author).ThenInclude(d => d.Laboratory)
+                .Include(d => d.Author).ThenInclude(d => d.OrgGu)
+                .Include(d => d.DocsExaminationTasksExaminations).ThenInclude(d => d.Examination)
+                .Include(d => d.DocsExaminationTasksExaminations).ThenInclude(d => d.Method)
+                .Include(d => d.DocsExaminationTasksExaminations).ThenInclude(d => d.User)
+                .Include(d => d.DocsExaminationTasksCiphers).ThenInclude(d => d.WeightUnit)
+                .FirstOrDefaultAsync(t => t.Guid == id);
+
+            return ds;
         }
 
         private bool DocsExaminationTasksExists(Guid id)
@@ -333,6 +331,12 @@ namespace InspectorWeb.Controllers
             ViewData["ShouldReturn"] = viewModel == null ?
                 new SelectList(returnItems, "value", "text") :
                 new SelectList(returnItems, "value", "text", viewModel.ShouldReturn);
+            ViewData["ExamiationLaboratory"] = viewModel == null ?
+                new SelectList(context.DirLaboratories, "Guid", "Mnemonic") :
+                new SelectList(context.DirLaboratories, "Guid", "Mnemonic", viewModel.ExamiationLaboratoryId);
+            ViewData["SamplingActor"] = viewModel == null ?
+                new SelectList(context.DirUsers, "Guid", "Name") :
+                new SelectList(context.DirUsers, "Guid", "Name", viewModel.SamplingActorId);
         }
     }
 }

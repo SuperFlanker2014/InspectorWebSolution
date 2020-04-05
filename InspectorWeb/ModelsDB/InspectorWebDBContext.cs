@@ -411,6 +411,14 @@ namespace InspectorWeb.ModelsDB
                     .HasColumnName("guid")
                     .ValueGeneratedNever();
 
+                entity.Property(e => e.Mnemonic)
+                    .HasColumnName("mnemonic")
+                    .HasMaxLength(20);
+
+                entity.Property(e => e.Name)
+                    .HasColumnName("name")
+                    .HasMaxLength(500);
+
                 entity.Property(e => e.Title)
                     .HasColumnName("title")
                     .HasMaxLength(500);
@@ -986,6 +994,10 @@ namespace InspectorWeb.ModelsDB
                     .IsRequired()
                     .HasColumnName("name")
                     .HasMaxLength(100);
+
+                entity.Property(e => e.NameWithTitle)
+                    .HasColumnName("nameWithTitle")
+                    .HasMaxLength(500);
 
                 entity.Property(e => e.OrgGuid).HasColumnName("org_guid");
 
@@ -1687,9 +1699,7 @@ namespace InspectorWeb.ModelsDB
 
                 entity.Property(e => e.DestinationCountryId).HasColumnName("destinationCountryId");
 
-                entity.Property(e => e.ExamiationPlace)
-                    .HasColumnName("examiationPlace")
-                    .HasMaxLength(500);
+                entity.Property(e => e.ExamiationLaboratoryId).HasColumnName("examiationLaboratoryId");
 
                 entity.Property(e => e.HasAppendix).HasColumnName("hasAppendix");
 
@@ -1701,9 +1711,7 @@ namespace InspectorWeb.ModelsDB
                     .HasColumnName("safePackage")
                     .HasMaxLength(500);
 
-                entity.Property(e => e.SamplingActor)
-                    .HasColumnName("samplingActor")
-                    .HasMaxLength(500);
+                entity.Property(e => e.SamplingActorId).HasColumnName("samplingActorId");
 
                 entity.Property(e => e.SamplingPlace)
                     .HasColumnName("samplingPlace")
@@ -1722,7 +1730,7 @@ namespace InspectorWeb.ModelsDB
                     .HasMaxLength(100);
 
                 entity.HasOne(d => d.Author)
-                    .WithMany(p => p.DocsExaminationTasks)
+                    .WithMany(p => p.DocsExaminationTasksAuthor)
                     .HasForeignKey(d => d.AuthorId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_docsExaminationTasks_dirUsers");
@@ -1737,10 +1745,20 @@ namespace InspectorWeb.ModelsDB
                     .HasForeignKey(d => d.DestinationCountryId)
                     .HasConstraintName("FK_docsExaminationTasks_dirCountries");
 
+                entity.HasOne(d => d.ExamiationLaboratory)
+                    .WithMany(p => p.DocsExaminationTasks)
+                    .HasForeignKey(d => d.ExamiationLaboratoryId)
+                    .HasConstraintName("FK_docsExaminationTasks_dirLaboratories");
+
                 entity.HasOne(d => d.OriginCountry)
                     .WithMany(p => p.DocsExaminationTasksOriginCountry)
                     .HasForeignKey(d => d.OriginCountryId)
                     .HasConstraintName("FK_docsExaminationTasks_dirsCountries1");
+
+                entity.HasOne(d => d.SamplingActor)
+                    .WithMany(p => p.DocsExaminationTasksSamplingActor)
+                    .HasForeignKey(d => d.SamplingActorId)
+                    .HasConstraintName("FK_docsExaminationTasks_dirUsers1");
 
                 entity.HasOne(d => d.SamplingProduction)
                     .WithMany(p => p.DocsExaminationTasks)

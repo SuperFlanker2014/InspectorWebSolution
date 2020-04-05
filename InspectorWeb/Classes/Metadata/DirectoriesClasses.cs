@@ -489,6 +489,8 @@ namespace InspectorWeb.ModelsDB
 			[DisplayName("Организация")] public DirOrganizations OrgGu { get; set; }
 			[DisplayName("Логин")] public string Login { get; set; }
 			[DisplayName("Пароль")] public string PasswordHash { get; set; }
+			[DisplayName("Номер филиала")] public string FilialNumber { get; set; }
+			[DisplayName("Должность и имя")] public string NameWithTitle { get; set; }
 		}
 
 		[NotMapped]
@@ -511,7 +513,9 @@ namespace InspectorWeb.ModelsDB
 		[DisplayName("Испытания (лаборатории)")]
 		public class MetaData
 		{
-			[DisplayName("Название")] public string Title { get; set; }
+			[DisplayName("Адрес")] public string Title { get; set; }
+			[DisplayName("Название")] public string Name { get; set; }
+			[DisplayName("Короткое название")] public string Mnemonic { get; set; }
 		}
 	}
 }

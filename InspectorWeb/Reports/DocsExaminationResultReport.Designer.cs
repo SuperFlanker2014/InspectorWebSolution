@@ -51,6 +51,17 @@ namespace InspectorWeb.Reports {
             this.tableCell13 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRTableCell>("tableCell13");
             this.tableCell14 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRTableCell>("tableCell14");
             this.richText6 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText6");
+            this.richText17 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText17");
+            this.richText16 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText16");
+            this.richText15 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText15");
+            this.richText14 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText14");
+            this.richText4 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText4");
+            this.richText2 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText2");
+            this.richText13 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText13");
+            this.richText12 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText12");
+            this.richText11 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText11");
+            this.richText9 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText9");
+            this.richText10 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText10");
             this.richText8 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText8");
             this.richText7 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText7");
             this.richText5 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText5");
@@ -77,16 +88,7 @@ namespace InspectorWeb.Reports {
             this.tableCell43 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRTableCell>("tableCell43");
             this.tableCell44 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRTableCell>("tableCell44");
             this.tableCell46 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRTableCell>("tableCell46");
-            this.richText10 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText10");
-            this.richText9 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText9");
-            this.richText11 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText11");
-            this.richText12 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText12");
-            this.richText13 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText13");
-            this.richText2 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText2");
-            this.richText4 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText4");
-            this.richText14 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText14");
-            this.richText15 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText15");
-            this.richText16 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText16");
+            this.richText18 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText18");
 
             // Data Sources
             this.objectDataSource1 = reportInitializer.GetDataSource<DevExpress.DataAccess.ObjectBinding.ObjectDataSource>("objectDataSource1");
@@ -128,6 +130,17 @@ namespace InspectorWeb.Reports {
         private DevExpress.XtraReports.UI.XRTableCell tableCell14;
         private DevExpress.XtraReports.UI.XRRichText richText6;
         private DevExpress.DataAccess.ObjectBinding.ObjectDataSource objectDataSource1;
+        private DevExpress.XtraReports.UI.XRRichText richText17;
+        private DevExpress.XtraReports.UI.XRRichText richText16;
+        private DevExpress.XtraReports.UI.XRRichText richText15;
+        private DevExpress.XtraReports.UI.XRRichText richText14;
+        private DevExpress.XtraReports.UI.XRRichText richText4;
+        private DevExpress.XtraReports.UI.XRRichText richText2;
+        private DevExpress.XtraReports.UI.XRRichText richText13;
+        private DevExpress.XtraReports.UI.XRRichText richText12;
+        private DevExpress.XtraReports.UI.XRRichText richText11;
+        private DevExpress.XtraReports.UI.XRRichText richText9;
+        private DevExpress.XtraReports.UI.XRRichText richText10;
         private DevExpress.XtraReports.UI.XRRichText richText8;
         private DevExpress.XtraReports.UI.XRRichText richText7;
         private DevExpress.XtraReports.UI.XRRichText richText5;
@@ -154,15 +167,6 @@ namespace InspectorWeb.Reports {
         private DevExpress.XtraReports.UI.XRTableCell tableCell43;
         private DevExpress.XtraReports.UI.XRTableCell tableCell44;
         private DevExpress.XtraReports.UI.XRTableCell tableCell46;
-        private DevExpress.XtraReports.UI.XRRichText richText10;
-        private DevExpress.XtraReports.UI.XRRichText richText9;
-        private DevExpress.XtraReports.UI.XRRichText richText11;
-        private DevExpress.XtraReports.UI.XRRichText richText12;
-        private DevExpress.XtraReports.UI.XRRichText richText13;
-        private DevExpress.XtraReports.UI.XRRichText richText2;
-        private DevExpress.XtraReports.UI.XRRichText richText4;
-        private DevExpress.XtraReports.UI.XRRichText richText14;
-        private DevExpress.XtraReports.UI.XRRichText richText15;
-        private DevExpress.XtraReports.UI.XRRichText richText16;
+        private DevExpress.XtraReports.UI.XRRichText richText18;
     }
 }
