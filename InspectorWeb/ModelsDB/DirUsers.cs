@@ -13,14 +13,14 @@ namespace InspectorWeb.ModelsDB
             SecSubjects = new HashSet<SecSubjects>();
         }
 
-        public Guid OrgGuid { get; set; }
         public Guid Guid { get; set; }
+        public Guid OrgGuid { get; set; }
         public string Name { get; set; }
         public string Login { get; set; }
         public string PasswordHash { get; set; }
         public Guid LaboratoryId { get; set; }
         public bool IsAdmin { get; set; }
-        public int? FilialNumber { get; set; }
+        public string FilialNumber { get; set; }
 
         public virtual DirLaboratories Laboratory { get; set; }
         public virtual DirOrganizations OrgGu { get; set; }

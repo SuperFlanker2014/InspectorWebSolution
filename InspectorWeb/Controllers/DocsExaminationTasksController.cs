@@ -30,14 +30,21 @@ namespace InspectorWeb.Controllers
             var properties = new List<DirectoryProperty>
             {
                 new DirectoryProperty("number", directoryClass.DisplayName("Number"), "text"),
-                new DirectoryProperty("date", directoryClass.DisplayName("Date"), "text")
+                new DirectoryProperty("date", directoryClass.DisplayName("Date"), "dateField"),
+                new DirectoryProperty("authorId", directoryClass.DisplayName("AuthorId"), "select")
+            };
+
+            var directoryDropdowns = new Dictionary<string, string>()
+            {
+                { "authorId", "DirUsers" }
             };
 
             return View(new PlainDirectoryModel()
             {
                 DirectoryName = "DocsExaminationTasks",
                 Properties = properties,
-                Access = DirectoryAccessRights.Delete,// | DirectoryAccessRights.Edit// | DirectoryAccessRights.Insert
+                DirectoryDropdowns = directoryDropdowns,
+                Access = DirectoryAccessRights.Delete,
                 HeaderButtons = new List<CustomControlButton>
                 {
                     new CustomControlButton("/DocsExaminationTasks/Create/", "Добавить", "jsgrid-button jsgrid-mode-button jsgrid-insert-mode-button")
@@ -55,10 +62,14 @@ namespace InspectorWeb.Controllers
             ViewData["DestinationCountry"] = new SelectList(context.DirCountries, "Guid", "Title");
             ViewData["OriginCountry"] = new SelectList(context.DirCountries, "Guid", "Title");
             ViewData["SamplingProduction"] = new SelectList(context.DirGoods, "Guid", "Title");
+            
+            var user = context.DirUsers.Where(u => u.Guid == UserGuid).Include(u => u.OrgGu).First();
 
             var view = new DocsExaminationTaskViewModel
             {
-                Number = context.DocsExaminationTasks.Max(det => det.Number) + 1,
+                Number = context.DocsExaminationTasks
+                    .Where(d => d.Author.FilialNumber == user.FilialNumber && d.Author.OrgGu.RegionNumber == user.OrgGu.RegionNumber)
+                    .Max(d => d.Number) ?? 0 + 1,
                 Date = DateTime.Today.ToString(DocsExaminationTaskViewModel.DateFormat)
             };
 
@@ -75,6 +86,7 @@ namespace InspectorWeb.Controllers
             {
                 var task = mapper.Map<DocsExaminationTaskViewModel, DocsExaminationTasks>(viewModel);
                 task.Guid = Guid.NewGuid();
+                task.AuthorId = UserGuid;
 
                 task.DocsExaminationTasksExaminations = new List<DocsExaminationTasksExaminations>();
                 foreach (var examModel in viewModel.TaskExaminations)
@@ -252,7 +264,8 @@ namespace InspectorWeb.Controllers
                 .Include(d => d.DestinationCountry)
                 .Include(d => d.OriginCountry)
                 .Include(d => d.SamplingProduction)
-                .Include(d => d.Author)
+                .Include(d => d.Author).ThenInclude(d => d.Laboratory)
+                .Include(d => d.Author).ThenInclude(d => d.OrgGu)
                 .Include(d => d.DocsExaminationTasksExaminations).ThenInclude(d => d.Examination)
                 .Include(d => d.DocsExaminationTasksExaminations).ThenInclude(d => d.Method)
                 .Include(d => d.DocsExaminationTasksExaminations).ThenInclude(d => d.User)

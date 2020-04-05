@@ -54,19 +54,20 @@ namespace InspectorWeb
 			{
 				options.Cookie.Name = "UserLoginCookie";
 				options.LoginPath = "/Account/Login";
-
-				//options.ExpireTimeSpan = TimeSpan.FromDays(1);
+				options.ExpireTimeSpan = TimeSpan.FromDays(1);
 				//options.SlidingExpiration = true;
 			});
 
-			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+			services.AddMvc()
+				.SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+				.AddJsonOptions(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
 			services.Configure<CookiePolicyOptions>(options =>
 			{
 				// This lambda determines whether user consent for non-essential cookies is needed for a given request.  
 				options.CheckConsentNeeded = context => true;
 				options.MinimumSameSitePolicy = SameSiteMode.None;
-			});
+			});		
 		}
 
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)

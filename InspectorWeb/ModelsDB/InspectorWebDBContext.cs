@@ -970,7 +970,9 @@ namespace InspectorWeb.ModelsDB
                     .HasColumnName("guid")
                     .HasDefaultValueSql("(newid())");
 
-                entity.Property(e => e.FilialNumber).HasColumnName("filialNumber");
+                entity.Property(e => e.FilialNumber)
+                    .HasColumnName("filialNumber")
+                    .HasMaxLength(10);
 
                 entity.Property(e => e.IsAdmin).HasColumnName("isAdmin");
 
@@ -1778,7 +1780,6 @@ namespace InspectorWeb.ModelsDB
                 entity.HasOne(d => d.Task)
                     .WithMany(p => p.DocsExaminationTasksCiphers)
                     .HasForeignKey(d => d.TaskId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_docsExaminationTasksCiphers_docsExaminationTasks");
 
                 entity.HasOne(d => d.WeightUnit)
@@ -1838,7 +1839,6 @@ namespace InspectorWeb.ModelsDB
                 entity.HasOne(d => d.Task)
                     .WithMany(p => p.DocsExaminationTasksExaminations)
                     .HasForeignKey(d => d.TaskId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_docsExaminationTasksExaminations_docsExaminationTasks");
 
                 entity.HasOne(d => d.User)

@@ -45,6 +45,7 @@ namespace InspectorWeb.Controllers
             {
                 identity = new ClaimsIdentity(new[] {
                     new Claim(ClaimTypes.Name, user.Name),
+                    new Claim(ClaimTypes.NameIdentifier, user.Guid.ToString()),
                     new Claim(ClaimTypes.Role, user.IsAdmin ? "Admin" : "User")
                 }, CookieAuthenticationDefaults.AuthenticationScheme);
 
