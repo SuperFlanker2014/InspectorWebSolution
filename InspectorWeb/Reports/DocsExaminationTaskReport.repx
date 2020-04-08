@@ -6,7 +6,7 @@
     <Item3 Ref="4" ControlType="BottomMarginBand" Name="bottomMarginBand1" HeightF="11" />
     <Item4 Ref="5" ControlType="DetailReportBand" Name="DetailReport" Level="0" DataMember="DocsExaminationTasksExaminations" DataSource="#Ref-0">
       <Bands>
-        <Item1 Ref="6" ControlType="DetailBand" Name="Detail" Expanded="false" HeightF="26.8749886">
+        <Item1 Ref="6" ControlType="DetailBand" Name="Detail" HeightF="26.8749886" KeepTogether="true">
           <SortFields>
             <Item1 Ref="7" FieldName="Examination.Title" />
           </SortFields>
@@ -75,11 +75,11 @@
             </Item1>
           </Controls>
         </Item2>
-        <Item3 Ref="43" ControlType="GroupHeaderBand" Name="GroupHeader1" HeightF="24.625061">
+        <Item3 Ref="43" ControlType="GroupHeaderBand" Name="GroupHeader1" GroupUnion="WithFirstDetail" HeightF="24.625061" KeepTogether="true">
           <GroupFields>
-            <Item1 Ref="44" FieldName="Examination.TypeGu.Title" />
+            <Item1 Ref="44" FieldName="Examination.TypeGu.ExamPriority" />
           </GroupFields>
-          <SortingSummary Ref="45" Enabled="true" FieldName="Examination.TypeGu.ExamPriority" />
+          <SortingSummary Ref="45" FieldName="Examination.TypeGu.ExamPriority" />
           <Controls>
             <Item1 Ref="46" ControlType="XRLabel" Name="label5" TextFormatString="{0} исследования (испытания) Образец принял ____________ Дата, подпись" Multiline="true" SizeF="766.999939,23" LocationFloat="0, 0" Padding="2,2,0,0,100" Borders="Left, Right, Bottom">
               <ExpressionBindings>
