@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -18,12 +20,28 @@ namespace InspectorWeb.ModelsDB
 		}
 
 		[NotMapped]
-		public string AppendixX => HasAppendix.HasValue ? "X" : "   ";
+		public string AppendixX => HasAppendix.HasValue ? "V" : "X";
 
 		[NotMapped]
-		public string ShouldReturnX => ShouldReturn.HasValue && ShouldReturn.Value ? "X" : "   ";
+		public string ShouldReturnX => ShouldReturn.HasValue && ShouldReturn.Value ? "V" : "X";
 
 		[NotMapped]
 		public string NumberText => $"{this.Author?.OrgGu?.RegionNumber}-{this.Author?.FilialNumber}-{Number}";
+
+		[NotMapped]
+		public string SafePackageText
+		{
+			get
+			{
+				var res = new List<string>();
+
+				foreach (var cipher in DocsExaminationTasksCiphers)
+				{
+					res.Add($"с.п.№ {cipher.SafePackageNumber} - шифр {cipher.Cipher}");
+				}
+
+				return string.Join(", ", res);
+			}
+		}
 	}
 }

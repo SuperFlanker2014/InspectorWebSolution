@@ -95,6 +95,7 @@ namespace InspectorWeb.ModelsDB
 		public class MetaData
 		{
 			[DisplayName("Название")] public string Title { get; set; }
+			[DisplayName("Приоритет")] public byte? ExamPriority { get; set; }
 		}
 	}
 

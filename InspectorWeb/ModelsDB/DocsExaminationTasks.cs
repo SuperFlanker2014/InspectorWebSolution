@@ -25,19 +25,21 @@ namespace InspectorWeb.ModelsDB
         public string SamplingStandard { get; set; }
         public string SamplingPlace { get; set; }
         public Guid? SamplingActorId { get; set; }
-        public Guid? SamplingProductionId { get; set; }
-        public Guid? ExamiationLaboratoryId { get; set; }
+        public string SamplingProduction { get; set; }
+        public Guid? ExaminationLaboratoryId { get; set; }
         public int Number { get; set; }
         public DateTime Date { get; set; }
         public Guid AuthorId { get; set; }
+        public string ExaminationFoundation { get; set; }
+        public string ExaminationAssignment { get; set; }
+        public string Comments { get; set; }
 
         public virtual DirUsers Author { get; set; }
         public virtual DocsClients Client { get; set; }
         public virtual DirCountries DestinationCountry { get; set; }
-        public virtual DirLaboratories ExamiationLaboratory { get; set; }
+        public virtual DirLaboratories ExaminationLaboratory { get; set; }
         public virtual DirCountries OriginCountry { get; set; }
         public virtual DirUsers SamplingActor { get; set; }
-        public virtual DirGoods SamplingProduction { get; set; }
         public virtual ICollection<DocsExaminationTasksCiphers> DocsExaminationTasksCiphers { get; set; }
         public virtual ICollection<DocsExaminationTasksExaminations> DocsExaminationTasksExaminations { get; set; }
     }

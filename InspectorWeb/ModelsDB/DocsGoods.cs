@@ -20,11 +20,6 @@ namespace InspectorWeb.ModelsDB
         public Guid? WeightUnitGuid { get; set; }
         public int? SamplesCount { get; set; }
 
-        public virtual DocsWithGoods DocGu { get; set; }
-        public virtual DirGoods GoodGu { get; set; }
-        public virtual DirPlacesUnits PlacesUnitGu { get; set; }
-        public virtual DirCountries ProductionCountryGu { get; set; }
-        public virtual DirWeightUnits WeightUnitGu { get; set; }
         public virtual ICollection<DocsGoodsDiseases> DocsGoodsDiseases { get; set; }
     }
 }

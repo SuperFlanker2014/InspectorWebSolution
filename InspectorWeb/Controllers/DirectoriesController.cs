@@ -97,6 +97,10 @@ namespace InspectorWeb.Controllers
 			{
 				return "checkbox";
 			}
+			else if (typeof(byte).Equals(type))
+			{
+				return "number";
+			}
 			else if(typeof(IModelBase).IsAssignableFrom(type))
 			{
 				return "select";

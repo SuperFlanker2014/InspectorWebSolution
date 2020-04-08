@@ -77,6 +77,10 @@ namespace InspectorWeb.Controllers
 						{
 							result = result.Where($"{propertyName}.Equals(@0.val)", new { val = Guid.Parse(val) });
 						}
+						else if (propertyInfo.PropertyType == typeof(byte) || propertyInfo.PropertyType == typeof(byte))
+						{
+							result = result.Where($"{propertyName}.Equals(@0.val)", new { val = byte.Parse(val) });
+						}
 					}
 				}
 				else //date
@@ -112,8 +116,6 @@ namespace InspectorWeb.Controllers
 			result = result
 				.Skip((pageIndex == 0 ? 0 : pageIndex - 1) * pageSize)
 				.Take(pageSize);
-
-			//var f = MyNamespace.QueryableExtensions.ToSql(result);
 
 			var resultArray = result.ToArray();
 

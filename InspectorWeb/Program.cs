@@ -19,7 +19,7 @@ namespace InspectorWeb
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-            .UseUrls("http://*:5000;http://localhost:5001;https://hostname:5002")
+            .UseUrls("http://*:80;https://*:81")//https://hostname:81
             .UseKestrel()
             .UseContentRoot(Directory.GetCurrentDirectory())
             .UseIISIntegration()

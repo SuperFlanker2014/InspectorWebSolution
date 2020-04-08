@@ -80,6 +80,23 @@
                         </div>
                         <br />
                         <div class="row">
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <label asp-for="ExaminationFoundation" class="input-group-addon"></label>
+                                    <input asp-for="ExaminationFoundation" class="form-control" />
+                                </div>
+                                <span asp-validation-for="ExaminationFoundation" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <label asp-for="ExaminationAssignment" class="input-group-addon"></label>
+                                    <input asp-for="ExaminationAssignment" class="form-control" />
+                                </div>
+                                <span asp-validation-for="ExaminationAssignment" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
                             <div class="col-md-4">
                                 <div class="input-group">
                                     <label asp-for="OriginCountryId" class="input-group-addon"></label>
@@ -94,9 +111,10 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="input-group">
-                                    <label asp-for="SamplingProductionId" class="input-group-addon"></label>
-                                    <select asp-for="SamplingProductionId" class="form-control select2-autocomplete" asp-items="ViewBag.SamplingProduction"></select>
+                                    <label asp-for="SamplingProduction" class="input-group-addon"></label>
+                                    <input asp-for="SamplingProduction" class="form-control"></input>
                                 </div>
+                                <span asp-validation-for="SamplingProduction" class="text-danger"></span>
                             </div>
                         </div>
                         <br />
@@ -114,16 +132,6 @@
                                     <input asp-for="CountMassVolume" class="form-control" />
                                 </div>
                                 <span asp-validation-for="CountMassVolume" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <br />
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="input-group">
-                                    <label asp-for="SafePackage" class="input-group-addon"></label>
-                                    <input asp-for="SafePackage" class="form-control" />
-                                </div>
-                                <span asp-validation-for="SafePackage" class="text-danger"></span>
                             </div>
                         </div>
                         <br />
@@ -183,9 +191,19 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="input-group">
-                                    <label asp-for="ExamiationLaboratoryId" class="input-group-addon"></label>
-                                    <select asp-for="ExamiationLaboratoryId" class="form-control" asp-items="ViewBag.ExamiationLaboratory"></select>
+                                    <label asp-for="ExaminationLaboratoryId" class="input-group-addon"></label>
+                                    <select asp-for="ExaminationLaboratoryId" class="form-control" asp-items="ViewBag.ExaminationLaboratory"></select>
                                 </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="input-group">
+                                    <label asp-for="Comments" class="input-group-addon"></label>
+                                    <input asp-for="Comments" class="form-control" />
+                                </div>
+                                <span asp-validation-for="Comments" class="text-danger"></span>
                             </div>
                         </div>
                     </div>

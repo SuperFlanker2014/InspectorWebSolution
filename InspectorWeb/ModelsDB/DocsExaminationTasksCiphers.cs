@@ -7,6 +7,7 @@ namespace InspectorWeb.ModelsDB
     {
         public Guid Guid { get; set; }
         public Guid TaskId { get; set; }
+        public string SafePackageNumber { get; set; }
         public string Cipher { get; set; }
         public Guid? WeightUnitId { get; set; }
         public decimal? Count { get; set; }

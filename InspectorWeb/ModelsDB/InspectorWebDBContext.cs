@@ -280,6 +280,8 @@ namespace InspectorWeb.ModelsDB
                     .HasColumnName("guid")
                     .ValueGeneratedNever();
 
+                entity.Property(e => e.ExamPriority).HasColumnName("examPriority");
+
                 entity.Property(e => e.Title)
                     .IsRequired()
                     .HasColumnName("title")
@@ -1687,6 +1689,10 @@ namespace InspectorWeb.ModelsDB
 
                 entity.Property(e => e.ClientId).HasColumnName("clientId");
 
+                entity.Property(e => e.Comments)
+                    .HasColumnName("comments")
+                    .HasMaxLength(500);
+
                 entity.Property(e => e.CountMassVolume)
                     .HasColumnName("countMassVolume")
                     .HasMaxLength(500);
@@ -1699,7 +1705,15 @@ namespace InspectorWeb.ModelsDB
 
                 entity.Property(e => e.DestinationCountryId).HasColumnName("destinationCountryId");
 
-                entity.Property(e => e.ExamiationLaboratoryId).HasColumnName("examiationLaboratoryId");
+                entity.Property(e => e.ExaminationAssignment)
+                    .HasColumnName("examinationAssignment")
+                    .HasMaxLength(500);
+
+                entity.Property(e => e.ExaminationFoundation)
+                    .HasColumnName("examinationFoundation")
+                    .HasMaxLength(500);
+
+                entity.Property(e => e.ExaminationLaboratoryId).HasColumnName("examinationLaboratoryId");
 
                 entity.Property(e => e.HasAppendix).HasColumnName("hasAppendix");
 
@@ -1717,7 +1731,9 @@ namespace InspectorWeb.ModelsDB
                     .HasColumnName("samplingPlace")
                     .HasMaxLength(500);
 
-                entity.Property(e => e.SamplingProductionId).HasColumnName("samplingProductionId");
+                entity.Property(e => e.SamplingProduction)
+                    .HasColumnName("samplingProduction")
+                    .HasMaxLength(500);
 
                 entity.Property(e => e.SamplingStandard)
                     .HasColumnName("samplingStandard")
@@ -1743,27 +1759,22 @@ namespace InspectorWeb.ModelsDB
                 entity.HasOne(d => d.DestinationCountry)
                     .WithMany(p => p.DocsExaminationTasksDestinationCountry)
                     .HasForeignKey(d => d.DestinationCountryId)
-                    .HasConstraintName("FK_docsExaminationTasks_dirCountries");
+                    .HasConstraintName("FK_docsExaminationTasks_dirCountries1");
 
-                entity.HasOne(d => d.ExamiationLaboratory)
+                entity.HasOne(d => d.ExaminationLaboratory)
                     .WithMany(p => p.DocsExaminationTasks)
-                    .HasForeignKey(d => d.ExamiationLaboratoryId)
+                    .HasForeignKey(d => d.ExaminationLaboratoryId)
                     .HasConstraintName("FK_docsExaminationTasks_dirLaboratories");
 
                 entity.HasOne(d => d.OriginCountry)
                     .WithMany(p => p.DocsExaminationTasksOriginCountry)
                     .HasForeignKey(d => d.OriginCountryId)
-                    .HasConstraintName("FK_docsExaminationTasks_dirsCountries1");
+                    .HasConstraintName("FK_docsExaminationTasks_dirCountries");
 
                 entity.HasOne(d => d.SamplingActor)
                     .WithMany(p => p.DocsExaminationTasksSamplingActor)
                     .HasForeignKey(d => d.SamplingActorId)
                     .HasConstraintName("FK_docsExaminationTasks_dirUsers1");
-
-                entity.HasOne(d => d.SamplingProduction)
-                    .WithMany(p => p.DocsExaminationTasks)
-                    .HasForeignKey(d => d.SamplingProductionId)
-                    .HasConstraintName("FK_docsExaminationTasks_dirGoods");
             });
 
             modelBuilder.Entity<DocsExaminationTasksCiphers>(entity =>
@@ -1787,6 +1798,10 @@ namespace InspectorWeb.ModelsDB
                 entity.Property(e => e.Count)
                     .HasColumnName("count")
                     .HasColumnType("numeric(18, 4)");
+
+                entity.Property(e => e.SafePackageNumber)
+                    .HasColumnName("safePackageNumber")
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.SampleTitle)
                     .HasColumnName("sampleTitle")
@@ -1895,34 +1910,6 @@ namespace InspectorWeb.ModelsDB
                     .HasColumnType("numeric(18, 4)");
 
                 entity.Property(e => e.WeightUnitGuid).HasColumnName("weight_unit_guid");
-
-                entity.HasOne(d => d.DocGu)
-                    .WithMany(p => p.DocsGoods)
-                    .HasForeignKey(d => d.DocGuid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_docsGoods_docsWithGoods");
-
-                entity.HasOne(d => d.GoodGu)
-                    .WithMany(p => p.DocsGoods)
-                    .HasForeignKey(d => d.GoodGuid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_docsGoods_dirGoods");
-
-                entity.HasOne(d => d.PlacesUnitGu)
-                    .WithMany(p => p.DocsGoods)
-                    .HasForeignKey(d => d.PlacesUnitGuid)
-                    .HasConstraintName("FK_docsGoods_dirPlacesUnits");
-
-                entity.HasOne(d => d.ProductionCountryGu)
-                    .WithMany(p => p.DocsGoods)
-                    .HasForeignKey(d => d.ProductionCountryGuid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_docsGoods_dirCountries");
-
-                entity.HasOne(d => d.WeightUnitGu)
-                    .WithMany(p => p.DocsGoods)
-                    .HasForeignKey(d => d.WeightUnitGuid)
-                    .HasConstraintName("FK_docsGoods_dirWeightUnits");
             });
 
             modelBuilder.Entity<DocsGoodsDiseases>(entity =>

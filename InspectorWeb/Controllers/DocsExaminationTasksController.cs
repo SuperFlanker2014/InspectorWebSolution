@@ -78,7 +78,7 @@ namespace InspectorWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-            [Bind("ClientId,Number,Date,Title,CountMassVolume,SafePackage,DateReceipt,DateSampling,HasAppendix,ShouldReturn,OriginCountryId,DestinationCountryId,SamplingStandard,SamplingPlace,SamplingActorId,SamplingProduction,ExamiationLaboratoryId,Examinations,Ciphers")]
+            [Bind("ClientId,Number,Date,Title,CountMassVolume,SafePackage,DateReceipt,DateSampling,HasAppendix,ShouldReturn,OriginCountryId,DestinationCountryId,SamplingStandard,SamplingPlace,SamplingActorId,SamplingProduction,ExamiationLaboratoryId,Examinations,Ciphers,ExaminationFoundation,ExaminationAssignment,Comments")]
             DocsExaminationTaskViewModel viewModel)
         {
             if (ModelState.IsValid)
@@ -126,7 +126,8 @@ namespace InspectorWeb.Controllers
                 .Include(d => d.Client)
                 .Include(d => d.DestinationCountry)
                 .Include(d => d.OriginCountry)
-                .Include(d => d.SamplingProduction)
+                .Include(d => d.ExaminationLaboratory)
+                .Include(d => d.SamplingActor)
                 .Include(d => d.DocsExaminationTasksExaminations)
                 .Include(d => d.DocsExaminationTasksCiphers)
                 .SingleOrDefaultAsync(d => d.Guid == id);
@@ -148,7 +149,7 @@ namespace InspectorWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id,
-            [Bind("Guid,ClientId,Number,Date,Title,CountMassVolume,SafePackage,DateReceipt,DateSampling,HasAppendix,ShouldReturn,OriginCountryId,DestinationCountryId,SamplingStandard,SamplingPlace,SamplingActorId,SamplingProduction,ExamiationLaboratoryId,Examinations,Ciphers,AuthorId")]
+            [Bind("Guid,AuthorId,ClientId,Number,Date,Title,CountMassVolume,SafePackage,DateReceipt,DateSampling,HasAppendix,ShouldReturn,OriginCountryId,DestinationCountryId,SamplingStandard,SamplingPlace,SamplingActorId,SamplingProduction,ExamiationLaboratoryId,Examinations,Ciphers,ExaminationFoundation,ExaminationAssignment,Comments")]
             DocsExaminationTaskViewModel viewModel)
         {
             if (id == null | id != viewModel.Guid)
@@ -290,11 +291,12 @@ namespace InspectorWeb.Controllers
                 .Include(d => d.Client)
                 .Include(d => d.DestinationCountry)
                 .Include(d => d.OriginCountry)
-                .Include(d => d.SamplingProduction)
                 .Include(d => d.SamplingActor)
+                .Include(d => d.ExaminationLaboratory)
                 .Include(d => d.Author).ThenInclude(d => d.Laboratory)
                 .Include(d => d.Author).ThenInclude(d => d.OrgGu)
                 .Include(d => d.DocsExaminationTasksExaminations).ThenInclude(d => d.Examination)
+                .Include(d => d.DocsExaminationTasksExaminations).ThenInclude(d => d.Examination).ThenInclude(d => d.TypeGu)
                 .Include(d => d.DocsExaminationTasksExaminations).ThenInclude(d => d.Method)
                 .Include(d => d.DocsExaminationTasksExaminations).ThenInclude(d => d.User)
                 .Include(d => d.DocsExaminationTasksCiphers).ThenInclude(d => d.WeightUnit)
@@ -325,15 +327,12 @@ namespace InspectorWeb.Controllers
             ViewData["OriginCountry"] = viewModel == null ?
                 new SelectList(context.DirCountries, "Guid", "Title") :
                 new SelectList(context.DirCountries, "Guid", "Title", viewModel.OriginCountryId);
-            ViewData["SamplingProduction"] = viewModel == null ?
-                new SelectList(context.DirGoods, "Guid", "Title") :
-                new SelectList(context.DirGoods, "Guid", "Title", viewModel.SamplingProductionId);
             ViewData["ShouldReturn"] = viewModel == null ?
                 new SelectList(returnItems, "value", "text") :
                 new SelectList(returnItems, "value", "text", viewModel.ShouldReturn);
-            ViewData["ExamiationLaboratory"] = viewModel == null ?
+            ViewData["ExaminationLaboratory"] = viewModel == null ?
                 new SelectList(context.DirLaboratories, "Guid", "Mnemonic") :
-                new SelectList(context.DirLaboratories, "Guid", "Mnemonic", viewModel.ExamiationLaboratoryId);
+                new SelectList(context.DirLaboratories, "Guid", "Mnemonic", viewModel.ExaminationLaboratoryId);
             ViewData["SamplingActor"] = viewModel == null ?
                 new SelectList(context.DirUsers, "Guid", "Name") :
                 new SelectList(context.DirUsers, "Guid", "Name", viewModel.SamplingActorId);

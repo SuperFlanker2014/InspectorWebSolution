@@ -15,6 +15,7 @@ namespace InspectorWeb.ModelsDB
 
         public Guid Guid { get; set; }
         public string Title { get; set; }
+        public byte ExamPriority { get; set; }
 
         public virtual ICollection<DirDiseases> DirDiseases { get; set; }
         public virtual ICollection<DirGoodsExams> DirGoodsExams { get; set; }

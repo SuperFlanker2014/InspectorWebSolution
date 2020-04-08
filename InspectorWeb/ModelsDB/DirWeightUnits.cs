@@ -9,7 +9,6 @@ namespace InspectorWeb.ModelsDB
         {
             DirGoodsGroups = new HashSet<DirGoodsGroups>();
             DocsExaminationTasksCiphers = new HashSet<DocsExaminationTasksCiphers>();
-            DocsGoods = new HashSet<DocsGoods>();
         }
 
         public Guid Guid { get; set; }
@@ -18,6 +17,5 @@ namespace InspectorWeb.ModelsDB
 
         public virtual ICollection<DirGoodsGroups> DirGoodsGroups { get; set; }
         public virtual ICollection<DocsExaminationTasksCiphers> DocsExaminationTasksCiphers { get; set; }
-        public virtual ICollection<DocsGoods> DocsGoods { get; set; }
     }
 }

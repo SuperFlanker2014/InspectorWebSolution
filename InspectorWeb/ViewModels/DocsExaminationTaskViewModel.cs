@@ -24,13 +24,11 @@ namespace InspectorWeb.ViewModels
 			ClientId = docsExaminationTask.ClientId;
 			DestinationCountryId = docsExaminationTask.DestinationCountryId;
 			OriginCountryId = docsExaminationTask.OriginCountryId;
-			SamplingProductionId = docsExaminationTask.SamplingProductionId;
-
+			SamplingProduction = docsExaminationTask.SamplingProduction;
 			Guid = docsExaminationTask.Guid;
 			AuthorId = docsExaminationTask.AuthorId;
 			Number = docsExaminationTask.Number;
 			Date = docsExaminationTask.Date.ToString(DateFormat);
-
 			Title = docsExaminationTask.Title;
 			CountMassVolume = docsExaminationTask.CountMassVolume;
 			SafePackage = docsExaminationTask.SafePackage;
@@ -41,7 +39,11 @@ namespace InspectorWeb.ViewModels
 			SamplingStandard = docsExaminationTask.SamplingStandard;
 			SamplingPlace = docsExaminationTask.SamplingPlace;
 			SamplingActorId = docsExaminationTask.SamplingActorId;
-			ExamiationLaboratoryId = docsExaminationTask.ExamiationLaboratoryId;
+			ExaminationLaboratoryId = docsExaminationTask.ExaminationLaboratoryId;
+
+			ExaminationFoundation = docsExaminationTask.ExaminationFoundation;
+			ExaminationAssignment = docsExaminationTask.ExaminationAssignment;
+			Comments = docsExaminationTask.Comments;
 
 			TaskExaminations = docsExaminationTask.DocsExaminationTasksExaminations.Select(m =>
 				new DocsExaminationTasksExaminationsViewModel()
@@ -65,6 +67,7 @@ namespace InspectorWeb.ViewModels
 					Guid = m.Guid,
 					TaskId = m.TaskId,
 					Cipher = m.Cipher,
+					SafePackageNumber = m.SafePackageNumber,
 					SampleTitle = m.SampleTitle,
 					WeightUnitId = m.WeightUnitId,
 					Count = m.Count,
@@ -75,6 +78,7 @@ namespace InspectorWeb.ViewModels
 
 		public Guid Guid { get; set; }
 		public Guid AuthorId { get; set; }
+
 		[DisplayName("Номер")]
 		public virtual int? Number { get; set; }
 		[DisplayName("Дата")]
@@ -86,34 +90,38 @@ namespace InspectorWeb.ViewModels
 		public Guid? DestinationCountryId { get; set; }
 		[DisplayName("Происхождение")]
 		public Guid? OriginCountryId { get; set; }
-		[DisplayName("Продукция")]
-		public Guid? SamplingProductionId { get; set; }
+		[DisplayName("Отбор проб произвёл")]
+		public Guid? SamplingActorId { get; set; }
+		[DisplayName("Место проведения исследований")]
+		public Guid? ExaminationLaboratoryId { get; set; }
 
+		[DisplayName("Продукция")]
+		public string SamplingProduction { get; set; }
 		[DisplayName("Наименование образца")]
 		public string Title { get; set; }
 		[DisplayName("Количество/вес/объём образца")]
 		public string CountMassVolume { get; set; }
 		[DisplayName("Номер сейф-пакента/пломбы/иной идентификатор")]
 		public string SafePackage { get; set; }
-
 		[DisplayName("Дата отбора")]
 		public string DateSampling { get; set; }
 		[DisplayName("Дата поступления на исследование")]
 		public string DateReceipt { get; set; }
-
 		[DisplayName("Образец отобран согласно")]
 		public string SamplingStandard { get; set; }
 		[DisplayName("Приложение с информ. об образцах")]
 		public int? HasAppendix { get; set; }
 		[DisplayName("Место отбора проб")]
 		public string SamplingPlace { get; set; }
-		[DisplayName("Отбор проб произвёл")]
-		public Guid? SamplingActorId { get; set; }
-		[DisplayName("Место проведения исследований")]
-		public Guid? ExamiationLaboratoryId { get; set; }
-
 		[DisplayName("Возврат")]
 		public bool ShouldReturn { get; set; }
+
+		[DisplayName("Основание проведения исследований")]
+		public string ExaminationFoundation { get; set; }
+		[DisplayName("Задание")]
+		public string ExaminationAssignment { get; set; }
+		[DisplayName("Примечание")]
+		public string Comments { get; set; }
 
 		public string Examinations { get; set; }
 		public DocsExaminationTasksExaminationsViewModel[] TaskExaminations

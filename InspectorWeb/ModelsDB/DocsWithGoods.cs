@@ -5,11 +5,6 @@ namespace InspectorWeb.ModelsDB
 {
     public partial class DocsWithGoods
     {
-        public DocsWithGoods()
-        {
-            DocsGoods = new HashSet<DocsGoods>();
-        }
-
         public Guid Guid { get; set; }
 
         public virtual DocsAll Gu { get; set; }
@@ -17,6 +12,5 @@ namespace InspectorWeb.ModelsDB
         public virtual DocsConclusionsExamination DocsConclusionsExamination { get; set; }
         public virtual DocsConclusionsExport DocsConclusionsExport { get; set; }
         public virtual DocsConclusionsImport DocsConclusionsImport { get; set; }
-        public virtual ICollection<DocsGoods> DocsGoods { get; set; }
     }
 }

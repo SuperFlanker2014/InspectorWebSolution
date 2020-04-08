@@ -13,6 +13,8 @@
     }
 
     $(function () {
+        var resultsTexts = [{ "title": "" }, { "title": "Выявлен (+)" }, { "title": "Не выявлен (-)" }]
+
         var dirSamplesExaminations = [];
         var dirExaminationMethods = [];
         var dirUsers = [];
@@ -34,7 +36,7 @@
             { name: "endDate", title: "Дата окончания", type: "dateField", align: "left", width: 30 },
             { name: "userId", title: "Исполнитель", type: "select", items: dirUsers, valueField: "guid", textField: "title", align: "left", width: 60 },
             { name: "sampleCiphers", title: "Шифры образцов", type: "text", align: "left", width: 100 },
-            { name: "examinationResult", title: "Результат", type: "text", align: "left", width: 100 },
+            { name: "examinationResult", title: "Результат", type: "select", items: resultsTexts, valueField: "title", textField: "title", align: "left", width: 100 },
             { name: "comments", title: "Примечания", type: "text", align: "left", width: 60 },
             { type: "control", editButton: true, deleteButton: true, width: 20 }
         ];

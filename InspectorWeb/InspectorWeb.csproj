@@ -11,6 +11,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\DocsConclusionsExaminations\**" />
+    <Content Remove="Views\DocsConclusionsExaminations\**" />
+    <EmbeddedResource Remove="Views\DocsConclusionsExaminations\**" />
+    <None Remove="Views\DocsConclusionsExaminations\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\DocsConclusionsExaminationsController.cs" />
+    <Compile Remove="ViewModels\DocsConclusionsExaminationViewModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Reports\DocsExaminationResultReport.repx" />
     <None Remove="Reports\DocsExaminationTaskReport.repx" />
     <None Remove="Reports\Docs_Act.repx" />

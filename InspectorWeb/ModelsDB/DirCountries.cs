@@ -12,7 +12,6 @@ namespace InspectorWeb.ModelsDB
             DocsConclusionsExamination = new HashSet<DocsConclusionsExamination>();
             DocsExaminationTasksDestinationCountry = new HashSet<DocsExaminationTasks>();
             DocsExaminationTasksOriginCountry = new HashSet<DocsExaminationTasks>();
-            DocsGoods = new HashSet<DocsGoods>();
         }
 
         public Guid Guid { get; set; }
@@ -27,6 +26,5 @@ namespace InspectorWeb.ModelsDB
         public virtual ICollection<DocsConclusionsExamination> DocsConclusionsExamination { get; set; }
         public virtual ICollection<DocsExaminationTasks> DocsExaminationTasksDestinationCountry { get; set; }
         public virtual ICollection<DocsExaminationTasks> DocsExaminationTasksOriginCountry { get; set; }
-        public virtual ICollection<DocsGoods> DocsGoods { get; set; }
     }
 }
