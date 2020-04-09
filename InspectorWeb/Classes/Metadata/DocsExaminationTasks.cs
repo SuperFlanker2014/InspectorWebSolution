@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -41,6 +42,34 @@ namespace InspectorWeb.ModelsDB
 				}
 
 				return string.Join(", ", res);
+			}
+		}
+
+		[NotMapped]
+		public string ProtocolDateText
+		{
+			get
+			{
+				return this.DocsExaminationTasksExaminations?
+				.Where(d => d.EndDate.HasValue)
+				.Select(d => d.EndDate.Value)
+				.DefaultIfEmpty()
+				.Max()
+				.ToString("dd.MM.yyyy");
+			}
+		}
+
+		[NotMapped]
+		public string ProtocolNumberText
+		{
+			get
+			{
+				var ciphers = DocsExaminationTasksCiphers?
+					.OrderBy(d => d.Cipher)
+					.Select(d => d.Cipher?.Substring(3))
+					.ToList();
+
+				return $"{this.Author?.OrgGu?.RegionNumber}-{this.Author?.FilialNumber}-{ciphers.FirstOrDefault()}-{ciphers.LastOrDefault()}";
 			}
 		}
 	}
