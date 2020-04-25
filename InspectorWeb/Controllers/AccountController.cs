@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using InspectorWeb.ModelsDB;
+using InspectorWeb.ViewModels;
 
 namespace InspectorWeb.Controllers
 {
@@ -41,7 +42,7 @@ namespace InspectorWeb.Controllers
             var hash = PasswordHash(password);
             var user = _context.DirUsers.FirstOrDefault(u => u.Login == login && u.PasswordHash == hash);
 
-            if (user != null )
+            if (user != null)
             {
                 identity = new ClaimsIdentity(new[] {
                     new Claim(ClaimTypes.Name, user.Name),
@@ -60,7 +61,9 @@ namespace InspectorWeb.Controllers
                 return RedirectToAction("Index", "DocsExaminationTasks");
             }
 
-            return View();
+            ModelState.AddModelError(nameof(LoginViewModel.Error), "неверный логин или пароль");
+
+            return View(new LoginViewModel());
         }
 
         public async Task<IActionResult> Logout()
@@ -69,10 +72,48 @@ namespace InspectorWeb.Controllers
             return RedirectToAction("Login");
         }
 
-        [Authorize(Roles = "Admin")]
-        public IActionResult Index()
+        [Authorize]
+        [HttpGet]
+        public IActionResult ChangePassword()
         {
             return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult ChangePassword([Bind("PasswordOld,PasswordNew1,PasswordNew2")] ChangePasswordViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                ModelState.Clear();
+
+                if (Guid.TryParse(User.FindFirst(claim => claim.Type == System.Security.Claims.ClaimTypes.NameIdentifier)?.Value, out var userGuid))
+                {
+                    var user = _context.DirUsers.First(u => u.Guid == userGuid);
+
+                    if (PasswordHash(viewModel.PasswordOld) != user.PasswordHash)
+                    {
+                        ModelState.AddModelError(nameof(viewModel.PasswordOld), "неверный пароль");
+                    }
+
+                    if (string.IsNullOrWhiteSpace(viewModel.PasswordNew1))
+                    {
+                        ModelState.AddModelError(nameof(viewModel.PasswordNew1), "пустой пароль");
+                    }
+
+                    if (viewModel.PasswordNew1 != viewModel.PasswordNew2)
+                    {
+                        ModelState.AddModelError(nameof(viewModel.PasswordNew2), "пароли не совпадают");
+                    }
+
+                    ModelState.AddModelError(nameof(viewModel.Message), "пароль изменён!");
+
+                    user.PasswordHash = PasswordHash(viewModel.PasswordNew1);
+                    _context.SaveChanges();
+                }                
+            }
+
+            return View(viewModel);
         }
 
         private string PasswordHash(string password)

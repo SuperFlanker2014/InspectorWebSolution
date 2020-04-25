@@ -311,7 +311,7 @@ namespace InspectorWeb.Controllers
 	}
 
 	[Route("api/data/DirUsers")]
-	//[Authorize(Roles = "Admin")]
+	[Authorize(Roles = "Admin")]
 	public class DirUsersDataController : BaseDataController<DirUsers>
 	{
 		public DirUsersDataController(InspectorWebDBContext dataContext, IMapper mapper) : base(dataContext, mapper)

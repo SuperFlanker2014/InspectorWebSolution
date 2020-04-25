@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
@@ -19,7 +20,15 @@ namespace InspectorWeb
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-            .UseUrls("http://*:80;https://*:81")//https://hostname:81
+            .UseUrls("http://*:8080;https://*:4443")
+            //.UseKestrel(options =>
+            //{
+            //    options.Listen(IPAddress.Any, 80);         // http:*:80
+            //    options.Listen(IPAddress.Any, 443, listenOptions =>
+            //    {
+            //        listenOptions.UseHttps("certificate.pfx", "password");
+            //    });
+            //})
             .UseKestrel()
             .UseContentRoot(Directory.GetCurrentDirectory())
             .UseIISIntegration()

@@ -69,7 +69,9 @@ namespace InspectorWeb.Controllers
             var view = new DocsExaminationTaskViewModel
             {
                 Number = numberQuery.Any() ? numberQuery.Max(d => d.Number) + 1 : 1,
-                Date = DateTime.Today.ToString(DocsExaminationTaskViewModel.DateFormat)
+                Date = DateTime.Today.ToString(DocsExaminationTaskViewModel.DateFormat),
+                Ciphers = "[]",
+                Examinations = "[]"
             };
 
             return View(view);

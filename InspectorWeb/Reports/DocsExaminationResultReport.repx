@@ -247,13 +247,13 @@
             </Item1>
             <Item2 Ref="131" ControlType="XRLabel" Name="label3" TextFormatString="№ {0}" CanGrow="false" TextAlignment="TopCenter" SizeF="208.33,20" LocationFloat="131.25, 22.9999866" Font="Times New Roman, 10pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" BorderWidth="1">
               <ExpressionBindings>
-                <Item1 Ref="132" EventName="BeforePrint" PropertyName="Text" Expression="[NumberText]" />
+                <Item1 Ref="132" EventName="BeforePrint" PropertyName="Text" Expression="[ProtocolNumberText]" />
               </ExpressionBindings>
               <StylePriority Ref="133" UseFont="false" />
             </Item2>
-            <Item3 Ref="134" ControlType="XRLabel" Name="label4" TextFormatString="от {0:dd.MM.yyyy}" CanGrow="false" TextAlignment="TopCenter" SizeF="208.33,20" LocationFloat="424.2414, 22.9999542" Font="Times New Roman, 10pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" BorderWidth="1">
+            <Item3 Ref="134" ControlType="XRLabel" Name="label4" TextFormatString="от {0}" CanGrow="false" TextAlignment="TopCenter" SizeF="208.33,20" LocationFloat="424.2414, 22.9999542" Font="Times New Roman, 10pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" BorderWidth="1">
               <ExpressionBindings>
-                <Item1 Ref="135" EventName="BeforePrint" PropertyName="Text" Expression="[Date]" />
+                <Item1 Ref="135" EventName="BeforePrint" PropertyName="Text" Expression="[ProtocolDateText]" />
               </ExpressionBindings>
               <StylePriority Ref="136" UseFont="false" />
             </Item3>

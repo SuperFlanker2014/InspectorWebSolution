@@ -220,6 +220,12 @@
     <None Include="wwwroot\lib_manual\xtrareportsjs\README.md" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="certificate.pfx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 
 </Project>

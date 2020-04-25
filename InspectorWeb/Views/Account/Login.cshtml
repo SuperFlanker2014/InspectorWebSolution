@@ -1,4 +1,6 @@
-﻿@{
+﻿@model InspectorWeb.ViewModels.LoginViewModel
+
+@{
     ViewData["Title"] = "Вход в систему";
     Layout = null;
 }
@@ -26,6 +28,7 @@
             <div class="col-md-4"></div>
             <div class="col-md-4">
                 <h2><strong>Войдите в систему</strong></h2><br />
+                <span asp-validation-for="Error" class="text-danger"></span>
                 <form asp-action="login" method="post">
                     <div class="form-group">
                         <label>Логин</label>
