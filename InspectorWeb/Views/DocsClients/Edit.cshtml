@@ -1,6 +1,6 @@
 ﻿@model InspectorWeb.ModelsDB.DocsClients
 
-@{    
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -8,16 +8,16 @@
 
 @section styles
 {
-<link href="~/lib/bootstrap-combobox/css/bootstrap-combobox.css" rel="stylesheet">    
-<link href="~/css/site-forms.css" rel="stylesheet">
+    <link href="~/lib/bootstrap-combobox/css/bootstrap-combobox.min.css" rel="stylesheet">
+    <link href="~/css/site-forms.css" rel="stylesheet">
 }
 
 @section scripts {
-    <script src="~/lib/bootstrap-combobox/js/bootstrap-combobox.js"></script>
-    <script src="~/lib/jquery.maskedinput/dist/jquery.maskedinput.min.js"></script>
+    <script src="~/lib/bootstrap-combobox/js/bootstrap-combobox.min.js"></script>
+    <script src="~/lib/jquery.maskedinput/jquery.maskedinput.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('.select-autocomplete').combobox();
+            $('.select2-autocomplete').select2();
             $(".phone").mask("+9 (999) 9999999");
             $(".bank-account").mask("99999999999999999999");
             $(".kpp").mask("999999999");
@@ -74,7 +74,7 @@
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <label asp-for="BankGuid" class="input-group-addon"></label>
-                                    <select asp-for="BankGuid" class="form-control select-autocomplete" asp-items="ViewBag.BankGuid"></select>
+                                    <select asp-for="BankGuid" class="form-control select2-autocomplete" asp-items="ViewBag.BankGuid"></select>
                                 </div>
                                 <div class="alert alert-danger nomarginbottom" role="alert" style="display:
                                     @(ViewData.ModelState.GetFieldValidationState("BankGuid") == ModelValidationState.Invalid ? "block" : "none" );">
@@ -145,14 +145,14 @@
                             <div class="col-md-5">
                                 <div class="input-group">
                                     <label asp-for="RegionGuid" class="input-group-addon"></label>
-                                    <select asp-for="RegionGuid" class="form-control select-autocomplete" asp-items="ViewBag.RegionGuid"></select>
+                                    <select asp-for="RegionGuid" class="form-control select2-autocomplete" asp-items="ViewBag.RegionGuid"></select>
                                 </div>
                                 <span asp-validation-for="RegionGuid" class="text-danger"></span>
                             </div>
                             <div class="col-md-4">
                                 <div class="input-group">
                                     <label asp-for="RegionRayonGuid" class="input-group-addon"></label>
-                                    <select asp-for="RegionRayonGuid" class="form-control select-autocomplete" asp-items="ViewBag.RegionRayonGuid"></select>
+                                    <select asp-for="RegionRayonGuid" class="form-control select2-autocomplete" asp-items="ViewBag.RegionRayonGuid"></select>
                                 </div>
                                 <span asp-validation-for="RegionRayonGuid" class="text-danger"></span>
                             </div>

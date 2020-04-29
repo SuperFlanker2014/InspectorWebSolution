@@ -9,6 +9,7 @@ using InspectorWeb.ModelsDB;
 using InspectorWeb.ViewModels;
 using InspectorWeb.Classes;
 using InspectorWeb.Classes.Metadata;
+using System.Security.Claims;
 
 namespace InspectorWeb.Controllers
 {
@@ -31,20 +32,22 @@ namespace InspectorWeb.Controllers
 				new DirectoryProperty("inn", directoryClass.DisplayName("Inn"), "text")
 			};
 
+            var isAdmin = User.Claims.First(c => c.Type == ClaimTypes.Role).Value == "Admin";
+
 			return View(new PlainDirectoryModel()
 			{
 				DirectoryName = "DocsClients",
 				Properties = properties,
-				//Access = DirectoryAccessRights.Delete,// | DirectoryAccessRights.Edit// | DirectoryAccessRights.Insert
-				//HeaderButtons = new List<CustomControlButton>
-				//{
-				//	new CustomControlButton("/DocsClients/Create/", "Добавить", "jsgrid-button jsgrid-mode-button jsgrid-insert-mode-button")
-				//},
-				//ItemButtons = new List<CustomControlButton>
-				//{ 
-				//	new CustomControlButton("/DocsClients/Edit/", "Изменить", "jsgrid-button jsgrid-edit-button")
-				//}				 
-			});			
+                Access = DirectoryAccessRights.Delete,
+                HeaderButtons = new List<CustomControlButton>
+                {
+                    new CustomControlButton("/DocsClients/Create/", "Добавить", "jsgrid-button jsgrid-mode-button jsgrid-insert-mode-button")
+                },
+                ItemButtons = new List<CustomControlButton>
+                {
+                    new CustomControlButton("/DocsClients/Edit/", "Изменить", "jsgrid-button jsgrid-edit-button")
+                }
+            });			
         }
 
         public async Task<IActionResult> Details(Guid? id)

@@ -21,6 +21,7 @@ namespace InspectorWeb.Reports {
             this.DetailReport = reportInitializer.GetControl<DevExpress.XtraReports.UI.DetailReportBand>("DetailReport");
             this.ReportHeader = reportInitializer.GetControl<DevExpress.XtraReports.UI.ReportHeaderBand>("ReportHeader");
             this.DetailReport1 = reportInitializer.GetControl<DevExpress.XtraReports.UI.DetailReportBand>("DetailReport1");
+            this.PageFooter = reportInitializer.GetControl<DevExpress.XtraReports.UI.PageFooterBand>("PageFooter");
             this.Detail = reportInitializer.GetControl<DevExpress.XtraReports.UI.DetailBand>("Detail");
             this.ReportHeader1 = reportInitializer.GetControl<DevExpress.XtraReports.UI.ReportHeaderBand>("ReportHeader1");
             this.ReportFooter = reportInitializer.GetControl<DevExpress.XtraReports.UI.ReportFooterBand>("ReportFooter");
@@ -79,10 +80,10 @@ namespace InspectorWeb.Reports {
             this.tableCell49 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRTableCell>("tableCell49");
             this.tableCell50 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRTableCell>("tableCell50");
             this.tableCell51 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRTableCell>("tableCell51");
+            this.richText16 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText16");
             this.table4 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRTable>("table4");
             this.label3 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label3");
             this.label4 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label4");
-            this.label1 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label1");
             this.tableRow7 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRTableRow>("tableRow7");
             this.tableCell40 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRTableCell>("tableCell40");
             this.tableCell41 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRTableCell>("tableCell41");
@@ -90,6 +91,7 @@ namespace InspectorWeb.Reports {
             this.tableCell43 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRTableCell>("tableCell43");
             this.tableCell44 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRTableCell>("tableCell44");
             this.tableCell46 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRTableCell>("tableCell46");
+            this.pageInfo1 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRPageInfo>("pageInfo1");
 
             // Data Sources
             this.objectDataSource1 = reportInitializer.GetDataSource<DevExpress.DataAccess.ObjectBinding.ObjectDataSource>("objectDataSource1");
@@ -100,6 +102,7 @@ namespace InspectorWeb.Reports {
         private DevExpress.XtraReports.UI.DetailReportBand DetailReport;
         private DevExpress.XtraReports.UI.ReportHeaderBand ReportHeader;
         private DevExpress.XtraReports.UI.DetailReportBand DetailReport1;
+        private DevExpress.XtraReports.UI.PageFooterBand PageFooter;
         private DevExpress.XtraReports.UI.DetailBand Detail;
         private DevExpress.XtraReports.UI.ReportHeaderBand ReportHeader1;
         private DevExpress.XtraReports.UI.ReportFooterBand ReportFooter;
@@ -159,10 +162,10 @@ namespace InspectorWeb.Reports {
         private DevExpress.XtraReports.UI.XRTableCell tableCell49;
         private DevExpress.XtraReports.UI.XRTableCell tableCell50;
         private DevExpress.XtraReports.UI.XRTableCell tableCell51;
+        private DevExpress.XtraReports.UI.XRRichText richText16;
         private DevExpress.XtraReports.UI.XRTable table4;
         private DevExpress.XtraReports.UI.XRLabel label3;
         private DevExpress.XtraReports.UI.XRLabel label4;
-        private DevExpress.XtraReports.UI.XRLabel label1;
         private DevExpress.XtraReports.UI.XRTableRow tableRow7;
         private DevExpress.XtraReports.UI.XRTableCell tableCell40;
         private DevExpress.XtraReports.UI.XRTableCell tableCell41;
@@ -170,5 +173,6 @@ namespace InspectorWeb.Reports {
         private DevExpress.XtraReports.UI.XRTableCell tableCell43;
         private DevExpress.XtraReports.UI.XRTableCell tableCell44;
         private DevExpress.XtraReports.UI.XRTableCell tableCell46;
+        private DevExpress.XtraReports.UI.XRPageInfo pageInfo1;
     }
 }
