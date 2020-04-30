@@ -48,12 +48,13 @@ namespace InspectorWeb.Controllers
 
 			var dataContextType = typeof(InspectorWebDBContext);
 
-			//var metaDataType = Assembly.GetExecutingAssembly().GetType(directoryClass.FullName + "+MetaData");
+			var metaDataType = Assembly.GetExecutingAssembly().GetType(directoryClass.FullName + "+MetaData");
 
 			var properties1 = directoryClass.GetProperties()
 				.Where(p => 
 					TypeSelector(p.PropertyType) != null 
 					&& p.CustomAttributes.All(ca => ca.AttributeType != typeof(NotMappedAttribute))
+					&& (metaDataType.GetProperties().FirstOrDefault(mp => mp.Name == p.Name)?.CustomAttributes?.All(ca => ca.AttributeType != typeof(NotMappedAttribute)) ?? true)
 					)
 				.Select(p => new Tuple<string, string, Type, string>(Char.ToLower(p.Name[0]) + p.Name.Substring(1), TypeSelector(p.PropertyType), p.PropertyType, p.Name))
 				.ToList();

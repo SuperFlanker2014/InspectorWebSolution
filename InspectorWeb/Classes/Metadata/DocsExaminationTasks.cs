@@ -69,7 +69,14 @@ namespace InspectorWeb.ModelsDB
 					.Select(d => d.Cipher?.Substring(3))
 					.ToList();
 
-				return $"{this.Author?.OrgGu?.RegionNumber}-{this.Author?.FilialNumber}-{ciphers.FirstOrDefault()}-{ciphers.LastOrDefault()}";
+				if (ciphers.Count == 1)
+				{
+					return $"{this.Author?.OrgGu?.RegionNumber}-{this.Author?.FilialNumber}-{ciphers.FirstOrDefault()}";
+				}
+				else
+				{
+					return $"{this.Author?.OrgGu?.RegionNumber}-{this.Author?.FilialNumber}-{ciphers.FirstOrDefault()}-{ciphers.LastOrDefault()}";
+				}
 			}
 		}
 	}

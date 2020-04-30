@@ -72,13 +72,13 @@ namespace InspectorWeb
 
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 		{
-			if (env.IsDevelopment())
+		//	if (env.IsDevelopment())
+		//	{
+		//		app.UseDeveloperExceptionPage();
+		//	}
+		//	else
 			{
-				app.UseDeveloperExceptionPage();
-			}
-			else
-			{
-				app.UseExceptionHandler("/error");
+				app.UseExceptionHandler("/Common/Error");
 			}
 
 			//app.UseHttpsRedirection();

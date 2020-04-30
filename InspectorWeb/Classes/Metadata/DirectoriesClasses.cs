@@ -489,7 +489,7 @@ namespace InspectorWeb.ModelsDB
 			[DisplayName("Лаборатория")] public DirLaboratories Laboratory { get; set; }
 			[DisplayName("Организация")] public DirOrganizations OrgGu { get; set; }
 			[DisplayName("Логин")] public string Login { get; set; }
-			[DisplayName("Пароль")] public string PasswordHash { get; set; }
+			[NotMapped] public string PasswordHash { get; set; }
 			[DisplayName("Номер филиала")] public string FilialNumber { get; set; }
 			[DisplayName("Должность и имя")] public string NameWithTitle { get; set; }
 		}

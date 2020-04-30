@@ -20,6 +20,11 @@ namespace InspectorWeb
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+            //.ConfigureLogging(logging =>
+            //{
+            //    logging.ClearProviders();
+            //    logging.AddProvider();
+            //})
             .UseUrls("http://*:8080;https://*:4443")
             //.UseKestrel(options =>
             //{

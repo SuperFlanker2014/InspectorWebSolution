@@ -1007,7 +1007,7 @@ namespace InspectorWeb.ModelsDB
                     .IsRequired()
                     .HasColumnName("password_hash")
                     .HasMaxLength(100)
-                    .HasDefaultValueSql("((757602046))");
+                    .HasDefaultValueSql("(N'I2uzfR1PyNB3qujyRKe/fvFvXQzylgU+UUIARcpeLkI=')");
 
                 entity.HasOne(d => d.Laboratory)
                     .WithMany(p => p.DirUsers)
