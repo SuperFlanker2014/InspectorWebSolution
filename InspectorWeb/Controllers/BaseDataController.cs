@@ -27,7 +27,7 @@ namespace InspectorWeb.Controllers
 		}
 
 		[HttpGet]
-		public object Get()
+		public virtual object Get()
 		{
 			var properties = typeof(T).GetProperties();
 
@@ -128,7 +128,7 @@ namespace InspectorWeb.Controllers
 		}
 
 		[HttpPost]
-		public object Post(T item)
+		public virtual object Post(T item)
 		{
 			item.Guid = Guid.NewGuid();
 			DataContext.Set<T>().Add(item);
@@ -146,7 +146,7 @@ namespace InspectorWeb.Controllers
 		}
 
 		[HttpPut("{id}")]
-		public object Put(Guid id, T editedItem)
+		public virtual object Put(Guid id, T editedItem)
 		{
 			var item = DataContext.Set<T>().Find(id);
 
@@ -170,7 +170,7 @@ namespace InspectorWeb.Controllers
 		}
 
 		[HttpDelete("{id}")]
-		public object Delete(Guid id)
+		public virtual object Delete(Guid id)
 		{
 			T item = DataContext.Set<T>().Find(id);
 

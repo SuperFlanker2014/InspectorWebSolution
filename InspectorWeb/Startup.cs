@@ -15,6 +15,8 @@ using InspectorWeb.ModelsDB;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Diagnostics;
+using Newtonsoft.Json;
 
 namespace InspectorWeb
 {
@@ -24,6 +26,8 @@ namespace InspectorWeb
 
 		public Startup(IConfiguration configuration)
 		{
+			Logger.Configure();
+			Logger.Info("Startup started");
 			Configuration = configuration;
 		}
 
@@ -72,13 +76,34 @@ namespace InspectorWeb
 
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 		{
-		//	if (env.IsDevelopment())
-		//	{
-		//		app.UseDeveloperExceptionPage();
-		//	}
-		//	else
+			//if (env.IsDevelopment())
+			//{
+			//	app.UseDeveloperExceptionPage();
+			//}
+			//else
 			{
-				app.UseExceptionHandler("/Common/Error");
+				app.UseExceptionHandler(a => a.Run(async context =>
+				{
+					var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>();
+					var exception = exceptionHandlerPathFeature.Error;
+
+					var msg = $"{context.Request.Path.Value}\n{context.Request.QueryString.ToString()}";
+					Logger.Error(msg, exception);
+
+					var result = JsonConvert.SerializeObject(new { error = exception.Message });
+					context.Response.ContentType = "application/json";
+					await context.Response.WriteAsync(result);
+
+					//var view = new ErrorViewModel
+					//{
+					//	RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+					//	StackTrace = exceptionHandlerPathFeature.Error.StackTrace,
+					//	Request = HttpContext.Request.QueryString.ToString(),
+					//	Exception = exceptionHandlerPathFeature.Error.Message
+					//};
+
+					//return RedirectToAction("Login");
+				}));
 			}
 
 			//app.UseHttpsRedirection();

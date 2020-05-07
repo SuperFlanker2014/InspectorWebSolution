@@ -9,5 +9,9 @@ namespace InspectorWeb.ViewModels
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
 
         public string StackTrace { get; set; }
+
+        public string Request { get; set; }
+
+        public string Exception { get; set; }
     }
 }

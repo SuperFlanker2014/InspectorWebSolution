@@ -3,6 +3,7 @@ using AutoMapper;
 using InspectorWeb.ModelsDB;
 using InspectorWeb.Classes.Metadata;
 using Microsoft.AspNetCore.Authorization;
+using System;
 
 namespace InspectorWeb.Controllers
 {
@@ -310,12 +311,32 @@ namespace InspectorWeb.Controllers
 		}
 	}
 
-	[Route("api/data/DirUsers")]
-	[Authorize(Roles = "Admin")]
+	[Route("api/data/DirUsers")]	
 	public class DirUsersDataController : BaseDataController<DirUsers>
 	{
 		public DirUsersDataController(InspectorWebDBContext dataContext, IMapper mapper) : base(dataContext, mapper)
 		{
+		}
+
+		[Authorize(Roles = "Admin")]
+		[HttpPost]
+		public override object Post(DirUsers item)
+		{
+			return base.Post(item);
+		}
+
+		[Authorize(Roles = "Admin")]
+		[HttpPut("{id}")]
+		public override object Put(Guid id, DirUsers editedItem)
+		{
+			return base.Put(id, editedItem);
+		}
+
+		[Authorize(Roles = "Admin")]
+		[HttpDelete("{id}")]
+		public override object Delete(Guid id)
+		{
+			return base.Delete(id);
 		}
 	}
 

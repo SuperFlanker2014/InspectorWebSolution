@@ -25,6 +25,11 @@ namespace InspectorWeb.Controllers
 
         public IActionResult Login()
         {
+            if (Guid.TryParse(User.FindFirst(claim => claim.Type == System.Security.Claims.ClaimTypes.NameIdentifier)?.Value, out var userGuid))
+            {
+                return RedirectToAction("Index", "DocsExaminationTasks");
+            }
+
             return View();
         }
 

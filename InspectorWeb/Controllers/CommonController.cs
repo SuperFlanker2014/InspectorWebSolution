@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
+using System.Diagnostics;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Diagnostics;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using AutoMapper;
 using InspectorWeb.ModelsDB;
 using InspectorWeb.Classes.Metadata;
-using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
 using InspectorWeb.ViewModels;
-using System.Diagnostics;
-using Microsoft.AspNetCore.Diagnostics;
 
 namespace InspectorWeb.Controllers
 {
@@ -24,22 +27,56 @@ namespace InspectorWeb.Controllers
 		{
 			var exceptionHandlerPathFeature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
 
-			//if (exceptionHandlerPathFeature?.Error is FileNotFoundException)
+			//string reqStr;
+			//try
 			//{
-			//	ExceptionMessage = "File error thrown";
+			//	//reqStr = JsonConvert.SerializeObject(HttpContext.Request,
+			//	//Formatting.Indented, new JsonSerializerSettings
+			//	//{
+			//	//	ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+			//	//	ContractResolver = new IgnoreErrorPropertiesResolver()
+			//	//});
 			//}
-			//if (exceptionHandlerPathFeature?.Path == "/index")
+			//catch (Exception ex)
 			//{
-			//	ExceptionMessage += " from home page";
-			//}
+			//	throw;
+			//}			
 
 			var view = new ErrorViewModel
 			{
 				RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
-				StackTrace = exceptionHandlerPathFeature.Error.StackTrace
+				StackTrace = exceptionHandlerPathFeature.Error.StackTrace,
+				Request = HttpContext.Request.QueryString.ToString(),
+				Exception = exceptionHandlerPathFeature.Error.Message
 			};
 
 			return View(view);
 		}
 	}
+
+	//public class IgnoreErrorPropertiesResolver : DefaultContractResolver
+	//{
+
+	//	protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
+	//	{
+	//		JsonProperty property = base.CreateProperty(member, memberSerialization);
+
+	//		if (new string[]
+	//		{
+	//			"InputStream",
+	//			"Filter",
+	//			"Length",
+	//			"Position",
+	//			"ReadTimeout",
+	//			"WriteTimeout",
+	//			"LastActivityDate",
+	//			"LastUpdatedDate",
+	//			"Session"
+	//		}.Contains(property.PropertyName))
+	//		{
+	//			property.Ignored = true;
+	//		}
+	//		return property;
+	//	}
+	//}
 }

@@ -18,7 +18,14 @@ namespace InspectorWeb.Controllers
 		{
 			get
 			{
-				return Guid.Parse(User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier)?.Value);
+				if (Guid.TryParse(User.FindFirst(claim => claim.Type == System.Security.Claims.ClaimTypes.NameIdentifier)?.Value, out var userGuid))
+				{
+					return userGuid;
+				}
+				else
+				{
+					return Guid.Empty;
+				}
 			}
 		}
 	}
