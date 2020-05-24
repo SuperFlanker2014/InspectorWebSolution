@@ -44,6 +44,7 @@ namespace InspectorWeb.ViewModels
 			ExaminationFoundation = docsExaminationTask.ExaminationFoundation;
 			ExaminationAssignment = docsExaminationTask.ExaminationAssignment;
 			Comments = docsExaminationTask.Comments;
+			Opinions = docsExaminationTask.Opinions;
 
 			TaskExaminations = docsExaminationTask.DocsExaminationTasksExaminations.Select(m =>
 				new DocsExaminationTasksExaminationsViewModel()
@@ -122,6 +123,8 @@ namespace InspectorWeb.ViewModels
 		public string ExaminationAssignment { get; set; }
 		[DisplayName("Примечание")]
 		public string Comments { get; set; }
+		[DisplayName("Мнения и интерпретации")]
+		public string Opinions { get; set; }
 
 		public string Examinations { get; set; }
 		public DocsExaminationTasksExaminationsViewModel[] TaskExaminations

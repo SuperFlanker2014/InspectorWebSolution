@@ -1719,6 +1719,10 @@ namespace InspectorWeb.ModelsDB
 
                 entity.Property(e => e.Number).HasColumnName("number");
 
+                entity.Property(e => e.Opinions)
+                    .HasColumnName("opinions")
+                    .HasMaxLength(1000);
+
                 entity.Property(e => e.OriginCountryId).HasColumnName("originCountryId");
 
                 entity.Property(e => e.SafePackage)

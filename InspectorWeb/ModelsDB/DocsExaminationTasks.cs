@@ -33,6 +33,7 @@ namespace InspectorWeb.ModelsDB
         public string ExaminationFoundation { get; set; }
         public string ExaminationAssignment { get; set; }
         public string Comments { get; set; }
+        public string Opinions { get; set; }
 
         public virtual DirUsers Author { get; set; }
         public virtual DocsClients Client { get; set; }

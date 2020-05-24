@@ -80,7 +80,7 @@ namespace InspectorWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-            [Bind("ClientId,Number,Date,Title,CountMassVolume,SafePackage,DateReceipt,DateSampling,HasAppendix,ShouldReturn,OriginCountryId,DestinationCountryId,SamplingStandard,SamplingPlace,SamplingActorId,SamplingProduction,ExaminationLaboratoryId,Examinations,Ciphers,ExaminationFoundation,ExaminationAssignment,Comments")]
+            [Bind("ClientId,Number,Date,Title,CountMassVolume,SafePackage,DateReceipt,DateSampling,HasAppendix,ShouldReturn,OriginCountryId,DestinationCountryId,SamplingStandard,SamplingPlace,SamplingActorId,SamplingProduction,ExaminationLaboratoryId,Examinations,Ciphers,ExaminationFoundation,ExaminationAssignment,Comments,Opinions")]
             DocsExaminationTaskViewModel viewModel)
         {
             if (ModelState.IsValid)
@@ -151,7 +151,7 @@ namespace InspectorWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id,
-            [Bind("Guid,AuthorId,ClientId,Number,Date,Title,CountMassVolume,SafePackage,DateReceipt,DateSampling,HasAppendix,ShouldReturn,OriginCountryId,DestinationCountryId,SamplingStandard,SamplingPlace,SamplingActorId,SamplingProduction,ExaminationLaboratoryId,Examinations,Ciphers,ExaminationFoundation,ExaminationAssignment,Comments")]
+            [Bind("Guid,AuthorId,ClientId,Number,Date,Title,CountMassVolume,SafePackage,DateReceipt,DateSampling,HasAppendix,ShouldReturn,OriginCountryId,DestinationCountryId,SamplingStandard,SamplingPlace,SamplingActorId,SamplingProduction,ExaminationLaboratoryId,Examinations,Ciphers,ExaminationFoundation,ExaminationAssignment,Comments,Opinions")]
             DocsExaminationTaskViewModel viewModel)
         {
             if (id == null | id != viewModel.Guid)

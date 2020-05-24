@@ -113,7 +113,7 @@
             <Item1 Ref="61" EventName="BeforePrint" PropertyName="Text" Expression="[NumberText]" />
           </ExpressionBindings>
         </Item6>
-        <Item7 Ref="62" ControlType="XRLabel" Name="Text5" TextFormatString="от {0:dd.MM.yyyy}" CanGrow="false" TextAlignment="TopCenter" SizeF="208.333328,25" LocationFloat="558.6667, 101.041664" Font="Times New Roman, 12pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" BorderWidth="1">
+        <Item7 Ref="62" ControlType="XRLabel" Name="Text5" TextFormatString="от {0:dd.MM.yyyy} г" CanGrow="false" TextAlignment="TopCenter" SizeF="208.333328,25" LocationFloat="558.6667, 101.041664" Font="Times New Roman, 12pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" BorderWidth="1">
           <ExpressionBindings>
             <Item1 Ref="63" EventName="BeforePrint" PropertyName="Text" Expression="[Date]" />
           </ExpressionBindings>
@@ -209,7 +209,7 @@
               </ExpressionBindings>
               <StylePriority Ref="108" UseFont="false" />
             </Item3>
-            <Item4 Ref="109" ControlType="XRLabel" Name="label4" TextFormatString="от {0:dd.MM.yyyy}" CanGrow="false" TextAlignment="TopCenter" SizeF="208.33,20" LocationFloat="424.2414, 42.7082176" Font="Times New Roman, 10pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" BorderWidth="1">
+            <Item4 Ref="109" ControlType="XRLabel" Name="label4" TextFormatString="от {0:dd.MM.yyyy} г" CanGrow="false" TextAlignment="TopCenter" SizeF="208.33,20" LocationFloat="424.2414, 42.7082176" Font="Times New Roman, 10pt" ForeColor="Black" BackColor="White" Padding="2,2,0,0,100" BorderColor="Black" Borders="None" BorderWidth="1">
               <ExpressionBindings>
                 <Item1 Ref="110" EventName="BeforePrint" PropertyName="Text" Expression="[Date]" />
               </ExpressionBindings>
@@ -221,40 +221,40 @@
     </Item6>
     <Item7 Ref="112" ControlType="DetailReportBand" Name="DetailReport2" Level="1">
       <Bands>
-        <Item1 Ref="113" ControlType="DetailBand" Name="Detail2" HeightF="152.625153">
+        <Item1 Ref="113" ControlType="DetailBand" Name="Detail2" HeightF="272.4168">
           <Controls>
-            <Item1 Ref="114" ControlType="XRTable" Name="table3" SizeF="766.999939,102.708374" LocationFloat="0, 49.9167747" Padding="2,2,0,0,100" Borders="All">
+            <Item1 Ref="114" ControlType="XRTable" Name="table3" SizeF="766.999939,222.500031" LocationFloat="0, 49.9167747" Padding="2,2,0,0,100" Borders="All">
               <Rows>
                 <Item1 Ref="115" ControlType="XRTableRow" Name="tableRow4" Weight="1.0641502401137335" TextAlignment="TopCenter" Font="Times New Roman, 10pt, style=Bold">
                   <Cells>
                     <Item1 Ref="116" ControlType="XRTableCell" Name="tableCell22" Weight="0.36766029502641218" Multiline="true" Text="№ п/п" />
-                    <Item2 Ref="117" ControlType="XRTableCell" Name="tableCell23" Weight="1.1976060944844069" Multiline="true" Text="Шифр образца" />
-                    <Item3 Ref="118" ControlType="XRTableCell" Name="tableCell24" Weight="1.434733610489181" Multiline="true" Text="Методика исследования (испытания)" />
-                    <Item4 Ref="119" ControlType="XRTableCell" Name="tableCell25" Weight="1.5038955192255781" Multiline="true" Text="Результат исследований (испытаний)" />
-                    <Item5 Ref="120" ControlType="XRTableCell" Name="tableCell27" Weight="1" Multiline="true" Text="Подпись, ФИО исполнителя" />
-                    <Item6 Ref="121" ControlType="XRTableCell" Name="tableCell28" Weight="1.771171675655101" Multiline="true" Text="Примечание" />
+                    <Item2 Ref="117" ControlType="XRTableCell" Name="tableCell23" Weight="0.72335135042932686" Multiline="true" Text="Шифр образца" />
+                    <Item3 Ref="118" ControlType="XRTableCell" Name="tableCell24" Weight="1.908988354544261" Multiline="true" Text="Методика исследования (испытания)" />
+                    <Item4 Ref="119" ControlType="XRTableCell" Name="tableCell25" Weight="2.0769533832024871" Multiline="true" Text="Результат исследований (испытаний)" />
+                    <Item5 Ref="120" ControlType="XRTableCell" Name="tableCell27" Weight="1.0691624878805106" Multiline="true" Text="Подпись, ФИО исполнителя" />
+                    <Item6 Ref="121" ControlType="XRTableCell" Name="tableCell28" Weight="1.1289513237976814" Multiline="true" Text="Примечание" />
                   </Cells>
                   <StylePriority Ref="122" UseFont="false" UseTextAlignment="false" />
                 </Item1>
                 <Item2 Ref="123" ControlType="XRTableRow" Name="tableRow5" Weight="0.31320817452386618" TextAlignment="TopCenter" Font="Times New Roman, 10pt, style=Bold">
                   <Cells>
                     <Item1 Ref="124" ControlType="XRTableCell" Name="tableCell29" Weight="0.36766029502641218" Multiline="true" Text="1" />
-                    <Item2 Ref="125" ControlType="XRTableCell" Name="tableCell30" Weight="1.19760638394653" Multiline="true" Text="2" />
-                    <Item3 Ref="126" ControlType="XRTableCell" Name="tableCell31" Weight="1.4347333210270579" Multiline="true" Text="3" />
-                    <Item4 Ref="127" ControlType="XRTableCell" Name="tableCell32" Weight="1.5038955192255781" Multiline="true" Text="4" />
-                    <Item5 Ref="128" ControlType="XRTableCell" Name="tableCell34" Weight="1" Multiline="true" Text="5" />
-                    <Item6 Ref="129" ControlType="XRTableCell" Name="tableCell35" Weight="1.771171675655101" Multiline="true" Text="6" />
+                    <Item2 Ref="125" ControlType="XRTableCell" Name="tableCell30" Weight="0.72335135042932608" Multiline="true" Text="2" />
+                    <Item3 Ref="126" ControlType="XRTableCell" Name="tableCell31" Weight="1.9089883545442619" Multiline="true" Text="3" />
+                    <Item4 Ref="127" ControlType="XRTableCell" Name="tableCell32" Weight="2.0769529490093008" Multiline="true" Text="4" />
+                    <Item5 Ref="128" ControlType="XRTableCell" Name="tableCell34" Weight="1.0691624878805106" Multiline="true" Text="5" />
+                    <Item6 Ref="129" ControlType="XRTableCell" Name="tableCell35" Weight="1.1289517579908677" Multiline="true" Text="6" />
                   </Cells>
                   <StylePriority Ref="130" UseFont="false" UseTextAlignment="false" />
                 </Item2>
-                <Item3 Ref="131" ControlType="XRTableRow" Name="tableRow6" Weight="0.483019704746129" TextAlignment="TopCenter" Font="Times New Roman, 10pt, style=Bold">
+                <Item3 Ref="131" ControlType="XRTableRow" Name="tableRow6" Weight="2.6528310072708345" TextAlignment="TopCenter" Font="Times New Roman, 10pt, style=Bold">
                   <Cells>
                     <Item1 Ref="132" ControlType="XRTableCell" Name="tableCell26" Weight="0.36766029502641218" Multiline="true" />
-                    <Item2 Ref="133" ControlType="XRTableCell" Name="tableCell33" Weight="1.19760638394653" Multiline="true" />
-                    <Item3 Ref="134" ControlType="XRTableCell" Name="tableCell36" Weight="1.4347333210270579" Multiline="true" />
-                    <Item4 Ref="135" ControlType="XRTableCell" Name="tableCell37" Weight="1.5038955192255781" Multiline="true" />
-                    <Item5 Ref="136" ControlType="XRTableCell" Name="tableCell38" Weight="1" Multiline="true" />
-                    <Item6 Ref="137" ControlType="XRTableCell" Name="tableCell39" Weight="1.771171675655101" Multiline="true" />
+                    <Item2 Ref="133" ControlType="XRTableCell" Name="tableCell33" Weight="0.72335135042932608" Multiline="true" />
+                    <Item3 Ref="134" ControlType="XRTableCell" Name="tableCell36" Weight="1.9089883545442619" Multiline="true" />
+                    <Item4 Ref="135" ControlType="XRTableCell" Name="tableCell37" Weight="2.0769517911608046" Multiline="true" />
+                    <Item5 Ref="136" ControlType="XRTableCell" Name="tableCell38" Weight="1.0691636457290068" Multiline="true" />
+                    <Item6 Ref="137" ControlType="XRTableCell" Name="tableCell39" Weight="1.1289517579908677" Multiline="true" />
                   </Cells>
                   <StylePriority Ref="138" UseFont="false" UseTextAlignment="false" />
                 </Item3>

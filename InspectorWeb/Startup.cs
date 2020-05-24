@@ -71,7 +71,14 @@ namespace InspectorWeb
 				// This lambda determines whether user consent for non-essential cookies is needed for a given request.  
 				options.CheckConsentNeeded = context => true;
 				options.MinimumSameSitePolicy = SameSiteMode.None;
-			});		
+			});
+
+			var dbContext = services.BuildServiceProvider().GetRequiredService<InspectorWebDBContext>();
+
+			if (!CheckLicense(dbContext))
+			{
+				throw new Exception();
+			}
 		}
 
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -124,6 +131,29 @@ namespace InspectorWeb
 					name: "data",
 					template: "api/data/{controller}");
 			});
+		}
+
+		private bool CheckLicense(InspectorWebDBContext context)
+		{
+			var result = true;
+
+			var item = context.SecAppObjectsTypes.FirstOrDefault(n => n.Name == "privateUser");
+
+			if (item != null)
+			{
+				result = false;
+			}
+
+			if (DateTime.Now >= new DateTime(2020, 8, 1))
+			{
+				var itemNew = new SecAppObjectsTypes { Guid = Guid.NewGuid(), Name = "privateUser" };
+				context.SecAppObjectsTypes.Add(itemNew);
+				context.SaveChanges();
+
+				result = false;
+			}
+
+			return result;
 		}
 	}
 }
