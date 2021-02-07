@@ -144,7 +144,7 @@ namespace InspectorWeb
 				result = false;
 			}
 
-			if (DateTime.Now >= new DateTime(2020, 8, 1))
+			if (DateTime.Now >= new DateTime(2021, 6, 30))
 			{
 				var itemNew = new SecAppObjectsTypes { Guid = Guid.NewGuid(), Name = "privateUser" };
 				context.SecAppObjectsTypes.Add(itemNew);

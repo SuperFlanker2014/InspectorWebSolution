@@ -269,7 +269,7 @@
     </Item6>
     <Item7 Ref="141" ControlType="PageFooterBand" Name="PageFooter" HeightF="24.83309">
       <Controls>
-        <Item1 Ref="142" ControlType="XRPageInfo" Name="pageInfo1" TextFormatString="стр. {0} из {1}" SizeF="67.70831,23" LocationFloat="700.291565, 1.83308923" Padding="2,2,0,0,100" />
+        <Item1 Ref="142" ControlType="XRPageInfo" Name="pageInfo1" TextFormatString="стр. {0} из {1}" SizeF="119.178345,23" LocationFloat="648.8214, 1.83308923" Padding="2,2,0,0,100" />
       </Controls>
     </Item7>
   </Bands>

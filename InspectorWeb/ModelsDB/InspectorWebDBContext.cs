@@ -1695,7 +1695,7 @@ namespace InspectorWeb.ModelsDB
 
                 entity.Property(e => e.CountMassVolume)
                     .HasColumnName("countMassVolume")
-                    .HasMaxLength(500);
+                    .HasMaxLength(4000);
 
                 entity.Property(e => e.Date).HasColumnName("date");
 
