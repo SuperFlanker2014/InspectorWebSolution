@@ -60,7 +60,7 @@ $(function () {
                 @foreach (var customControlButton in Model.ItemButtons)
                 {
                 <text>
-                customButtons = customButtons.add($("<a href='@customControlButton.Link" + item.guid + "'><input class='@customControlButton.Classes' title='@customControlButton.Title' type='button'></a>"));
+                customButtons = customButtons.add($("<a href='@customControlButton.Link" + item.guid + "' target='_blank'><input class='@customControlButton.Classes' title='@customControlButton.Title' type='button'></a>"));
                 </text>
                 }
                 return customButtons.add(result);
