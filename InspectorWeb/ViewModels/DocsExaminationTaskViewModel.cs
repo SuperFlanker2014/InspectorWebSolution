@@ -98,7 +98,7 @@ namespace InspectorWeb.ViewModels
 
 		[DisplayName("Продукция")]
 		public string SamplingProduction { get; set; }
-		[DisplayName("Наименование образца")]
+		[DisplayName("Наименование образца"), MaxLength(200)]
 		public string Title { get; set; }
 		[DisplayName("Количество/вес/объём образца")]
 		public string CountMassVolume { get; set; }

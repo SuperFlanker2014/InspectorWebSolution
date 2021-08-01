@@ -77,7 +77,7 @@ namespace InspectorWeb
 
 			if (!CheckLicense(dbContext))
 			{
-				throw new Exception();
+				throw new Exception("license is outdated");
 			}
 		}
 
@@ -144,7 +144,7 @@ namespace InspectorWeb
 				result = false;
 			}
 
-			if (DateTime.Now >= new DateTime(2021, 6, 30))
+			if (DateTime.Now >= new DateTime(2021, 10, 31))
 			{
 				var itemNew = new SecAppObjectsTypes { Guid = Guid.NewGuid(), Name = "privateUser" };
 				context.SecAppObjectsTypes.Add(itemNew);
