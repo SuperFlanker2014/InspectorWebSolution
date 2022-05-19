@@ -52,6 +52,8 @@ namespace InspectorWeb.Reports {
             this.richText22 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText22");
             this.richText6 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText6");
             this.label5 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label5");
+            this.richText24 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText24");
+            this.richText23 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText23");
             this.richText21 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText21");
             this.richText20 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText20");
             this.richText19 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText19");
@@ -135,6 +137,8 @@ namespace InspectorWeb.Reports {
         private DevExpress.XtraReports.UI.XRRichText richText6;
         private DevExpress.XtraReports.UI.XRLabel label5;
         private DevExpress.DataAccess.ObjectBinding.ObjectDataSource objectDataSource1;
+        private DevExpress.XtraReports.UI.XRRichText richText24;
+        private DevExpress.XtraReports.UI.XRRichText richText23;
         private DevExpress.XtraReports.UI.XRRichText richText21;
         private DevExpress.XtraReports.UI.XRRichText richText20;
         private DevExpress.XtraReports.UI.XRRichText richText19;
