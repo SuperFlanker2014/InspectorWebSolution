@@ -66,7 +66,8 @@ namespace InspectorWeb.ModelsDB
 			{
 				var ciphers = DocsExaminationTasksCiphers?
 					.OrderBy(d => d.Cipher)
-					.Select(d => d.Cipher?.Substring(3))
+					.Select(d => d.Cipher?.Length > 3 ? d.Cipher?.Substring(3) : d.Cipher)
+					.Where(s => !string.IsNullOrEmpty(s))
 					.ToList();
 
 				if (ciphers.Count == 1)
