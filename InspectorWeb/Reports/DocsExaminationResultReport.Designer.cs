@@ -97,6 +97,10 @@ namespace InspectorWeb.Reports {
             this.tableCell46 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRTableCell>("tableCell46");
             this.pageInfo1 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRPageInfo>("pageInfo1");
 
+            // Parameters
+            this.laboratoryDirector = reportInitializer.GetParameter("laboratoryDirector");
+            this.laboratoryDirectorTitle = reportInitializer.GetParameter("laboratoryDirectorTitle");
+
             // Data Sources
             this.objectDataSource1 = reportInitializer.GetDataSource<DevExpress.DataAccess.ObjectBinding.ObjectDataSource>("objectDataSource1");
         }
@@ -182,5 +186,7 @@ namespace InspectorWeb.Reports {
         private DevExpress.XtraReports.UI.XRTableCell tableCell44;
         private DevExpress.XtraReports.UI.XRTableCell tableCell46;
         private DevExpress.XtraReports.UI.XRPageInfo pageInfo1;
+        private DevExpress.XtraReports.Parameters.Parameter laboratoryDirector;
+        private DevExpress.XtraReports.Parameters.Parameter laboratoryDirectorTitle;
     }
 }

@@ -277,10 +277,15 @@ namespace InspectorWeb.Controllers
         {
             var ds = await GetItemForReport(id);
 
+            var settings = await context.Settings.SingleOrDefaultAsync();
+
             var report = new InspectorWeb.Reports.DocsExaminationResultReport
             {
                 DataSource = new List<DocsExaminationTasks> { ds }
             };
+            report.Parameters["laboratoryDirector"].Value = settings.LaboratoryDirector;
+            report.Parameters["laboratoryDirectorTitle"].Value = settings.LaboratoryDirectorTitle;
+            report.RequestParameters = false;
 
             ViewData["Title"] = $"Протокол исследований (испытаний) № {ds.NumberText} от {ds.Date:dd.MM.yyyy} - печать";
 

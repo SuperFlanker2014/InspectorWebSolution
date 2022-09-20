@@ -23,7 +23,7 @@
     "InspectorWeb": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "https://localhost:4443",
+      "launchUrl": "https://localhost:8080",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

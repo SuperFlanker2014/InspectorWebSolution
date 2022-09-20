@@ -1,0 +1,69 @@
+﻿@model InspectorWeb.ViewModels.SettingsViewModel
+
+@{
+    ViewData["Title"] = "Настройки приложения";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using Microsoft.AspNetCore.Mvc.ModelBinding
+
+@section styles
+{
+    <link href="~/lib/bootstrap-combobox/css/bootstrap-combobox.min.css" rel="stylesheet">
+    <link href="~/css/site-forms.css" rel="stylesheet">
+}
+
+@section scripts {
+}
+
+@Html.AntiForgeryToken()
+
+<div class="container">
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">Настройки приложения</div>
+                    <div class="panel-body">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="input-group">
+                                    <label asp-for="LaboratoryDirector" class="input-group-addon"></label>
+                                    <input asp-for="LaboratoryDirector" class="form-control inn" />
+                                </div>
+                                <div class="alert alert-danger nomarginbottom" role="alert" style="display:
+                                    @(ViewData.ModelState.GetFieldValidationState("LaboratoryDirector") == ModelValidationState.Invalid ? "block" : "none" );">
+                                    <span asp-validation-for="LaboratoryDirector" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="input-group">
+                                    <label asp-for="LaboratoryDirectorTitle" class="input-group-addon"></label>
+                                    <input asp-for="LaboratoryDirectorTitle" class="form-control inn" />
+                                </div>
+                                <div class="alert alert-danger nomarginbottom" role="alert" style="display:
+                                    @(ViewData.ModelState.GetFieldValidationState("LaboratoryDirectorTitle") == ModelValidationState.Invalid ? "block" : "none" );">
+                                    <span asp-validation-for="LaboratoryDirectorTitle" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Сохранить" class="btn btn-default" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

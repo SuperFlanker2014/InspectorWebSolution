@@ -9,10 +9,10 @@ namespace InspectorWeb.ViewModels
 		{
 			Access = DirectoryAccessRights.None;
 			HeaderButtons = new List<CustomControlButton>();
-			ItemButtons = new List<CustomControlButton>();			
+			ItemButtons = new List<CustomControlButton>();
 			Properties = new List<DirectoryProperty>();
 			Directories = new List<DirectoryItem>();
-			DirectoryDropdowns = new Dictionary<string, string>();			
+			DirectoryDropdowns = new Dictionary<string, string>();
 		}
 
 		public string DirectoryName { get; set; }

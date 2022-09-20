@@ -1,6 +1,8 @@
 ﻿Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=InspectorWebDB;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir ModelsDB -force
 Scaffold-DbContext "Server=EIBRAGIMOV\SQLDEVELOPER2017;Database=InspectorWebDB;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir ModelsDB -force
-Scaffold-DbContext "Server=localhost;Database=InspectorWebDB;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir ModelsDB -force
+Scaffold-DbContext "Server=localhost\SQLEXPRESS;Database=InspectorWebDB;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir ModelsDB -force
+
+после пересоздания удалить пустой конструктор контекста
 
 удалить пустой конструктор
 

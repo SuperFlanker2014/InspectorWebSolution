@@ -77,13 +77,14 @@ namespace InspectorWeb.ModelsDB
         public virtual DbSet<SecOperations> SecOperations { get; set; }
         public virtual DbSet<SecPermissions> SecPermissions { get; set; }
         public virtual DbSet<SecSubjects> SecSubjects { get; set; }
+        public virtual DbSet<Settings> Settings { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=localhost;Database=InspectorWebDB;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=InspectorWebDB;Trusted_Connection=True;");
             }
         }
 
@@ -1747,7 +1748,7 @@ namespace InspectorWeb.ModelsDB
 
                 entity.Property(e => e.Title)
                     .HasColumnName("title")
-                    .HasMaxLength(100);
+                    .HasMaxLength(200);
 
                 entity.HasOne(d => d.Author)
                     .WithMany(p => p.DocsExaminationTasksAuthor)
@@ -1856,7 +1857,7 @@ namespace InspectorWeb.ModelsDB
 
                 entity.Property(e => e.SampleCiphers)
                     .HasColumnName("sampleCiphers")
-                    .HasMaxLength(100);
+                    .HasMaxLength(300);
 
                 entity.Property(e => e.TaskId).HasColumnName("taskId");
 
@@ -2261,6 +2262,22 @@ namespace InspectorWeb.ModelsDB
                     .WithMany(p => p.SecSubjects)
                     .HasForeignKey(d => d.UserGuid)
                     .HasConstraintName("FK_secSubjects_dirUsers");
+            });
+
+            modelBuilder.Entity<Settings>(entity =>
+            {
+                entity.HasKey(e => e.Guid)
+                    .HasName("PK_Settings_1");
+
+                entity.Property(e => e.Guid)
+                    .HasColumnName("guid")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.LaboratoryDirector)
+                    .IsRequired()
+                    .HasMaxLength(200);
+
+                entity.Property(e => e.LaboratoryDirectorTitle).HasMaxLength(200);
             });
         }
     }
