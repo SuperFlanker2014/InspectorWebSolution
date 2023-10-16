@@ -28,6 +28,7 @@ namespace InspectorWeb.ModelsDB
         public string SamplingProduction { get; set; }
         public Guid? ExaminationLaboratoryId { get; set; }
         public int Number { get; set; }
+        public string NumberText { get; set; }
         public DateTime Date { get; set; }
         public Guid AuthorId { get; set; }
         public string ExaminationFoundation { get; set; }

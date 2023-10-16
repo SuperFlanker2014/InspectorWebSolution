@@ -27,7 +27,7 @@ namespace InspectorWeb.ViewModels
 			SamplingProduction = docsExaminationTask.SamplingProduction;
 			Guid = docsExaminationTask.Guid;
 			AuthorId = docsExaminationTask.AuthorId;
-			Number = docsExaminationTask.Number;
+			NumberText = docsExaminationTask.NumberText;
 			Date = docsExaminationTask.Date.ToString(DateFormat);
 			Title = docsExaminationTask.Title;
 			CountMassVolume = docsExaminationTask.CountMassVolume;
@@ -81,7 +81,7 @@ namespace InspectorWeb.ViewModels
 		public Guid AuthorId { get; set; }
 
 		[DisplayName("Номер")]
-		public virtual int? Number { get; set; }
+		public string NumberText { get; set; }
 		[DisplayName("Дата")]
 		public string Date { get; set; }
 

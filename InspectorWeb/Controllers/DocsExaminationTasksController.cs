@@ -29,7 +29,7 @@ namespace InspectorWeb.Controllers
 
             var properties = new List<DirectoryProperty>
             {
-                new DirectoryProperty("number", directoryClass.DisplayName("Number"), "text"),
+                new DirectoryProperty("numberText", directoryClass.DisplayName("NumberText"), "text"),
                 new DirectoryProperty("date", directoryClass.DisplayName("Date"), "dateField"),
                 new DirectoryProperty("authorId", directoryClass.DisplayName("AuthorId"), "select")
             };
@@ -68,7 +68,7 @@ namespace InspectorWeb.Controllers
 
             var view = new DocsExaminationTaskViewModel
             {
-                Number = numberQuery.Any() ? numberQuery.Max(d => d.Number) + 1 : 1,
+                NumberText = "001",//numberQuery.Any() ? numberQuery.Max(d => d.Number) + 1 : 1,
                 Date = DateTime.Today.ToString(DocsExaminationTaskViewModel.DateFormat),
                 Ciphers = "[]",
                 Examinations = "[]"
@@ -143,7 +143,7 @@ namespace InspectorWeb.Controllers
 
             PutSelectsData(viewModel);
 
-            ViewData["Title"] = $"Задание на исследование #{viewModel.Number} от {viewModel.Date}";
+            ViewData["Title"] = $"Задание на исследование #{viewModel.NumberText} от {viewModel.Date}";
 
             return View(viewModel);
         }
@@ -151,7 +151,7 @@ namespace InspectorWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id,
-            [Bind("Guid,AuthorId,ClientId,Number,Date,Title,CountMassVolume,SafePackage,DateReceipt,DateSampling,HasAppendix,ShouldReturn,OriginCountryId,DestinationCountryId,SamplingStandard,SamplingPlace,SamplingActorId,SamplingProduction,ExaminationLaboratoryId,Examinations,Ciphers,ExaminationFoundation,ExaminationAssignment,Comments,Opinions")]
+            [Bind("Guid,AuthorId,ClientId,NumberText,Date,Title,CountMassVolume,SafePackage,DateReceipt,DateSampling,HasAppendix,ShouldReturn,OriginCountryId,DestinationCountryId,SamplingStandard,SamplingPlace,SamplingActorId,SamplingProduction,ExaminationLaboratoryId,Examinations,Ciphers,ExaminationFoundation,ExaminationAssignment,Comments,Opinions")]
             DocsExaminationTaskViewModel viewModel)
         {
             if (id == null | id != viewModel.Guid)
@@ -254,7 +254,7 @@ namespace InspectorWeb.Controllers
 
             PutSelectsData(viewModel);
 
-            ViewData["Title"] = $"Задание на исследование #{viewModel.Number} от {viewModel.Date}";
+            ViewData["Title"] = $"Задание на исследование #{viewModel.NumberText} от {viewModel.Date}";
 
             return View(viewModel);
         }

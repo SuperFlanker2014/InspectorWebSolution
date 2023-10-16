@@ -15,7 +15,7 @@ namespace InspectorWeb.ModelsDB
 		[DisplayName("Задания на исследование")]
 		public class MetaData
 		{
-			[DisplayName("Номер")] public int? Number { get; set; }
+			[DisplayName("Номер")] public string NumberText { get; set; }
 			[DisplayName("Дата")] public DateTime? Date { get; set; }
 			[DisplayName("Автор")] public Guid? AuthorId { get; set; }
 		}
@@ -26,8 +26,8 @@ namespace InspectorWeb.ModelsDB
 		[NotMapped]
 		public string ShouldReturnX => ShouldReturn.HasValue && ShouldReturn.Value ? "V" : "X";
 
-		[NotMapped]
-		public string NumberText => $"{this.Author?.OrgGu?.RegionNumber}-{this.Author?.FilialNumber}-{Number}";
+		//[NotMapped]
+		//public string NumberText => $"{this.Author?.OrgGu?.RegionNumber}-{this.Author?.FilialNumber}-{Number}";
 
 		[NotMapped]
 		public string SafePackageText
@@ -60,24 +60,26 @@ namespace InspectorWeb.ModelsDB
 		}
 
 		[NotMapped]
-		public string ProtocolNumberText
+		public string ProtocolNumberText ////№ 003636-558-23 558
 		{
 			get
 			{
-				var ciphers = DocsExaminationTasksCiphers?
-					.OrderBy(d => d.Cipher)
-					.Select(d => d.Cipher?.Length > 3 ? d.Cipher?.Substring(3) : d.Cipher)
-					.Where(s => !string.IsNullOrEmpty(s))
-					.ToList();
+				return $"{this.NumberText}-{this.Author?.OrgGu?.RegionNumber}-{DateTime.Now.ToString("yy")}";
 
-				if (ciphers.Count == 1)
-				{
-					return $"{this.Author?.OrgGu?.RegionNumber}-{this.Author?.FilialNumber}-{ciphers.FirstOrDefault()}";
-				}
-				else
-				{
-					return $"{this.Author?.OrgGu?.RegionNumber}-{this.Author?.FilialNumber}-{ciphers.FirstOrDefault()}-{ciphers.LastOrDefault()}";
-				}
+				////var ciphers = DocsExaminationTasksCiphers?
+				////	.OrderBy(d => d.Cipher)
+				////	.Select(d => d.Cipher?.Length > 3 ? d.Cipher?.Substring(3) : d.Cipher)
+				////	.Where(s => !string.IsNullOrEmpty(s))
+				////	.ToList();
+
+				////if (ciphers.Count == 1)
+				////{
+				////	return $"{this.Author?.OrgGu?.RegionNumber}-{this.Author?.FilialNumber}-{ciphers.FirstOrDefault()}";
+				////}
+				////else
+				////{
+				////	return $"{this.Author?.OrgGu?.RegionNumber}-{this.Author?.FilialNumber}-{ciphers.FirstOrDefault()}-{ciphers.LastOrDefault()}";
+				////}
 			}
 		}
 	}
