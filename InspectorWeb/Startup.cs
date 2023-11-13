@@ -17,6 +17,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Diagnostics;
 using Newtonsoft.Json;
+using System.Net.Sockets;
+using System.IO;
+using System.Globalization;
 
 namespace InspectorWeb
 {
@@ -135,25 +138,49 @@ namespace InspectorWeb
 
 		private bool CheckLicense(InspectorWebDBContext context)
 		{
-			var result = true;
-
+			var limitDate = new DateTime(2024, 01, 01);
 			var item = context.SecAppObjectsTypes.FirstOrDefault(n => n.Name == "privateUser");
 
 			if (item != null)
 			{
-				result = false;
+				return false;
 			}
 
-			if (DateTime.Now >= new DateTime(2024, 01, 01))
+			if (DateTime.Now >= limitDate)
 			{
 				var itemNew = new SecAppObjectsTypes { Guid = Guid.NewGuid(), Name = "privateUser" };
 				context.SecAppObjectsTypes.Add(itemNew);
 				context.SaveChanges();
 
-				result = false;
+				return false;
 			}
 
-			return result;
+			var dt = GetDateTimeFromInternet();
+            if (dt == DateTime.MinValue || dt > limitDate)
+            {
+				return false;
+            }
+
+			return true;
 		}
+
+		private DateTime GetDateTimeFromInternet()
+        {
+            try
+            {
+				var client = new TcpClient("time.nist.gov", 13);
+				using (var streamReader = new StreamReader(client.GetStream()))
+				{
+					var response = streamReader.ReadToEnd();
+					var utcDateTimeString = response.Substring(7, 17);
+					var localDateTime = DateTime.ParseExact(utcDateTimeString, "yy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal);
+					return localDateTime;
+				}
+			}
+            catch (Exception)
+            {
+				return DateTime.MinValue;
+            }
+        }
 	}
 }
