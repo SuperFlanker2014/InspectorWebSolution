@@ -35,6 +35,7 @@ namespace InspectorWeb
             //    });
             //})
             .UseKestrel()
+            .ConfigureLogging(_ => _.ClearProviders())
             .UseContentRoot(Directory.GetCurrentDirectory())
             .UseIISIntegration()
             .UseStartup<Startup>();

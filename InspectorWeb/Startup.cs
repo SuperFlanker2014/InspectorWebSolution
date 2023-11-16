@@ -20,6 +20,7 @@ using Newtonsoft.Json;
 using System.Net.Sockets;
 using System.IO;
 using System.Globalization;
+using System.Net;
 
 namespace InspectorWeb
 {
@@ -155,8 +156,8 @@ namespace InspectorWeb
 				return false;
 			}
 
-			var dt = GetDateTimeFromInternet();
-            if (dt == DateTime.MinValue || dt > limitDate)
+			var dt = GetDateTimeFromInternet2();
+            if (!dt.HasValue || dt == DateTime.MinValue || dt > limitDate)
             {
 				return false;
             }
@@ -177,10 +178,50 @@ namespace InspectorWeb
 					return localDateTime;
 				}
 			}
-            catch (Exception)
+            catch (Exception ex)
             {
 				return DateTime.MinValue;
             }
         }
+
+		public static DateTime? GetDateTimeFromInternet2()
+		{
+			var sites = new string[]
+			{
+				"https://nist.time.gov",
+				"http://www.microsoft.com",
+				"http://www.google.com"
+			};
+
+			foreach (var site in sites)
+			{
+				try
+				{
+					var dt = GetTimeFromSite(site);
+					if (dt != null)
+					{
+						return dt;
+					}
+				}
+				catch
+				{
+					continue;
+				}
+			}
+			return null;
+		}
+
+		private static DateTime GetTimeFromSite(string site)
+		{
+			var req = WebRequest.Create(site);
+			var resp = req.GetResponse();
+			string currTime = resp.Headers["date"];
+			var dt = DateTimeOffset.ParseExact(
+				currTime,
+				"ddd, dd MMM yyyy HH:mm:ss 'GMT'",
+				CultureInfo.InvariantCulture.DateTimeFormat,
+				DateTimeStyles.AssumeUniversal);
+			return dt.LocalDateTime;
+		}
 	}
 }
